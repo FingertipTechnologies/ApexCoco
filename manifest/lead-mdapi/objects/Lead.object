@@ -1,0 +1,849 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <content>Apex_Lead_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <content>Apex_Lead_Record_Page</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <compactLayoutAssignment>Apex_Lead_Compact</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Apex_Lead_Compact</fullName>
+        <fields>Name</fields>
+        <fields>Company</fields>
+        <fields>Status</fields>
+        <fields>Customer_Type__c</fields>
+        <fields>Interested_Product__c</fields>
+        <fields>Estimated_Annual_Volume__c</fields>
+        <fields>Potential_Category__c</fields>
+        <fields>AI_Lead_Score__c</fields>
+        <fields>Sample_Requested__c</fields>
+        <label>Apex Lead Compact</label>
+    </compactLayouts>
+    <fields>
+        <fullName>AI_Insights__c</fullName>
+        <description>Generated recommendation</description>
+        <externalId>false</externalId>
+        <label>AI Insights</label>
+        <length>32768</length>
+        <required>false</required>
+        <type>LongTextArea</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>AI_Lead_Score__c</fullName>
+        <description>AI prioritization</description>
+        <externalId>false</externalId>
+        <label>AI Lead Score</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Application_Usage__c</fullName>
+        <description>End use</description>
+        <externalId>false</externalId>
+        <label>Application / Usage</label>
+        <length>32768</length>
+        <required>false</required>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Business_Model__c</fullName>
+        <description>Business model</description>
+        <externalId>false</externalId>
+        <label>Business Model</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Bulk Ingredient Buyer</fullName>
+                    <default>false</default>
+                    <label>Bulk Ingredient Buyer</label>
+                </value>
+                <value>
+                    <fullName>Private Label</fullName>
+                    <default>false</default>
+                    <label>Private Label</label>
+                </value>
+                <value>
+                    <fullName>Own Brand Distribution</fullName>
+                    <default>false</default>
+                    <label>Own Brand Distribution</label>
+                </value>
+                <value>
+                    <fullName>Manufacturing Partner</fullName>
+                    <default>false</default>
+                    <label>Manufacturing Partner</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Buying_Intent__c</fullName>
+        <description>Buying stage</description>
+        <externalId>false</externalId>
+        <label>Buying Intent</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Immediate Purchase</fullName>
+                    <default>false</default>
+                    <label>Immediate Purchase</label>
+                </value>
+                <value>
+                    <fullName>Future Requirement</fullName>
+                    <default>false</default>
+                    <label>Future Requirement</label>
+                </value>
+                <value>
+                    <fullName>R&amp;D Evaluation</fullName>
+                    <default>false</default>
+                    <label>R&amp;D Evaluation</label>
+                </value>
+                <value>
+                    <fullName>Price Comparison</fullName>
+                    <default>false</default>
+                    <label>Price Comparison</label>
+                </value>
+                <value>
+                    <fullName>Existing Supplier Review</fullName>
+                    <default>false</default>
+                    <label>Existing Supplier Review</label>
+                </value>
+                <value>
+                    <fullName>Information Gathering</fullName>
+                    <default>false</default>
+                    <label>Information Gathering</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Campaign__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Track exhibition/campaign</description>
+        <externalId>false</externalId>
+        <label>Campaign Name</label>
+        <referenceTo>Campaign</referenceTo>
+        <relationshipLabel>Leads (Campaign)</relationshipLabel>
+        <relationshipName>Apex_Leads</relationshipName>
+        <required>false</required>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Company_Type__c</fullName>
+        <description>Business classification</description>
+        <externalId>false</externalId>
+        <label>Company Type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Importer</fullName>
+                    <default>false</default>
+                    <label>Importer</label>
+                </value>
+                <value>
+                    <fullName>Brand Owner</fullName>
+                    <default>false</default>
+                    <label>Brand Owner</label>
+                </value>
+                <value>
+                    <fullName>Manufacturer</fullName>
+                    <default>false</default>
+                    <label>Manufacturer</label>
+                </value>
+                <value>
+                    <fullName>Distributor</fullName>
+                    <default>false</default>
+                    <label>Distributor</label>
+                </value>
+                <value>
+                    <fullName>Trader</fullName>
+                    <default>false</default>
+                    <label>Trader</label>
+                </value>
+                <value>
+                    <fullName>Retailer</fullName>
+                    <default>false</default>
+                    <label>Retailer</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Competitor__c</fullName>
+        <description>Competitor mapping (kept as text: the org already has this field as text and Salesforce cannot change a field type; a lookup can replace it later)</description>
+        <externalId>false</externalId>
+        <label>Competitor Name</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Country__c</fullName>
+        <description>Customer geography (values: DEMO list, extend as needed)</description>
+        <externalId>false</externalId>
+        <label>Country</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>India</fullName>
+                    <default>false</default>
+                    <label>India</label>
+                </value>
+                <value>
+                    <fullName>United States</fullName>
+                    <default>false</default>
+                    <label>United States</label>
+                </value>
+                <value>
+                    <fullName>United Kingdom</fullName>
+                    <default>false</default>
+                    <label>United Kingdom</label>
+                </value>
+                <value>
+                    <fullName>Germany</fullName>
+                    <default>false</default>
+                    <label>Germany</label>
+                </value>
+                <value>
+                    <fullName>Netherlands</fullName>
+                    <default>false</default>
+                    <label>Netherlands</label>
+                </value>
+                <value>
+                    <fullName>France</fullName>
+                    <default>false</default>
+                    <label>France</label>
+                </value>
+                <value>
+                    <fullName>Italy</fullName>
+                    <default>false</default>
+                    <label>Italy</label>
+                </value>
+                <value>
+                    <fullName>Spain</fullName>
+                    <default>false</default>
+                    <label>Spain</label>
+                </value>
+                <value>
+                    <fullName>Sweden</fullName>
+                    <default>false</default>
+                    <label>Sweden</label>
+                </value>
+                <value>
+                    <fullName>Poland</fullName>
+                    <default>false</default>
+                    <label>Poland</label>
+                </value>
+                <value>
+                    <fullName>United Arab Emirates</fullName>
+                    <default>false</default>
+                    <label>United Arab Emirates</label>
+                </value>
+                <value>
+                    <fullName>Saudi Arabia</fullName>
+                    <default>false</default>
+                    <label>Saudi Arabia</label>
+                </value>
+                <value>
+                    <fullName>Turkey</fullName>
+                    <default>false</default>
+                    <label>Turkey</label>
+                </value>
+                <value>
+                    <fullName>South Africa</fullName>
+                    <default>false</default>
+                    <label>South Africa</label>
+                </value>
+                <value>
+                    <fullName>Egypt</fullName>
+                    <default>false</default>
+                    <label>Egypt</label>
+                </value>
+                <value>
+                    <fullName>Australia</fullName>
+                    <default>false</default>
+                    <label>Australia</label>
+                </value>
+                <value>
+                    <fullName>New Zealand</fullName>
+                    <default>false</default>
+                    <label>New Zealand</label>
+                </value>
+                <value>
+                    <fullName>Japan</fullName>
+                    <default>false</default>
+                    <label>Japan</label>
+                </value>
+                <value>
+                    <fullName>South Korea</fullName>
+                    <default>false</default>
+                    <label>South Korea</label>
+                </value>
+                <value>
+                    <fullName>China</fullName>
+                    <default>false</default>
+                    <label>China</label>
+                </value>
+                <value>
+                    <fullName>Singapore</fullName>
+                    <default>false</default>
+                    <label>Singapore</label>
+                </value>
+                <value>
+                    <fullName>Malaysia</fullName>
+                    <default>false</default>
+                    <label>Malaysia</label>
+                </value>
+                <value>
+                    <fullName>Vietnam</fullName>
+                    <default>false</default>
+                    <label>Vietnam</label>
+                </value>
+                <value>
+                    <fullName>Canada</fullName>
+                    <default>false</default>
+                    <label>Canada</label>
+                </value>
+                <value>
+                    <fullName>Brazil</fullName>
+                    <default>false</default>
+                    <label>Brazil</label>
+                </value>
+                <value>
+                    <fullName>Mexico</fullName>
+                    <default>false</default>
+                    <label>Mexico</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Current_Supplier__c</fullName>
+        <description>Existing supplier</description>
+        <externalId>false</externalId>
+        <label>Current Supplier</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Customer_Response__c</fullName>
+        <description>Response tracking</description>
+        <externalId>false</externalId>
+        <label>Customer Response</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Interested</fullName>
+                    <default>false</default>
+                    <label>Interested</label>
+                </value>
+                <value>
+                    <fullName>Not Interested</fullName>
+                    <default>false</default>
+                    <label>Not Interested</label>
+                </value>
+                <value>
+                    <fullName>Future Requirement</fullName>
+                    <default>false</default>
+                    <label>Future Requirement</label>
+                </value>
+                <value>
+                    <fullName>Waiting Approval</fullName>
+                    <default>false</default>
+                    <label>Waiting Approval</label>
+                </value>
+                <value>
+                    <fullName>Requested Sample</fullName>
+                    <default>false</default>
+                    <label>Requested Sample</label>
+                </value>
+                <value>
+                    <fullName>Requested Quote</fullName>
+                    <default>false</default>
+                    <label>Requested Quote</label>
+                </value>
+                <value>
+                    <fullName>No Response</fullName>
+                    <default>false</default>
+                    <label>No Response</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Customer_Type__c</fullName>
+        <description>Customer segment</description>
+        <externalId>false</externalId>
+        <label>Customer Type</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Importer</fullName>
+                    <default>false</default>
+                    <label>Importer</label>
+                </value>
+                <value>
+                    <fullName>Brand Owner</fullName>
+                    <default>false</default>
+                    <label>Brand Owner</label>
+                </value>
+                <value>
+                    <fullName>Manufacturer</fullName>
+                    <default>false</default>
+                    <label>Manufacturer</label>
+                </value>
+                <value>
+                    <fullName>Distributor</fullName>
+                    <default>false</default>
+                    <label>Distributor</label>
+                </value>
+                <value>
+                    <fullName>Trader</fullName>
+                    <default>false</default>
+                    <label>Trader</label>
+                </value>
+                <value>
+                    <fullName>Retailer</fullName>
+                    <default>false</default>
+                    <label>Retailer</label>
+                </value>
+                <value>
+                    <fullName>Private Label Customer</fullName>
+                    <default>false</default>
+                    <label>Private Label Customer</label>
+                </value>
+                <value>
+                    <fullName>B2C Customer</fullName>
+                    <default>false</default>
+                    <label>B2C Customer</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Decision_Maker_Identified__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Qualification</description>
+        <externalId>false</externalId>
+        <label>Decision Maker Identified</label>
+        <required>false</required>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Designation__c</fullName>
+        <description>Contact role</description>
+        <externalId>false</externalId>
+        <label>Designation</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Employee_Count__c</fullName>
+        <description>Company size</description>
+        <externalId>false</externalId>
+        <label>Employee Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Estimated_Annual_Volume__c</fullName>
+        <description>Potential volume (MT)</description>
+        <externalId>false</externalId>
+        <label>Estimated Annual Volume</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Event_Name__c</fullName>
+        <description>Trade show/event name</description>
+        <externalId>false</externalId>
+        <label>Event Name</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Expected_Monthly_Volume__c</fullName>
+        <description>Monthly requirement (MT)</description>
+        <externalId>false</externalId>
+        <label>Expected Monthly Volume</label>
+        <precision>16</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+    </fields>
+    <fields>
+        <fullName>Last_Contact_Date__c</fullName>
+        <description>Last interaction</description>
+        <externalId>false</externalId>
+        <label>Last Contact Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Lead_Classification__c</fullName>
+        <description>Research outcome</description>
+        <externalId>false</externalId>
+        <label>Lead Classification</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Potential Customer</fullName>
+                    <default>false</default>
+                    <label>Potential Customer</label>
+                </value>
+                <value>
+                    <fullName>Competitor</fullName>
+                    <default>false</default>
+                    <label>Competitor</label>
+                </value>
+                <value>
+                    <fullName>Price Collector</fullName>
+                    <default>false</default>
+                    <label>Price Collector</label>
+                </value>
+                <value>
+                    <fullName>Existing Supplier Customer</fullName>
+                    <default>false</default>
+                    <label>Existing Supplier Customer</label>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>false</default>
+                    <label>Unknown</label>
+                </value>
+                <value>
+                    <fullName>Junk Lead</fullName>
+                    <default>false</default>
+                    <label>Junk Lead</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Lead_Health__c</fullName>
+        <description>AI insight</description>
+        <externalId>false</externalId>
+        <label>Lead Health</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>High</fullName>
+                    <default>false</default>
+                    <label>High</label>
+                </value>
+                <value>
+                    <fullName>Medium</fullName>
+                    <default>false</default>
+                    <label>Medium</label>
+                </value>
+                <value>
+                    <fullName>Low</fullName>
+                    <default>false</default>
+                    <label>Low</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Lead_Number__c</fullName>
+        <description>Unique lead reference</description>
+        <displayFormat>L-{00000}</displayFormat>
+        <externalId>false</externalId>
+        <label>Lead Number</label>
+        <type>AutoNumber</type>
+    </fields>
+    <fields>
+        <fullName>LinkedIn_Profile__c</fullName>
+        <description>Research information</description>
+        <externalId>false</externalId>
+        <label>LinkedIn Profile</label>
+        <required>false</required>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Next_Followup_Date__c</fullName>
+        <description>Reminder</description>
+        <externalId>false</externalId>
+        <label>Next Follow-up Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Potential_Category__c</fullName>
+        <description>Business potential</description>
+        <externalId>false</externalId>
+        <label>Potential Category</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>High</fullName>
+                    <default>false</default>
+                    <label>High</label>
+                </value>
+                <value>
+                    <fullName>Medium</fullName>
+                    <default>false</default>
+                    <label>Medium</label>
+                </value>
+                <value>
+                    <fullName>Low</fullName>
+                    <default>false</default>
+                    <label>Low</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Preferred_Communication__c</fullName>
+        <description>Channel preference</description>
+        <externalId>false</externalId>
+        <label>Preferred Communication</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Email</fullName>
+                    <default>false</default>
+                    <label>Email</label>
+                </value>
+                <value>
+                    <fullName>Phone</fullName>
+                    <default>false</default>
+                    <label>Phone</label>
+                </value>
+                <value>
+                    <fullName>WhatsApp</fullName>
+                    <default>false</default>
+                    <label>WhatsApp</label>
+                </value>
+                <value>
+                    <fullName>Meeting</fullName>
+                    <default>false</default>
+                    <label>Meeting</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Product_Requirement_Confirmed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Qualification</description>
+        <externalId>false</externalId>
+        <label>Product Requirement Confirmed</label>
+        <required>false</required>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Purchase_Timeline__c</fullName>
+        <description>Expected buying timeline</description>
+        <externalId>false</externalId>
+        <label>Purchase Timeline</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Immediate</fullName>
+                    <default>false</default>
+                    <label>Immediate</label>
+                </value>
+                <value>
+                    <fullName>3 Months</fullName>
+                    <default>false</default>
+                    <label>3 Months</label>
+                </value>
+                <value>
+                    <fullName>6 Months</fullName>
+                    <default>false</default>
+                    <label>6 Months</label>
+                </value>
+                <value>
+                    <fullName>12 Months</fullName>
+                    <default>false</default>
+                    <label>12 Months</label>
+                </value>
+                <value>
+                    <fullName>Long Term</fullName>
+                    <default>false</default>
+                    <label>Long Term</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Reason_for_Switching__c</fullName>
+        <description>Customer motivation (values: DEMO list, validate with Apex)</description>
+        <externalId>false</externalId>
+        <label>Reason for Switching</label>
+        <required>false</required>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Price</fullName>
+                    <default>false</default>
+                    <label>Price</label>
+                </value>
+                <value>
+                    <fullName>Quality Issues</fullName>
+                    <default>false</default>
+                    <label>Quality Issues</label>
+                </value>
+                <value>
+                    <fullName>Supply Reliability</fullName>
+                    <default>false</default>
+                    <label>Supply Reliability</label>
+                </value>
+                <value>
+                    <fullName>Lead Time</fullName>
+                    <default>false</default>
+                    <label>Lead Time</label>
+                </value>
+                <value>
+                    <fullName>Certification / Compliance</fullName>
+                    <default>false</default>
+                    <label>Certification / Compliance</label>
+                </value>
+                <value>
+                    <fullName>Product Range</fullName>
+                    <default>false</default>
+                    <label>Product Range</label>
+                </value>
+                <value>
+                    <fullName>Payment Terms</fullName>
+                    <default>false</default>
+                    <label>Payment Terms</label>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                    <label>Other</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Research_Completed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Research status</description>
+        <externalId>false</externalId>
+        <label>Research Completed</label>
+        <required>false</required>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Research_Notes__c</fullName>
+        <description>Research comments</description>
+        <externalId>false</externalId>
+        <label>Research Notes</label>
+        <length>32768</length>
+        <required>false</required>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Sample_Product__c</fullName>
+        <description>Sample requirement</description>
+        <externalId>false</externalId>
+        <label>Sample Product</label>
+        <length>100</length>
+        <required>false</required>
+        <type>Text</type>
+    </fields>
+    <fields>
+        <fullName>Sample_Request_Date__c</fullName>
+        <description>Sample timeline</description>
+        <externalId>false</externalId>
+        <label>Sample Request Date</label>
+        <required>false</required>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Sample_Requested__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Opportunity trigger</description>
+        <externalId>false</externalId>
+        <label>Sample Requested</label>
+        <required>false</required>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>WhatsApp_Number__c</fullName>
+        <description>Communication</description>
+        <externalId>false</externalId>
+        <label>WhatsApp Number</label>
+        <required>false</required>
+        <type>Phone</type>
+    </fields>
+</CustomObject>

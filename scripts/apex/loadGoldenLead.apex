@@ -18,7 +18,7 @@ Lead golden = new Lead(
     LeadSource = 'Trade Show', Event_Name__c = 'International Food Expo', Status = status, Rating = 'Hot', Industry = 'Food & Beverage', Website = 'www.abcfoods-intl.example', LinkedIn_Profile__c = 'https://www.linkedin.com/company/abcfoods-intl',
     Company_Type__c = 'Importer', Customer_Type__c = 'Importer', Business_Model__c = 'Bulk Ingredient Buyer', Employee_Count__c = 120,
     Potential_Category__c = 'High', Buying_Intent__c = 'R&D Evaluation', Purchase_Timeline__c = '6 Months', Estimated_Annual_Volume__c = 500, Expected_Monthly_Volume__c = 40,
-    Interested_Product__c = 'Coconut Milk Powder', Application_Usage__c = 'Bakery and beverage manufacturers in the US Northeast (reconstitution trials).',
+    Application_Usage__c = 'Bakery and beverage manufacturers in the US Northeast (reconstitution trials).',
     Lead_Classification__c = 'Potential Customer', Research_Completed__c = true, Research_Notes__c = 'Importer supplying US bakery and beverage manufacturers. Currently buying from Competitor A at about 3,400/MT. APEX DEMO DATA',
     Current_Supplier__c = 'Competitor A', Competitor__c = 'Competitor A', Reason_for_Switching__c = 'Lead Time',
     Last_Contact_Date__c = Date.today().addDays(-1), Next_Followup_Date__c = Date.today().addDays(2), Preferred_Communication__c = 'WhatsApp', Customer_Response__c = 'Requested Sample',
@@ -27,5 +27,8 @@ Lead golden = new Lead(
     AI_Lead_Score__c = 92, Lead_Health__c = 'High', AI_Insights__c = 'High-fit importer: target geography, product fit, 500 MT volume, R&D has requested samples. Recommended next action: create Sample Request.',
     Description = 'APEX DEMO DATA'
 );
+Schema.DisplayType ipType = Schema.SObjectType.Lead.fields.getMap().get('Interested_Product__c').getDescribe().getType();
+if (ipType == Schema.DisplayType.REFERENCE) { golden.put('Interested_Product__c', [SELECT Id FROM Product2 WHERE Name = 'Coconut Milk Powder' LIMIT 1].Id); }
+else { golden.put('Interested_Product__c', 'Coconut Milk Powder'); }
 insert golden;
 System.debug('Golden lead created: ' + golden.Id + ' (status ' + status + '). Open it and click "Request Sample".');

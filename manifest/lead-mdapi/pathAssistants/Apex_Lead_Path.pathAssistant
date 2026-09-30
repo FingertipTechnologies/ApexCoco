@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Lead</entityName>
+    <fieldName>Status</fieldName>
+    <masterLabel>Apex Lead Path</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>LeadSource</fieldNames>
+        <fieldNames>Event_Name__c</fieldNames>
+        <fieldNames>Company_Type__c</fieldNames>
+        <fieldNames>Country__c</fieldNames>
+        <info>&lt;p&gt;New lead captured (trade show card, website, LinkedIn, email). Complete the company research next.&lt;/p&gt;</info>
+        <picklistValueName>New</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Website</fieldNames>
+        <fieldNames>LinkedIn_Profile__c</fieldNames>
+        <fieldNames>Employee_Count__c</fieldNames>
+        <fieldNames>Lead_Classification__c</fieldNames>
+        <fieldNames>Research_Completed__c</fieldNames>
+        <info>&lt;p&gt;Research the company: website, LinkedIn, port data. Classify the lead (potential customer, competitor, price collector, junk).&lt;/p&gt;</info>
+        <picklistValueName>Research Pending</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Customer_Type__c</fieldNames>
+        <fieldNames>Business_Model__c</fieldNames>
+        <fieldNames>Potential_Category__c</fieldNames>
+        <fieldNames>Estimated_Annual_Volume__c</fieldNames>
+        <fieldNames>Purchase_Timeline__c</fieldNames>
+        <info>&lt;p&gt;Product fit, customer type, volume, timeline and geography confirmed. Ownership is clear.&lt;/p&gt;</info>
+        <picklistValueName>Qualified</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Buying_Intent__c</fieldNames>
+        <fieldNames>Customer_Response__c</fieldNames>
+        <fieldNames>Last_Contact_Date__c</fieldNames>
+        <fieldNames>Next_Followup_Date__c</fieldNames>
+        <fieldNames>Preferred_Communication__c</fieldNames>
+        <info>&lt;p&gt;Active conversation. Log every call and WhatsApp so nothing is lost.&lt;/p&gt;</info>
+        <picklistValueName>Engaged</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Sample_Requested__c</fieldNames>
+        <fieldNames>Sample_Request_Date__c</fieldNames>
+        <fieldNames>Sample_Product__c</fieldNames>
+        <fieldNames>Decision_Maker_Identified__c</fieldNames>
+        <fieldNames>Product_Requirement_Confirmed__c</fieldNames>
+        <info>&lt;p&gt;The customer is asking for a sample: the real buying signal. Use Request Sample to create the opportunity and Sample Request #1.&lt;/p&gt;</info>
+        <picklistValueName>Sample Discussion</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Next_Followup_Date__c</fieldNames>
+        <fieldNames>Customer_Response__c</fieldNames>
+        <fieldNames>Reason_for_Switching__c</fieldNames>
+        <info>&lt;p&gt;Not buying now. Keep a follow-up date; do not let the lead get buried.&lt;/p&gt;</info>
+        <picklistValueName>Nurture</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Lead_Classification__c</fieldNames>
+        <info>&lt;p&gt;Not a real lead.&lt;/p&gt;</info>
+        <picklistValueName>Junk</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Lead_Classification__c</fieldNames>
+        <fieldNames>Current_Supplier__c</fieldNames>
+        <fieldNames>Competitor__c</fieldNames>
+        <info>&lt;p&gt;Lost to a competitor or no requirement. Record who and why for re-engagement.&lt;/p&gt;</info>
+        <picklistValueName>Lost</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>__MASTER__</recordTypeName>
+</PathAssistant>
