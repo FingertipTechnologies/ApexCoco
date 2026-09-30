@@ -42,7 +42,7 @@ def report(api, name, rtype, columns, group, filters=(), date_col=None, aggregat
             x += f'        <booleanFilter>{X(boolean_filter)}</booleanFilter>\n'
         for col, op, val in filters:
             x += f'        <criteriaItems>\n            <column>{col}</column>\n            <columnToColumn>false</columnToColumn>\n            <isUnlocked>true</isUnlocked>\n            <operator>{op}</operator>\n            <value>{X(val)}</value>\n        </criteriaItems>\n'
-        x += '        <language>en_US</language>\n    </filter>\n'
+        x += '    </filter>\n'
     x += '    <format>Summary</format>\n'
     x += f'    <groupingsDown>\n        <dateGranularity>Day</dateGranularity>\n        <field>{group}</field>\n        <sortOrder>Asc</sortOrder>\n    </groupingsDown>\n'
     x += f'    <name>{X(name)}</name>\n    <params>\n        <name>co</name>\n        <value>1</value>\n    </params>\n' if False else f'    <name>{X(name)}</name>\n'
@@ -58,19 +58,19 @@ report('Sample_Requests_by_Status', 'Sample Requests by Status', SR,
        'Sample_Request__c.Status__c', date_col='CUST_CREATED_DATE', desc='Sample lifecycle overview: requested, prepared, dispatched, testing, approved, rejected.')
 report('Sample_Aging_Open', 'Sample Aging - Open Samples', SR,
        ['CUST_NAME', 'Sample_Request__c.Account__c', 'Sample_Request__c.Product__c', 'Sample_Request__c.Requested_Date__c', 'Sample_Request__c.Days_Since_Request__c', 'Sample_Request__c.Days_Pending_Feedback__c', 'Sample_Request__c.Next_Action__c'],
-       'Sample_Request__c.Status__c', filters=[('Sample_Request__c.Is_Open__c', 'equals', '1')], date_col='CUST_CREATED_DATE', desc='Open samples with days since request and days pending customer feedback.')
+       'Sample_Request__c.Status__c', filters=[('Sample_Request__c.Status__c', 'notEqual', 'Approved,Rejected,Closed')], date_col='CUST_CREATED_DATE', desc='Open samples with days since request and days pending customer feedback.')
 report('Sample_Rejections_by_Reason', 'Sample Rejections by Reason', SR,
        ['CUST_NAME', 'Sample_Request__c.Account__c', 'Sample_Request__c.Product__c', 'Sample_Request__c.Iteration_Number__c', 'Sample_Request__c.Customer_Feedback__c', 'Sample_Request__c.Next_Action__c'],
        'Sample_Request__c.Rejection_Reason__c', filters=[('Sample_Request__c.Result__c', 'equals', 'Rejected')], date_col='CUST_CREATED_DATE', desc='Why samples are rejected, to drive specification improvements.')
 report('Opportunity_Pipeline_by_Stage', 'Opportunity Pipeline by Stage', 'Opportunity',
        ['OPPORTUNITY_NAME', 'ACCOUNT_NAME', 'Opportunity.Primary_Product__c', 'Opportunity.Expected_Annual_Volume__c', 'AMOUNT', 'CLOSE_DATE', 'FULL_NAME', 'Opportunity.Latest_Sample_Status__c', 'Opportunity.Next_Action__c'],
-       'STAGE_NAME', filters=[('CLOSED', 'equals', '0')], date_col='CLOSE_DATE', aggregates=('AMOUNT',), desc='Open pipeline value by Apex stage, with product, volume, owner and next action.')
+       'STAGE_NAME', filters=[('STAGE_NAME', 'notEqual', 'Closed Won,Closed Lost')], date_col='CLOSE_DATE', aggregates=('AMOUNT',), desc='Open pipeline value by Apex stage, with product, volume, owner and next action.')
 report('Stale_Opportunities', 'Stale Opportunities (No Activity)', 'Opportunity',
        ['OPPORTUNITY_NAME', 'ACCOUNT_NAME', 'STAGE_NAME', 'Opportunity.Days_Since_Last_Activity__c', 'Opportunity.Next_Action__c', 'AMOUNT', 'CLOSE_DATE'],
-       'FULL_NAME', filters=[('Opportunity.Is_Stale__c', 'equals', '1')], date_col='CLOSE_DATE', aggregates=('AMOUNT',), desc='Open opportunities with no activity beyond the configured period, by owner.')
+       'FULL_NAME', filters=[('Opportunity.Days_Since_Last_Activity__c', 'greaterThan', '30'), ('STAGE_NAME', 'notEqual', 'Closed Won,Closed Lost')], date_col='CLOSE_DATE', aggregates=('AMOUNT',), desc='Open opportunities with no activity beyond the configured period, by owner.')
 report('Won_Lost_Analysis', 'Won / Lost Analysis', 'Opportunity',
        ['OPPORTUNITY_NAME', 'ACCOUNT_NAME', 'Opportunity.Primary_Product__c', 'AMOUNT', 'CLOSE_DATE', 'Opportunity.Loss_Reason__c', 'Opportunity.Competitor__c', 'FULL_NAME'],
-       'STAGE_NAME', filters=[('CLOSED', 'equals', '1')], date_col='CLOSE_DATE', aggregates=('AMOUNT',), desc='Closed opportunities with loss reasons and competitor context for re-engagement.')
+       'STAGE_NAME', filters=[('STAGE_NAME', 'equals', 'Closed Won,Closed Lost')], date_col='CLOSE_DATE', aggregates=('AMOUNT',), desc='Closed opportunities with loss reasons and competitor context for re-engagement.')
 report('Quotes_and_Revisions', 'Quotes and Revisions', 'Apex_Quotes__c',
        ['Quote$Name', 'Quote$QuoteNumber', 'Quote$Quote_Version__c', 'Quote$TotalPrice', 'Quote$Discount', 'Quote$Margin_Percent__c', 'Quote$Approval_Status__c', 'Quote$Quote_Date__c', 'Quote$Revision_Reason__c'],
        'Quote$Status', date_col='Quote$CreatedDate', aggregates=('Quote$TotalPrice',), desc='Every quote version with discount, margin and approval status. Centralised pricing history instead of Excel.')
@@ -81,8 +81,8 @@ report('Orders_and_SAP_Status', 'Orders and SAP Status (DEMO)', 'Apex_Orders__c'
        ['Order$OrderNumber', 'Order$Status', 'Order$EffectiveDate', 'Order$PoNumber', 'Order$TotalAmount', 'Order$SAP_Order_Number__c', 'Order$SAP_Invoice_Number__c', 'Order$Integration_Mode__c'],
        'Order$SAP_Status__c', date_col='Order$CreatedDate', aggregates=('Order$TotalAmount',), desc='Order visibility with the simulated SAP status. Integration is a labelled mock.')
 report('Repeat_Business_Reorder_Status', 'Repeat Business - Reorder Status', 'AccountList',
-       ['ACCOUNT_NAME', 'Account.Customer_Type__c', 'Account.Market__c', 'Account.Last_Purchase_Date__c', 'Account.Last_Order_Value__c', 'Account.Average_Reorder_Interval_Days__c', 'Account.Expected_Reorder_Date__c', 'Account.Orders_Last_12_Months__c'],
-       'Account.Reorder_Status__c', date_col='CREATED_DATE', desc='Customers due or overdue for a repeat order, with cadence and last purchase.')
+       ['ACCOUNT.NAME', 'Account.Customer_Type__c', 'Account.Market__c', 'Account.Last_Purchase_Date__c', 'Account.Last_Order_Value__c', 'Account.Average_Reorder_Interval_Days__c', 'Account.Expected_Reorder_Date__c', 'Account.Orders_Last_12_Months__c'],
+       'Account.Reorder_Status__c', date_col='ACCOUNT.CREATED_DATE', desc='Customers due or overdue for a repeat order, with cadence and last purchase.')
 report('Onboarding_Status', 'Customer Onboarding Status', 'CustomEntity$Customer_Onboarding__c',
        ['CUST_NAME', 'Customer_Onboarding__c.Account__c', 'Customer_Onboarding__c.Opportunity__c', 'Customer_Onboarding__c.Completion_Percent__c', 'Customer_Onboarding__c.Due_Date__c', 'Customer_Onboarding__c.Quality_Status__c', 'Customer_Onboarding__c.Finance_Status__c', 'Customer_Onboarding__c.Logistics_Status__c'],
        'Customer_Onboarding__c.Status__c', date_col='CUST_CREATED_DATE', desc='Pending and completed onboarding checklists.')

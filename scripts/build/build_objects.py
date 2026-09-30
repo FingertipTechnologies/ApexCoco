@@ -163,11 +163,11 @@ CMDT = '$CustomMetadata.Apex_Demo_Setting__mdt.Default.'
 
 # ================================================================ Sample_Request__c
 SR = [
- dict(api='Account__c', label='Account', type='Lookup', referenceTo='Account', relationshipLabel='Sample Requests', relationshipName='Sample_Requests', required=True, deleteConstraint='Restrict', track=True),
+ dict(api='Account__c', label='Account', type='Lookup', referenceTo='Account', relationshipLabel='Sample Requests', relationshipName='Sample_Requests', deleteConstraint='Restrict', track=True, help='Filled automatically from the Opportunity or parent sample when left blank.'),
  dict(api='Contact__c', label='Contact', type='Lookup', referenceTo='Contact', relationshipLabel='Sample Requests', relationshipName='Sample_Requests', required=True, deleteConstraint='Restrict'),
  dict(api='Lead__c', label='Source Lead', type='Lookup', referenceTo='Lead', relationshipLabel='Sample Requests', relationshipName='Sample_Requests', description='Retains the qualified Lead supplied by Person 1 (Visiting Card -> Lead).'),
  dict(api='Opportunity__c', label='Opportunity', type='Lookup', referenceTo='Opportunity', relationshipLabel='Sample Requests', relationshipName='Sample_Requests', track=True, description='Commercial context. Populated automatically by the flow Apex_Sample_Request_After_Create when left blank.'),
- dict(api='Product__c', label='Product', type='Lookup', referenceTo='Product2', relationshipLabel='Sample Requests', relationshipName='Sample_Requests', required=True, deleteConstraint='Restrict', track=True),
+ dict(api='Product__c', label='Product', type='Lookup', referenceTo='Product2', relationshipLabel='Sample Requests', relationshipName='Sample_Requests', track=True),
  dict(api='Specification__c', label='Specification / Grade', type='Text', length=255, help='Spec or grade requested by the customer. Change it on the next iteration when the customer asks for an adjustment.', track=True),
  dict(api='Sample_Quantity__c', label='Sample Quantity', type='Number', precision=16, scale=2, required=True),
  dict(api='Sample_Unit__c', label='Sample Unit', type='Picklist', values=['KG', 'G', 'Other'], default='KG', required=True),
@@ -201,6 +201,8 @@ SR = [
       formula='NOT(OR(ISPICKVAL(Status__c, "Approved"), ISPICKVAL(Status__c, "Rejected"), ISPICKVAL(Status__c, "Closed")))'),
 ]
 SR_VRS = [
+ ('VR_Product_Required', 'ISBLANK(Product__c)', 'Select the product to sample.', 'Product__c', 'Product lookup to Product2 cannot be DB-required (Product2 does not allow restrict delete).'),
+ ('VR_Account_Required', 'ISBLANK(Account__c)', 'Account is required. It is filled automatically when the sample is created from an Opportunity or a parent sample.', 'Account__c', None),
  ('VR_Dispatch_Requires_Courier_Tracking', 'ISPICKVAL(Status__c, "Dispatched") && (ISBLANK(Courier_Partner__c) || ISBLANK(Tracking_Number__c))',
   'Courier partner and tracking number are required before a sample can be marked Dispatched.', 'Tracking_Number__c', 'VR-Sample-Dispatch-Tracking'),
  ('VR_Dispatch_Requires_Date', 'ISPICKVAL(Status__c, "Dispatched") && ISBLANK(Dispatch_Date__c)',
@@ -394,7 +396,7 @@ ORDER = [
 ]
 CASE = [
  dict(api='Complaint_Type__c', label='Complaint Type', type='Picklist', values=['Quality', 'Packaging', 'Quantity Shortage', 'Delivery Delay', 'Documentation', 'Other']),
- dict(api='Product__c', label='Product', type='Lookup', referenceTo='Product2', relationshipLabel='Cases', relationshipName='Cases'),
+ dict(api='Complaint_Product__c', label='Product', type='Lookup', referenceTo='Product2', relationshipLabel='Cases', relationshipName='Cases'),
  dict(api='Batch_Number__c', label='Batch Number', type='Text', length=50),
  dict(api='Order__c', label='Order', type='Lookup', referenceTo='Order', relationshipLabel='Cases', relationshipName='Cases'),
  dict(api='Resolution__c', label='Resolution', type='LongTextArea', length=32768, visibleLines=3),
@@ -491,7 +493,7 @@ def main():
     base = os.path.join(FA, 'objects', 'Account')
     w(os.path.join(base, 'Account.object-meta.xml'), standard_object_xml('Apex_Account_Record_Page', 'Apex_Account_Compact'))
     write_fields(FA, 'Account', ACC)
-    w(os.path.join(base, 'compactLayouts', 'Apex_Account_Compact.compactLayout-meta.xml'), compact_xml('Apex_Account_Compact', 'Apex Account Compact', ['Name', 'Customer_Type__c', 'BillingCountry', 'Market__c', 'Last_Purchase_Date__c', 'Expected_Reorder_Date__c', 'Reorder_Status__c', 'Onboarding_Status__c']))
+    w(os.path.join(base, 'compactLayouts', 'Apex_Account_Compact.compactLayout-meta.xml'), compact_xml('Apex_Account_Compact', 'Apex Account Compact', ['Name', 'Customer_Type__c', 'Industry', 'Market__c', 'Last_Purchase_Date__c', 'Expected_Reorder_Date__c', 'Reorder_Status__c', 'Onboarding_Status__c']))
     w(os.path.join(base, 'listViews', 'Apex_Reorder_Due.listView-meta.xml'), listview_xml('Apex_Reorder_Due', 'Apex Customers - Reorder Due / Overdue', ['ACCOUNT.NAME', 'Customer_Type__c', 'ACCOUNT.ADDRESS1_COUNTRY', 'Last_Purchase_Date__c', 'Average_Reorder_Interval_Days__c', 'Expected_Reorder_Date__c', 'Reorder_Status__c'], [('Reorder_Status__c', 'equals', 'Due,Overdue')]))
 
     # Quote / QuoteLineItem

@@ -103,7 +103,7 @@
     <formulas>
         <name>f_Account</name>
         <dataType>String</dataType>
-        <expression>IF(AND(ISBLANK({!$Record.Account__c}), NOT(ISBLANK({!$Record.Parent_Sample_Request__c}))), {!$Record.Parent_Sample_Request__r.Account__c}, {!$Record.Account__c})</expression>
+        <expression>IF(NOT(ISBLANK({!$Record.Account__c})), {!$Record.Account__c}, IF(NOT(ISBLANK({!$Record.Opportunity__c})), {!$Record.Opportunity__r.AccountId}, IF(NOT(ISBLANK({!$Record.Parent_Sample_Request__c})), {!$Record.Parent_Sample_Request__r.Account__c}, {!$Record.Account__c})))</expression>
     </formulas>
     <formulas>
         <name>f_ApprovalDate</name>

@@ -17,6 +17,7 @@ TABS = {'Sample_Request__c': 'Sample_Request__c', 'Competitor_Intel__c': 'Compet
         'Quote': 'standard-Quote', 'Order': 'standard-Order', 'Case': 'standard-Case', 'Dashboard': 'standard-Dashboard', 'Report': 'standard-report'}
 
 def perms(obj, c, r, e, d, va=False, ma=False):
+    if ma: d = True
     return (f'    <objectPermissions>\n        <allowCreate>{str(c).lower()}</allowCreate>\n        <allowDelete>{str(d).lower()}</allowDelete>\n        <allowEdit>{str(e).lower()}</allowEdit>\n'
             f'        <allowRead>{str(r).lower()}</allowRead>\n        <modifyAllRecords>{str(ma).lower()}</modifyAllRecords>\n        <object>{obj}</object>\n        <viewAllRecords>{str(va).lower()}</viewAllRecords>\n    </objectPermissions>\n')
 
@@ -71,7 +72,7 @@ permset('Apex_Sales_Manager', 'Apex Sales Manager',
          perms('Integration_Log__c', 0, 1, 0, 0, va=True), perms('Account', 1, 1, 1, 1, va=True, ma=True), perms('Contact', 1, 1, 1, 1, va=True, ma=True), perms('Lead', 1, 1, 1, 1, va=True, ma=True),
          perms('Opportunity', 1, 1, 1, 1, va=True, ma=True), perms('Product2', 1, 1, 1, 0, va=True), perms('Pricebook2', 1, 1, 1, 0, va=True), perms('Quote', 1, 1, 1, 1, va=True, ma=True),
          perms('Order', 1, 1, 1, 1, va=True, ma=True), perms('Case', 1, 1, 1, 1, va=True, ma=True)],
-        editable_objects=ALL, readonly_objects=['Integration_Log__c'], tabs=ALL_TABS, user_perms=['RunReports', 'ManageDashboards', 'CreateCustomizeReports', 'CreateCustomizeDashboards'])
+        editable_objects=ALL, readonly_objects=['Integration_Log__c'], tabs=ALL_TABS, user_perms=['RunReports', 'CreateCustomizeReports', 'CreateCustomizeDashboards'])
 
 # Sales Admin: samples, products/pricebook, onboarding documents, orders and SAP handoff
 permset('Apex_Sales_Admin', 'Apex Sales Admin',
@@ -91,5 +92,5 @@ permset('Apex_Management', 'Apex Management',
          perms('Opportunity', 0, 1, 1, 0, va=True), perms('Product2', 0, 1, 0, 0, va=True), perms('Pricebook2', 0, 1, 0, 0, va=True), perms('Quote', 0, 1, 1, 0, va=True),
          perms('Order', 0, 1, 0, 0, va=True), perms('Case', 0, 1, 0, 0, va=True)],
         editable_objects=['Opportunity', 'Quote', 'Account'], readonly_objects=['Sample_Request__c', 'Competitor_Intel__c', 'Customer_Onboarding__c', 'Integration_Log__c', 'Lead', 'Order', 'Case', 'Product2', 'QuoteLineItem'],
-        tabs=ALL_TABS, flows=False, apex=False, user_perms=['RunReports', 'ManageDashboards', 'CreateCustomizeDashboards'])
+        tabs=ALL_TABS, flows=False, apex=False, user_perms=['RunReports', 'CreateCustomizeDashboards'])
 print('permission sets written')

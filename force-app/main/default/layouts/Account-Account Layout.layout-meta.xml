@@ -35,7 +35,7 @@
                 <field>Phone</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
+                <behavior>Edit</behavior>
                 <field>OwnerId</field>
             </layoutItems>
         </layoutColumns>
@@ -223,6 +223,19 @@
         <fields>CASES.PRIORITY</fields>
         <fields>CASES.STATUS</fields>
         <relatedList>RelatedCaseList</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>QUOTE.QUOTENUMBER</fields>
+        <fields>QUOTE.STATUS</fields>
+        <fields>QUOTE.TOTALPRICE</fields>
+        <relatedList>RelatedQuoteList</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>ORDER.ORDERNUMBER</fields>
+        <fields>ORDER.STATUS</fields>
+        <fields>ORDER.TOTALAMOUNT</fields>
+        <relatedList>RelatedOrderList</relatedList>
     </relatedLists>
     <relatedLists>
         <relatedList>RelatedActivityList</relatedList>

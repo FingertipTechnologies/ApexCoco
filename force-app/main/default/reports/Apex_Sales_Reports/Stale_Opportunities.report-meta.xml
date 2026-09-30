@@ -25,13 +25,19 @@
     <description>Open opportunities with no activity beyond the configured period, by owner.</description>
     <filter>
         <criteriaItems>
-            <column>Opportunity.Is_Stale__c</column>
+            <column>Opportunity.Days_Since_Last_Activity__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
-            <operator>equals</operator>
-            <value>1</value>
+            <operator>greaterThan</operator>
+            <value>30</value>
         </criteriaItems>
-        <language>en_US</language>
+        <criteriaItems>
+            <column>STAGE_NAME</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Closed Won,Closed Lost</value>
+        </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>

@@ -21,7 +21,7 @@ qualification) is built separately; Person 2 starts from the qualified Lead that
 | Customer onboarding | `Customer_Onboarding__c` (5 checklist areas with owner/status), 2 flows | Created automatically at Customer Approval. Checklist areas are DEMO placeholders. |
 | PO → Order → SAP | Order fields, automatic Order + Order Product at PO Received, `Send to SAP (Simulated)` action, `Integration_Log__c` | **No live SAP.** The handoff is a labelled mock with outbound/inbound logs. |
 | Repeat business | Account roll-ups (last purchase, interval, expected reorder, reorder status), daily scheduled flow | Creates one follow-up task and one pre-filled Repeat opportunity when a reorder is due. |
-| Service linkage | Case fields (complaint type, product, batch, order), Quality Team queue, routing flow | Email-to-Case routing address is a manual org step (see below). |
+| Service linkage | Case fields (complaint type, product `Complaint_Product__c`, batch, order), Quality Team queue, routing flow | Email-to-Case routing address is a manual org step (see below). |
 | UX | Apex Sales app, 5 Lightning record pages (Sample Request, Opportunity, Account 360, Quote, Order), 9 layouts, 8 compact layouts, 4 tabs | Critical fields above the fold; related lists for samples, quotes, competitors, onboarding, orders, cases, activities. |
 | Analytics | 11 reports, 2 dashboards (Sales Management, Sample Management), 2 custom report types | Dynamic dashboards (logged-in user). |
 | Access | 4 permission sets: Apex Sales Executive, Apex Sales Manager, Apex Sales Admin, Apex Management | Not overbuilt; each demo user sees the intended experience. |
@@ -133,8 +133,8 @@ sf apex run --target-org apexdemo --file scripts/apex/loadDemoData.apex
 * Deploying `OpportunityStage` and `QuoteStatus` standard value sets replaces the org's stage/status lists (legacy stages are
   kept inactive). Deploy to a demo org, not to a production org with live pipeline.
 * Deploying the standard layouts (Account, Opportunity, Quote, Order, Case) overwrites the org's default layouts.
-* This project was authored and validated structurally (metadata conversion + cross-reference checks) without an org
-  connection in the build environment. The first deployment to a Developer Edition org must be run with
+* The first deployment to a Developer Edition org surfaced 45 component errors (lookup delete constraints, layout required flags, formula-field reads in before-save flows, report column names); all were fixed in the build. This project was otherwise validated structurally (metadata conversion + cross-reference checks) without an org
+  connection in the build environment. Deploy with
   `scripts/deploy.sh`; any component-level deployment error will name the component and can be fixed in place.
 
 ## Git / merge rules (from the build brief)

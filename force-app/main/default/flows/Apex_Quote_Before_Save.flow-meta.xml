@@ -72,7 +72,7 @@
     <formulas>
         <name>f_ApprovalStatus</name>
         <dataType>String</dataType>
-        <expression>IF(NOT({!$Record.Requires_Approval__c}), "Not Required", IF(ISBLANK(TEXT({!$Record.Approval_Status__c})), "Not Required", TEXT({!$Record.Approval_Status__c})))</expression>
+        <expression>IF(BLANKVALUE({!$Record.Discount}, 0) &lt;= BLANKVALUE({!Get_Settings.Discount_Threshold_Percent__c}, 5), "Not Required", IF(ISBLANK(TEXT({!$Record.Approval_Status__c})), "Not Required", TEXT({!$Record.Approval_Status__c})))</expression>
     </formulas>
     <formulas>
         <name>f_ManagementApprover</name>

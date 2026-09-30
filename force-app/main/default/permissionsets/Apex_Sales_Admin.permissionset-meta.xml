@@ -75,17 +75,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case.Complaint_Product__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case.Complaint_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Case.Order__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Case.Product__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -640,6 +640,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Sample_Request__c.Account__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Sample_Request__c.Approval_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -735,6 +740,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Sample_Request__c.Product__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Sample_Request__c.Rejection_Reason__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -778,7 +788,7 @@
     <label>Apex Sales Admin</label>
     <objectPermissions>
         <allowCreate>1</allowCreate>
-        <allowDelete>0</allowDelete>
+        <allowDelete>true</allowDelete>
         <allowEdit>1</allowEdit>
         <allowRead>1</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
@@ -796,7 +806,7 @@
     </objectPermissions>
     <objectPermissions>
         <allowCreate>1</allowCreate>
-        <allowDelete>0</allowDelete>
+        <allowDelete>true</allowDelete>
         <allowEdit>1</allowEdit>
         <allowRead>1</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
@@ -877,7 +887,7 @@
     </objectPermissions>
     <objectPermissions>
         <allowCreate>1</allowCreate>
-        <allowDelete>0</allowDelete>
+        <allowDelete>true</allowDelete>
         <allowEdit>1</allowEdit>
         <allowRead>1</allowRead>
         <modifyAllRecords>true</modifyAllRecords>

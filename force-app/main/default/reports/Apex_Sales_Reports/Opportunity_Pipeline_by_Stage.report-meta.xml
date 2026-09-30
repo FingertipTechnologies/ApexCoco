@@ -31,13 +31,12 @@
     <description>Open pipeline value by Apex stage, with product, volume, owner and next action.</description>
     <filter>
         <criteriaItems>
-            <column>CLOSED</column>
+            <column>STAGE_NAME</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
-            <operator>equals</operator>
-            <value>0</value>
+            <operator>notEqual</operator>
+            <value>Closed Won,Closed Lost</value>
         </criteriaItems>
-        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

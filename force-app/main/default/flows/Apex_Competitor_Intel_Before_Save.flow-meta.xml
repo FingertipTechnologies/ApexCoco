@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <assignments>
+        <name>Apply_Defaults</name>
+        <label>Default account and product from the opportunity</label>
+        <locationX>176</locationX>
+        <locationY>110</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Account__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_Account</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Product__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_Product</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>Person 2. When competitor intel is logged from an Opportunity, the Account and Product default from the opportunity so the intel stays on the customer relationship.</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>f_Account</name>
+        <dataType>String</dataType>
+        <expression>IF(AND(ISBLANK({!$Record.Account__c}), NOT(ISBLANK({!$Record.Opportunity__c}))), {!$Record.Opportunity__r.AccountId}, {!$Record.Account__c})</expression>
+    </formulas>
+    <formulas>
+        <name>f_Product</name>
+        <dataType>String</dataType>
+        <expression>IF(AND(ISBLANK({!$Record.Product__c}), NOT(ISBLANK({!$Record.Opportunity__c}))), {!$Record.Opportunity__r.Primary_Product__c}, {!$Record.Product__c})</expression>
+    </formulas>
+    <interviewLabel>Apex Competitor Intel Before Save {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Apex Competitor Intel - Before Save</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Apply_Defaults</targetReference>
+        </connector>
+        <object>Competitor_Intel__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

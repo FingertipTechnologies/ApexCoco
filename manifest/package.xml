@@ -45,9 +45,9 @@
         <members>Apex_Demo_Setting__mdt.Sample_Approval_Quantity_Limit_KG__c</members>
         <members>Apex_Demo_Setting__mdt.Stale_Opportunity_Days__c</members>
         <members>Case.Batch_Number__c</members>
+        <members>Case.Complaint_Product__c</members>
         <members>Case.Complaint_Type__c</members>
         <members>Case.Order__c</members>
-        <members>Case.Product__c</members>
         <members>Case.Resolution__c</members>
         <members>Competitor_Intel__c.Account__c</members>
         <members>Competitor_Intel__c.Competitor_Name__c</members>
@@ -223,6 +223,7 @@
     <types>
         <members>Apex_Account_Reorder_Follow_Up</members>
         <members>Apex_Case_Before_Save</members>
+        <members>Apex_Competitor_Intel_Before_Save</members>
         <members>Apex_Customer_Onboarding_After_Save</members>
         <members>Apex_Customer_Onboarding_Before_Save</members>
         <members>Apex_Lead_Request_Sample</members>
@@ -334,6 +335,7 @@
         <members>Opportunity.VR_Sample_Requested_Needs_Sample</members>
         <members>Opportunity.VR_Technical_Evaluation_Needs_Status</members>
         <members>Quote.VR_Sent_Requires_Approval</members>
+        <members>Sample_Request__c.VR_Account_Required</members>
         <members>Sample_Request__c.VR_Approved_Requires_Feedback</members>
         <members>Sample_Request__c.VR_Closed_Requires_Reason</members>
         <members>Sample_Request__c.VR_Dispatch_Date_After_Request</members>
@@ -341,6 +343,7 @@
         <members>Sample_Request__c.VR_Dispatch_Requires_Date</members>
         <members>Sample_Request__c.VR_Feedback_Requires_Result</members>
         <members>Sample_Request__c.VR_Feedback_Requires_Text</members>
+        <members>Sample_Request__c.VR_Product_Required</members>
         <members>Sample_Request__c.VR_Quantity_Positive</members>
         <members>Sample_Request__c.VR_Rejected_Requires_Next_Action</members>
         <members>Sample_Request__c.VR_Rejected_Requires_Reason</members>

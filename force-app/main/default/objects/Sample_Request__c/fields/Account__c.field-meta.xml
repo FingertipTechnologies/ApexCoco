@@ -3,11 +3,12 @@
     <fullName>Account__c</fullName>
     <deleteConstraint>Restrict</deleteConstraint>
     <externalId>false</externalId>
+    <inlineHelpText>Filled automatically from the Opportunity or parent sample when left blank.</inlineHelpText>
     <label>Account</label>
     <referenceTo>Account</referenceTo>
     <relationshipLabel>Sample Requests</relationshipLabel>
     <relationshipName>Sample_Requests</relationshipName>
-    <required>true</required>
+    <required>false</required>
     <trackHistory>true</trackHistory>
     <type>Lookup</type>
 </CustomField>

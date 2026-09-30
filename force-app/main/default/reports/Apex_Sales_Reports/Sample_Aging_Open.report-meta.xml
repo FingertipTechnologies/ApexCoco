@@ -24,13 +24,12 @@
     <description>Open samples with days since request and days pending customer feedback.</description>
     <filter>
         <criteriaItems>
-            <column>Sample_Request__c.Is_Open__c</column>
+            <column>Sample_Request__c.Status__c</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
-            <operator>equals</operator>
-            <value>1</value>
+            <operator>notEqual</operator>
+            <value>Approved,Rejected,Closed</value>
         </criteriaItems>
-        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

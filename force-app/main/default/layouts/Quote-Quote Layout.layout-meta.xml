@@ -15,7 +15,7 @@
                 <field>QuoteNumber</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
+                <behavior>Edit</behavior>
                 <field>OpportunityId</field>
             </layoutItems>
             <layoutItems>
@@ -27,7 +27,7 @@
                 <field>ContactId</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
+                <behavior>Edit</behavior>
                 <field>OwnerId</field>
             </layoutItems>
         </layoutColumns>
@@ -244,6 +244,13 @@
             <quickActionName>Quote.Revise_Quote</quickActionName>
         </quickActionListItems>
     </quickActionList>
+    <relatedLists>
+        <fields>PRODUCT2.NAME</fields>
+        <fields>QUOTELINEITEM.QUANTITY</fields>
+        <fields>QUOTELINEITEM.UNITPRICE</fields>
+        <fields>QUOTELINEITEM.TOTALPRICE</fields>
+        <relatedList>RelatedQuoteLineItemList</relatedList>
+    </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
         <fields>Quote_Version__c</fields>

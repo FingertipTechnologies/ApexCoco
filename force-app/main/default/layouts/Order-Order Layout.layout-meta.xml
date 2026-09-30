@@ -27,7 +27,7 @@
                 <field>EffectiveDate</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
+                <behavior>Edit</behavior>
                 <field>OwnerId</field>
             </layoutItems>
         </layoutColumns>
@@ -166,6 +166,13 @@
             <quickActionName>Order.Send_to_SAP</quickActionName>
         </quickActionListItems>
     </quickActionList>
+    <relatedLists>
+        <fields>PRODUCT2.NAME</fields>
+        <fields>ORDERITEM.QUANTITY</fields>
+        <fields>ORDERITEM.UNITPRICE</fields>
+        <fields>ORDERITEM.TOTALPRICE</fields>
+        <relatedList>RelatedOrderItemList</relatedList>
+    </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
         <fields>Direction__c</fields>

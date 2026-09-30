@@ -3,7 +3,7 @@
     <fullName>Apex_Account_Compact</fullName>
     <fields>Name</fields>
     <fields>Customer_Type__c</fields>
-    <fields>BillingCountry</fields>
+    <fields>Industry</fields>
     <fields>Market__c</fields>
     <fields>Last_Purchase_Date__c</fields>
     <fields>Expected_Reorder_Date__c</fields>

@@ -157,7 +157,7 @@
   ],
   "Case": [
    "Complaint_Type__c",
-   "Product__c",
+   "Complaint_Product__c",
    "Batch_Number__c",
    "Order__c",
    "Resolution__c"
@@ -219,9 +219,7 @@
  },
  "required": {
   "Sample_Request__c": [
-   "Account__c",
    "Contact__c",
-   "Product__c",
    "Sample_Quantity__c",
    "Sample_Unit__c",
    "Requested_Date__c",

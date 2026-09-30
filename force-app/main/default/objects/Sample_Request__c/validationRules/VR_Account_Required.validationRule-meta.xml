@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Account_Required</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISBLANK(Account__c)</errorConditionFormula>
+    <errorDisplayField>Account__c</errorDisplayField>
+    <errorMessage>Account is required. It is filled automatically when the sample is created from an Opportunity or a parent sample.</errorMessage>
+</ValidationRule>

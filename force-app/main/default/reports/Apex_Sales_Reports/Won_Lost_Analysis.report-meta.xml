@@ -28,13 +28,12 @@
     <description>Closed opportunities with loss reasons and competitor context for re-engagement.</description>
     <filter>
         <criteriaItems>
-            <column>CLOSED</column>
+            <column>STAGE_NAME</column>
             <columnToColumn>false</columnToColumn>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
-            <value>1</value>
+            <value>Closed Won,Closed Lost</value>
         </criteriaItems>
-        <language>en_US</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

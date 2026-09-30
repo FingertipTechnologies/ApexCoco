@@ -5,7 +5,6 @@
     <fieldName>Status__c</fieldName>
     <masterLabel>Apex Sample Request Path</masterLabel>
     <pathAssistantSteps>
-        <fieldNames>Product__c</fieldNames>
         <fieldNames>Specification__c</fieldNames>
         <fieldNames>Sample_Quantity__c</fieldNames>
         <fieldNames>Sample_Unit__c</fieldNames>
