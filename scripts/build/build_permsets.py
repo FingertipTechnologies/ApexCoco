@@ -21,8 +21,10 @@ def perms(obj, c, r, e, d, va=False, ma=False):
     return (f'    <objectPermissions>\n        <allowCreate>{str(c).lower()}</allowCreate>\n        <allowDelete>{str(d).lower()}</allowDelete>\n        <allowEdit>{str(e).lower()}</allowEdit>\n'
             f'        <allowRead>{str(r).lower()}</allowRead>\n        <modifyAllRecords>{str(ma).lower()}</modifyAllRecords>\n        <object>{obj}</object>\n        <viewAllRecords>{str(va).lower()}</viewAllRecords>\n    </objectPermissions>\n')
 
+STD_FLS = ['Order.OpportunityId', 'Order.PoNumber', 'Order.PoDate', 'Order.Description', 'Quote.Description', 'Quote.ExpirationDate', 'Case.SuppliedEmail', 'Opportunity.Description', 'Account.Description', 'Contact.Description', 'Product2.Description', 'Product2.Family', 'Product2.ProductCode']
+
 def field_perms(editable_objects, readonly_objects):
-    out = []
+    out = [(f, True) for f in STD_FLS]
     for obj, fields in inv['fields'].items():
         if obj not in editable_objects and obj not in readonly_objects:
             continue
