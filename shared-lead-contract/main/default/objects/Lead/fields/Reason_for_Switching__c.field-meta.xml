@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason_for_Switching__c</fullName>
+    <description>Customer motivation (values: DEMO list, validate with Apex)</description>
+    <externalId>false</externalId>
+    <label>Reason for Switching</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Price</fullName>
+                <default>false</default>
+                <label>Price</label>
+            </value>
+            <value>
+                <fullName>Quality Issues</fullName>
+                <default>false</default>
+                <label>Quality Issues</label>
+            </value>
+            <value>
+                <fullName>Supply Reliability</fullName>
+                <default>false</default>
+                <label>Supply Reliability</label>
+            </value>
+            <value>
+                <fullName>Lead Time</fullName>
+                <default>false</default>
+                <label>Lead Time</label>
+            </value>
+            <value>
+                <fullName>Certification / Compliance</fullName>
+                <default>false</default>
+                <label>Certification / Compliance</label>
+            </value>
+            <value>
+                <fullName>Product Range</fullName>
+                <default>false</default>
+                <label>Product Range</label>
+            </value>
+            <value>
+                <fullName>Payment Terms</fullName>
+                <default>false</default>
+                <label>Payment Terms</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

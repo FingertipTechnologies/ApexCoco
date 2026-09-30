@@ -1,12 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Interested_Product__c</fullName>
-    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Product interest</description>
     <externalId>false</externalId>
     <label>Interested Product</label>
-    <referenceTo>Product2</referenceTo>
-    <relationshipLabel>Interested Leads</relationshipLabel>
-    <relationshipName>Interested_Leads</relationshipName>
     <required>false</required>
-    <type>Lookup</type>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Coconut Milk Powder</fullName>
+                <default>false</default>
+                <label>Coconut Milk Powder</label>
+            </value>
+            <value>
+                <fullName>Coconut Cream</fullName>
+                <default>false</default>
+                <label>Coconut Cream</label>
+            </value>
+            <value>
+                <fullName>Desiccated Coconut</fullName>
+                <default>false</default>
+                <label>Desiccated Coconut</label>
+            </value>
+            <value>
+                <fullName>Coconut Water</fullName>
+                <default>false</default>
+                <label>Coconut Water</label>
+            </value>
+            <value>
+                <fullName>Coconut Oil</fullName>
+                <default>false</default>
+                <label>Coconut Oil</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
 </CustomField>

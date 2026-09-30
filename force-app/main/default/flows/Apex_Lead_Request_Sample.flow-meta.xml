@@ -257,7 +257,7 @@
         <inputAssignments>
             <field>Competitor__c</field>
             <value>
-                <elementReference>Get_Lead.Competitor__c</elementReference>
+                <elementReference>Get_Lead.Competitor__r.Name</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -269,7 +269,7 @@
         <inputAssignments>
             <field>Expected_Annual_Volume__c</field>
             <value>
-                <elementReference>Get_Lead.Expected_Annual_Volume__c</elementReference>
+                <elementReference>Get_Lead.Estimated_Annual_Volume__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -323,7 +323,7 @@
         <inputAssignments>
             <field>Volume_Unit__c</field>
             <value>
-                <elementReference>Get_Lead.Volume_Unit__c</elementReference>
+                <stringValue>MT</stringValue>
             </value>
         </inputAssignments>
         <object>Opportunity</object>
@@ -509,10 +509,10 @@
         <name>Get_Product</name>
         <label>Get selected product</label>
         <locationX>182</locationX>
-        <locationY>830</locationY>
+        <locationY>410</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Get_Existing_Opportunity</targetReference>
+            <targetReference>Already_Converted</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -567,9 +567,15 @@
             </value>
         </filters>
         <inputAssignments>
-            <field>Next_Action__c</field>
+            <field>Customer_Response__c</field>
             <value>
-                <stringValue>Create Sample Request</stringValue>
+                <stringValue>Requested Sample</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Sample_Product__c</field>
+            <value>
+                <elementReference>Get_Product.Name</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -592,7 +598,7 @@
         <locationX>182</locationX>
         <locationY>830</locationY>
         <connector>
-            <targetReference>Get_Product</targetReference>
+            <targetReference>Get_Existing_Opportunity</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Fault_Screen</targetReference>
@@ -605,12 +611,6 @@
                 <elementReference>varAccountId</elementReference>
             </value>
         </filters>
-        <inputAssignments>
-            <field>Business_Type__c</field>
-            <value>
-                <elementReference>Get_Lead.Business_Type__c</elementReference>
-            </value>
-        </inputAssignments>
         <inputAssignments>
             <field>Customer_Type__c</field>
             <value>
@@ -660,11 +660,11 @@
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Already_Converted</targetReference>
+            <targetReference>Get_Product</targetReference>
         </connector>
         <fields>
             <name>Intro_Text</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;{!Get_Lead.Company}&lt;/b&gt; ({!Get_Lead.Name}) has asked for a sample. This is the buying signal that opens an Apex opportunity. Expected volume: {!Get_Lead.Expected_Annual_Volume__c} {!Get_Lead.Volume_Unit__c}.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;{!Get_Lead.Company}&lt;/b&gt; ({!Get_Lead.Name}) has asked for a sample. This is the buying signal that opens an Apex opportunity. Estimated annual volume: {!Get_Lead.Estimated_Annual_Volume__c} MT. Interested in: {!Get_Lead.Interested_Product__c}.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>

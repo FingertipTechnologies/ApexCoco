@@ -2,8 +2,9 @@
 private class LeadSampleConversionServiceTest {
 
     private static Lead makeLead(String company, String email) {
+        String openStatus = [SELECT MasterLabel FROM LeadStatus WHERE IsConverted = false ORDER BY SortOrder ASC LIMIT 1].MasterLabel;
         Lead ld = new Lead(FirstName = 'Michael', LastName = 'Anderson', Company = company, Email = email,
-                           Status = 'Open - Not Contacted', Country = 'USA');
+                           Status = openStatus, Country = 'USA');
         insert ld;
         return ld;
     }

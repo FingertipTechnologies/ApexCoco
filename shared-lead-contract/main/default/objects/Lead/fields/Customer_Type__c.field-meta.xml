@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Customer_Type__c</fullName>
+    <description>Customer segment</description>
     <externalId>false</externalId>
     <label>Customer Type</label>
     <required>false</required>
@@ -10,29 +11,44 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Direct Customer</fullName>
-                <default>false</default>
-                <label>Direct Customer</label>
-            </value>
-            <value>
                 <fullName>Importer</fullName>
                 <default>false</default>
                 <label>Importer</label>
             </value>
             <value>
-                <fullName>Brand</fullName>
+                <fullName>Brand Owner</fullName>
                 <default>false</default>
-                <label>Brand</label>
+                <label>Brand Owner</label>
             </value>
             <value>
-                <fullName>Private Label</fullName>
+                <fullName>Manufacturer</fullName>
                 <default>false</default>
-                <label>Private Label</label>
+                <label>Manufacturer</label>
             </value>
             <value>
-                <fullName>Distributor/Other</fullName>
+                <fullName>Distributor</fullName>
                 <default>false</default>
-                <label>Distributor/Other</label>
+                <label>Distributor</label>
+            </value>
+            <value>
+                <fullName>Trader</fullName>
+                <default>false</default>
+                <label>Trader</label>
+            </value>
+            <value>
+                <fullName>Retailer</fullName>
+                <default>false</default>
+                <label>Retailer</label>
+            </value>
+            <value>
+                <fullName>Private Label Customer</fullName>
+                <default>false</default>
+                <label>Private Label Customer</label>
+            </value>
+            <value>
+                <fullName>B2C Customer</fullName>
+                <default>false</default>
+                <label>B2C Customer</label>
             </value>
         </valueSetDefinition>
     </valueSet>

@@ -10,28 +10,67 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Direct Customer</fullName>
-                <default>false</default>
-                <label>Direct Customer</label>
-            </value>
-            <value>
                 <fullName>Importer</fullName>
                 <default>false</default>
                 <label>Importer</label>
             </value>
             <value>
+                <fullName>Brand Owner</fullName>
+                <default>false</default>
+                <label>Brand Owner</label>
+            </value>
+            <value>
+                <fullName>Manufacturer</fullName>
+                <default>false</default>
+                <label>Manufacturer</label>
+            </value>
+            <value>
+                <fullName>Distributor</fullName>
+                <default>false</default>
+                <label>Distributor</label>
+            </value>
+            <value>
+                <fullName>Trader</fullName>
+                <default>false</default>
+                <label>Trader</label>
+            </value>
+            <value>
+                <fullName>Retailer</fullName>
+                <default>false</default>
+                <label>Retailer</label>
+            </value>
+            <value>
+                <fullName>Private Label Customer</fullName>
+                <default>false</default>
+                <label>Private Label Customer</label>
+            </value>
+            <value>
+                <fullName>B2C Customer</fullName>
+                <default>false</default>
+                <label>B2C Customer</label>
+            </value>
+            <value>
+                <fullName>Direct Customer</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Direct Customer</label>
+            </value>
+            <value>
                 <fullName>Brand</fullName>
                 <default>false</default>
+                <isActive>false</isActive>
                 <label>Brand</label>
             </value>
             <value>
                 <fullName>Private Label</fullName>
                 <default>false</default>
+                <isActive>false</isActive>
                 <label>Private Label</label>
             </value>
             <value>
                 <fullName>Distributor/Other</fullName>
                 <default>false</default>
+                <isActive>false</isActive>
                 <label>Distributor/Other</label>
             </value>
         </valueSetDefinition>

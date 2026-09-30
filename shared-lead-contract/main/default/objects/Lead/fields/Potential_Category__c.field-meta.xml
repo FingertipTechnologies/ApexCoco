@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Volume_Unit__c</fullName>
+    <fullName>Potential_Category__c</fullName>
+    <description>Business potential</description>
     <externalId>false</externalId>
-    <label>Volume Unit</label>
+    <label>Potential Category</label>
     <required>false</required>
     <type>Picklist</type>
     <valueSet>
@@ -10,19 +11,19 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>MT</fullName>
-                <default>true</default>
-                <label>MT</label>
+                <fullName>High</fullName>
+                <default>false</default>
+                <label>High</label>
             </value>
             <value>
-                <fullName>KG</fullName>
+                <fullName>Medium</fullName>
                 <default>false</default>
-                <label>KG</label>
+                <label>Medium</label>
             </value>
             <value>
-                <fullName>Other</fullName>
+                <fullName>Low</fullName>
                 <default>false</default>
-                <label>Other</label>
+                <label>Low</label>
             </value>
         </valueSetDefinition>
     </valueSet>

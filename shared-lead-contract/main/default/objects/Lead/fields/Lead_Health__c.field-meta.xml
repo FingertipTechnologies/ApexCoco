@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Potential_Rating__c</fullName>
+    <fullName>Lead_Health__c</fullName>
+    <description>AI insight</description>
     <externalId>false</externalId>
-    <label>Potential Rating</label>
+    <label>Lead Health</label>
     <required>false</required>
     <type>Picklist</type>
     <valueSet>
@@ -10,9 +11,9 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Low</fullName>
+                <fullName>High</fullName>
                 <default>false</default>
-                <label>Low</label>
+                <label>High</label>
             </value>
             <value>
                 <fullName>Medium</fullName>
@@ -20,9 +21,9 @@
                 <label>Medium</label>
             </value>
             <value>
-                <fullName>High</fullName>
+                <fullName>Low</fullName>
                 <default>false</default>
-                <label>High</label>
+                <label>Low</label>
             </value>
         </valueSetDefinition>
     </valueSet>

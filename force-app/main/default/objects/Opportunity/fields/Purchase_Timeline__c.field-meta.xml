@@ -10,23 +10,52 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
+                <fullName>Immediate</fullName>
+                <default>false</default>
+                <label>Immediate</label>
+            </value>
+            <value>
+                <fullName>3 Months</fullName>
+                <default>false</default>
+                <label>3 Months</label>
+            </value>
+            <value>
+                <fullName>6 Months</fullName>
+                <default>false</default>
+                <label>6 Months</label>
+            </value>
+            <value>
+                <fullName>12 Months</fullName>
+                <default>false</default>
+                <label>12 Months</label>
+            </value>
+            <value>
+                <fullName>Long Term</fullName>
+                <default>false</default>
+                <label>Long Term</label>
+            </value>
+            <value>
                 <fullName>&lt;3 Months</fullName>
                 <default>false</default>
+                <isActive>false</isActive>
                 <label>&lt;3 Months</label>
             </value>
             <value>
                 <fullName>3-6 Months</fullName>
                 <default>false</default>
+                <isActive>false</isActive>
                 <label>3-6 Months</label>
             </value>
             <value>
                 <fullName>6-12 Months</fullName>
                 <default>false</default>
+                <isActive>false</isActive>
                 <label>6-12 Months</label>
             </value>
             <value>
                 <fullName>&gt;12 Months</fullName>
                 <default>false</default>
+                <isActive>false</isActive>
                 <label>&gt;12 Months</label>
             </value>
         </valueSetDefinition>

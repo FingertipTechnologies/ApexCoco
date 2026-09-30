@@ -16,10 +16,13 @@ def w(path, content):
         f.write(content)
 
 # ---------------------------------------------------------------- field builders
-def picklist_xml(values, default=None, restricted=True):
+def picklist_xml(values, default=None, restricted=True, inactive=()):
     vals = ''.join(
         f'            <value>\n                <fullName>{X(v)}</fullName>\n                <default>{"true" if v == default else "false"}</default>\n                <label>{X(v)}</label>\n            </value>\n'
         for v in values)
+    vals += ''.join(
+        f'            <value>\n                <fullName>{X(v)}</fullName>\n                <default>false</default>\n                <isActive>false</isActive>\n                <label>{X(v)}</label>\n            </value>\n'
+        for v in inactive)
     return (f'    <valueSet>\n        <restricted>{"true" if restricted else "false"}</restricted>\n'
             f'        <valueSetDefinition>\n            <sorted>false</sorted>\n{vals}        </valueSetDefinition>\n    </valueSet>\n')
 
@@ -72,9 +75,11 @@ def field_xml(f, track_history=False):
     if t == 'Checkbox' and not f.get('formula'):
         pass
     if t == 'Picklist':
+        parts.append(picklist_xml(f['values'], f.get('default'), f.get('restricted', True), f.get('inactive', ())))
+    if t == 'MultiselectPicklist':
         parts.append(picklist_xml(f['values'], f.get('default'), f.get('restricted', True)))
-    if t == 'LongTextArea':
-        parts.append(f'    <visibleLines>{f.get("visibleLines", 3)}</visibleLines>\n')
+    if t in ('LongTextArea', 'MultiselectPicklist'):
+        parts.append(f'    <visibleLines>{f.get("visibleLines", 4)}</visibleLines>\n')
     body = ''.join(parts)
     # formula fields: precision/scale must appear (alphabetically) before 'required'/'type'. Rebuild properly.
     if f.get('formula') and f['formulaType'] in ('Number', 'Percent', 'Currency'):
@@ -154,9 +159,9 @@ def compact_xml(name, label, fields):
     return HDR + f'<CompactLayout xmlns="{NS}">\n    <fullName>{name}</fullName>\n' + ''.join(f'    <fields>{f}</fields>\n' for f in fields) + f'    <label>{X(label)}</label>\n</CompactLayout>\n'
 
 # ---------------------------------------------------------------- shared picklists
-CUSTOMER_TYPES = ['Direct Customer', 'Importer', 'Brand', 'Private Label', 'Distributor/Other']
+CUSTOMER_TYPES = ['Importer', 'Brand Owner', 'Manufacturer', 'Distributor', 'Trader', 'Retailer', 'Private Label Customer', 'B2C Customer']
 VOLUME_UNITS = ['MT', 'KG', 'Other']
-TIMELINES = ['<3 Months', '3-6 Months', '6-12 Months', '>12 Months']
+TIMELINES = ['Immediate', '3 Months', '6 Months', '12 Months', 'Long Term']
 ITEM_STATUS = ['Pending', 'In Progress', 'Complete', 'Not Required']
 ITEM_OWNER = ['Sales Admin', 'Finance', 'Quality', 'Operations', 'Compliance', 'Sales Executive']
 CMDT = '$CustomMetadata.Apex_Demo_Setting__mdt.Default.'
@@ -297,7 +302,7 @@ OPP = [
  dict(api='Primary_Product__c', label='Primary Product', type='Lookup', referenceTo='Product2', relationshipLabel='Opportunities (Primary Product)', relationshipName='Primary_Product_Opportunities'),
  dict(api='Expected_Annual_Volume__c', label='Expected Annual Volume', type='Number', precision=16, scale=2),
  dict(api='Volume_Unit__c', label='Volume Unit', type='Picklist', values=VOLUME_UNITS, default='MT'),
- dict(api='Purchase_Timeline__c', label='Purchase Timeline', type='Picklist', values=TIMELINES),
+ dict(api='Purchase_Timeline__c', label='Purchase Timeline', type='Picklist', values=TIMELINES, inactive=['<3 Months', '3-6 Months', '6-12 Months', '>12 Months']),
  dict(api='Current_Supplier__c', label='Current Supplier', type='Text', length=100),
  dict(api='Competitor__c', label='Competitor', type='Text', length=100),
  dict(api='Sample_Approved_Date__c', label='Sample Approved Date', type='Date', help='Set automatically when a linked sample request is approved.'),
@@ -337,7 +342,7 @@ OPP_VRS = [
 
 # ================================================================ Account
 ACC = [
- dict(api='Customer_Type__c', label='Customer Type', type='Picklist', values=CUSTOMER_TYPES),
+ dict(api='Customer_Type__c', label='Customer Type', type='Picklist', values=CUSTOMER_TYPES, inactive=['Direct Customer', 'Brand', 'Private Label', 'Distributor/Other']),
  dict(api='Business_Type__c', label='Business Type', type='Text', length=100),
  dict(api='Market__c', label='Market', type='Picklist', values=['India', 'Export']),
  dict(api='Onboarding_Status__c', label='Onboarding Status', type='Picklist', values=['Not Started', 'In Progress', 'Complete', 'On Hold'], help='Maintained by flow from the Customer Onboarding record.'),
@@ -406,23 +411,55 @@ PRODUCT = [
  dict(api='Unit_of_Measure__c', label='Unit of Measure', type='Text', length=10, default='"MT"'),
 ]
 
-# ================================================================ Lead (shared contract, Person 1 owns; frozen API names)
+# ================================================================ Lead (shared contract, Person 1 owns; API names from Apex_Coco_Salesforce_Lead_Object_Fields.xlsx)
+COUNTRIES = ['India', 'United States', 'United Kingdom', 'Germany', 'Netherlands', 'France', 'Italy', 'Spain', 'Sweden', 'Poland', 'United Arab Emirates', 'Saudi Arabia', 'Turkey', 'South Africa', 'Egypt', 'Australia', 'New Zealand', 'Japan', 'South Korea', 'China', 'Singapore', 'Malaysia', 'Vietnam', 'Canada', 'Brazil', 'Mexico', 'Other']
+COMPANY_TYPES = ['Importer', 'Brand Owner', 'Manufacturer', 'Distributor', 'Trader', 'Retailer']
+LEAD_CUSTOMER_TYPES = COMPANY_TYPES + ['Private Label Customer', 'B2C Customer']
+LEAD_TIMELINES = ['Immediate', '3 Months', '6 Months', '12 Months', 'Long Term']
 LEAD = [
- dict(api='Customer_Type__c', label='Customer Type', type='Picklist', values=CUSTOMER_TYPES),
- dict(api='Business_Type__c', label='Business Type', type='Text', length=100),
- dict(api='Interested_Product__c', label='Interested Product', type='Lookup', referenceTo='Product2', relationshipLabel='Interested Leads', relationshipName='Interested_Leads'),
- dict(api='Expected_Annual_Volume__c', label='Expected Annual Volume', type='Number', precision=16, scale=2),
- dict(api='Volume_Unit__c', label='Volume Unit', type='Picklist', values=VOLUME_UNITS, default='MT'),
- dict(api='Purchase_Timeline__c', label='Purchase Timeline', type='Picklist', values=TIMELINES),
- dict(api='Current_Supplier__c', label='Current Supplier', type='Text', length=100),
- dict(api='Competitor__c', label='Competitor', type='Text', length=100),
- dict(api='Potential_Rating__c', label='Potential Rating', type='Picklist', values=['Low', 'Medium', 'High']),
- dict(api='Lead_Score__c', label='Lead Score', type='Number', precision=3, scale=0),
- dict(api='Sample_Requested__c', label='Sample Requested', type='Checkbox', default='false'),
- dict(api='Sample_Request_Date__c', label='Sample Request Date', type='Date'),
- dict(api='Qualification_Notes__c', label='Qualification Notes', type='LongTextArea', length=32768, visibleLines=3),
- dict(api='Next_Action__c', label='Next Action', type='Text', length=255),
- dict(api='Next_Follow_up_Date__c', label='Next Follow-up Date', type='Date'),
+ dict(api='Lead_Number__c', label='Lead Number', type='AutoNumber', displayFormat='L-{00000}', description='Unique lead reference'),
+ dict(api='Campaign__c', label='Campaign Name', type='Lookup', referenceTo='Campaign', relationshipLabel='Leads (Campaign)', relationshipName='Apex_Leads', description='Track exhibition/campaign'),
+ dict(api='Event_Name__c', label='Event Name', type='Text', length=255, description='Trade show/event name'),
+ dict(api='LinkedIn_Profile__c', label='LinkedIn Profile', type='Url', description='Research information'),
+ dict(api='Country__c', label='Country', type='Picklist', values=COUNTRIES, description='Customer geography (values: DEMO list, extend as needed)'),
+ dict(api='Company_Type__c', label='Company Type', type='Picklist', values=COMPANY_TYPES, description='Business classification'),
+ dict(api='Employee_Count__c', label='Employee Count', type='Number', precision=18, scale=0, description='Company size'),
+ dict(api='Customer_Type__c', label='Customer Type', type='Picklist', values=LEAD_CUSTOMER_TYPES, description='Customer segment'),
+ dict(api='Business_Model__c', label='Business Model', type='Picklist', values=['Bulk Ingredient Buyer', 'Private Label', 'Own Brand Distribution', 'Manufacturing Partner'], description='Business model'),
+ dict(api='Potential_Category__c', label='Potential Category', type='Picklist', values=['High', 'Medium', 'Low'], description='Business potential'),
+ dict(api='Buying_Intent__c', label='Buying Intent', type='Picklist', values=['Immediate Purchase', 'Future Requirement', 'R&D Evaluation', 'Price Comparison', 'Existing Supplier Review', 'Information Gathering'], description='Buying stage'),
+ dict(api='Purchase_Timeline__c', label='Purchase Timeline', type='Picklist', values=LEAD_TIMELINES, description='Expected buying timeline'),
+ dict(api='Estimated_Annual_Volume__c', label='Estimated Annual Volume', type='Number', precision=16, scale=2, description='Potential volume (MT)'),
+ dict(api='Expected_Monthly_Volume__c', label='Expected Monthly Volume', type='Number', precision=16, scale=2, description='Monthly requirement (MT)'),
+ dict(api='Interested_Product__c', label='Interested Product', type='MultiselectPicklist', values=['Coconut Milk Powder', 'Coconut Cream', 'Desiccated Coconut', 'Coconut Water', 'Coconut Oil', 'Other'], description='Product interest'),
+ dict(api='Application_Usage__c', label='Application / Usage', type='LongTextArea', length=32768, visibleLines=3, description='End use'),
+ dict(api='Lead_Classification__c', label='Lead Classification', type='Picklist', values=['Potential Customer', 'Competitor', 'Price Collector', 'Existing Supplier Customer', 'Unknown', 'Junk Lead'], description='Research outcome'),
+ dict(api='Research_Completed__c', label='Research Completed', type='Checkbox', default='false', description='Research status'),
+ dict(api='Research_Notes__c', label='Research Notes', type='LongTextArea', length=32768, visibleLines=3, description='Research comments'),
+ dict(api='Current_Supplier__c', label='Current Supplier', type='Text', length=255, description='Existing supplier'),
+ dict(api='Competitor__c', label='Competitor Name', type='Lookup', referenceTo='Competitor__c', relationshipLabel='Leads', relationshipName='Leads', description='Competitor mapping'),
+ dict(api='Reason_for_Switching__c', label='Reason for Switching', type='Picklist', values=['Price', 'Quality Issues', 'Supply Reliability', 'Lead Time', 'Certification / Compliance', 'Product Range', 'Payment Terms', 'Other'], description='Customer motivation (values: DEMO list, validate with Apex)'),
+ dict(api='WhatsApp_Number__c', label='WhatsApp Number', type='Phone', description='Communication'),
+ dict(api='Designation__c', label='Designation', type='Text', length=255, description='Contact role'),
+ dict(api='Last_Contact_Date__c', label='Last Contact Date', type='Date', description='Last interaction'),
+ dict(api='Next_Followup_Date__c', label='Next Follow-up Date', type='Date', description='Reminder'),
+ dict(api='Preferred_Communication__c', label='Preferred Communication', type='Picklist', values=['Email', 'Phone', 'WhatsApp', 'Meeting'], description='Channel preference'),
+ dict(api='Customer_Response__c', label='Customer Response', type='Picklist', values=['Interested', 'Not Interested', 'Future Requirement', 'Waiting Approval', 'Requested Sample', 'Requested Quote', 'No Response'], description='Response tracking'),
+ dict(api='Sample_Requested__c', label='Sample Requested', type='Checkbox', default='false', description='Opportunity trigger'),
+ dict(api='Sample_Request_Date__c', label='Sample Request Date', type='Date', description='Sample timeline'),
+ dict(api='Sample_Product__c', label='Sample Product', type='Text', length=255, description='Sample requirement'),
+ dict(api='Decision_Maker_Identified__c', label='Decision Maker Identified', type='Checkbox', default='false', description='Qualification'),
+ dict(api='Product_Requirement_Confirmed__c', label='Product Requirement Confirmed', type='Checkbox', default='false', description='Qualification'),
+ dict(api='AI_Lead_Score__c', label='AI Lead Score', type='Number', precision=3, scale=0, description='AI prioritization'),
+ dict(api='Lead_Health__c', label='Lead Health', type='Picklist', values=['High', 'Medium', 'Low'], description='AI insight'),
+ dict(api='AI_Insights__c', label='AI Insights', type='LongTextArea', length=32768, visibleLines=4, description='Generated recommendation'),
+]
+COMPETITOR = [
+ dict(api='Website__c', label='Website', type='Url'),
+ dict(api='Country__c', label='Country', type='Picklist', values=COUNTRIES),
+ dict(api='Strength__c', label='Strength', type='Text', length=255),
+ dict(api='Weakness__c', label='Weakness', type='Text', length=255),
+ dict(api='Notes__c', label='Notes', type='LongTextArea', length=32768, visibleLines=3),
 ]
 
 # ---------------------------------------------------------------- write everything
@@ -513,16 +550,21 @@ def main():
     write_fields(FA, 'Case', CASE)
     write_fields(FA, 'Product2', PRODUCT)
     write_fields(SHARED, 'Lead', LEAD)
+    base = os.path.join(SHARED, 'objects', 'Competitor__c')
+    w(os.path.join(base, 'Competitor__c.object-meta.xml'), custom_object_xml('Competitor', 'Competitors', 'Competitor Name', history=False, compact=None,
+        description='Competitor master referenced by Lead.Competitor__c (shared Lead contract).'))
+    write_fields(SHARED, 'Competitor__c', COMPETITOR)
+    w(os.path.join(base, 'listViews', 'All.listView-meta.xml'), listview_xml('All', 'All Competitors', ['NAME', 'Country__c', 'Website__c', 'Strength__c', 'Weakness__c']))
 
     # Field inventory for permission sets / docs
     inv = {
         'Sample_Request__c': [f['api'] for f in SR], 'Competitor_Intel__c': [f['api'] for f in CI], 'Customer_Onboarding__c': [f['api'] for f in ONB],
         'Integration_Log__c': [f['api'] for f in IL], 'Opportunity': [f['api'] for f in OPP], 'Account': [f['api'] for f in ACC], 'Quote': [f['api'] for f in QUOTE],
-        'QuoteLineItem': [f['api'] for f in QLI], 'Order': [f['api'] for f in ORDER], 'Case': [f['api'] for f in CASE], 'Product2': [f['api'] for f in PRODUCT], 'Lead': [f['api'] for f in LEAD],
+        'QuoteLineItem': [f['api'] for f in QLI], 'Order': [f['api'] for f in ORDER], 'Case': [f['api'] for f in CASE], 'Product2': [f['api'] for f in PRODUCT], 'Lead': [f['api'] for f in LEAD], 'Competitor__c': [f['api'] for f in COMPETITOR],
     }
     readonly = {}
     required = {}
-    for obj, lst in [('Sample_Request__c', SR), ('Competitor_Intel__c', CI), ('Customer_Onboarding__c', ONB), ('Integration_Log__c', IL), ('Opportunity', OPP), ('Account', ACC), ('Quote', QUOTE), ('QuoteLineItem', QLI), ('Order', ORDER), ('Case', CASE), ('Product2', PRODUCT), ('Lead', LEAD)]:
+    for obj, lst in [('Sample_Request__c', SR), ('Competitor_Intel__c', CI), ('Customer_Onboarding__c', ONB), ('Integration_Log__c', IL), ('Opportunity', OPP), ('Account', ACC), ('Quote', QUOTE), ('QuoteLineItem', QLI), ('Order', ORDER), ('Case', CASE), ('Product2', PRODUCT), ('Lead', LEAD), ('Competitor__c', COMPETITOR)]:
         readonly[obj] = [f['api'] for f in lst if f.get('formula') or f['type'] == 'Summary']
         required[obj] = [f['api'] for f in lst if f.get('required')]
     with open(os.path.join(os.path.dirname(__file__), 'field_inventory.json'), 'w') as fh:

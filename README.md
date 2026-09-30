@@ -52,16 +52,23 @@ docs/                             documentation
 
 ### The shared Lead contract
 
-Person 2 never renames or redefines Person 1's Lead fields. The API names Person 2 consumes are:
+The Lead fields are defined by Person 1's specification (`Apex_Coco_Salesforce_Lead_Object_Fields.xlsx`) and are created in
+`shared-lead-contract/` exactly with those API names: 36 custom fields (Lead Number, Campaign, Event Name, LinkedIn Profile,
+Country, Company Type, Employee Count, Customer Type, Business Model, Potential Category, Buying Intent, Purchase Timeline,
+Estimated / Expected Monthly Volume, Interested Product (multi-select), Application / Usage, Lead Classification, Research
+Completed / Notes, Current Supplier, Competitor (lookup to the small `Competitor__c` object), Reason for Switching, WhatsApp
+Number, Designation, Last Contact / Next Follow-up Date, Preferred Communication, Customer Response, Sample Requested / Date /
+Product, Decision Maker Identified, Product Requirement Confirmed, AI Lead Score, Lead Health, AI Insights), the Lead Status
+values (New, Research Pending, Qualified, Engaged, Sample Discussion, Nurture, Junk, Lost, Converted), the Lead Source values
+(Trade Show, Website, LinkedIn, Email, Referral) and a Lead page layout organised by the spreadsheet sections.
 
-`Lead.Customer_Type__c`, `Business_Type__c`, `Interested_Product__c` (lookup Product2), `Expected_Annual_Volume__c`,
-`Volume_Unit__c`, `Purchase_Timeline__c`, `Current_Supplier__c`, `Competitor__c`, `Potential_Rating__c`, `Lead_Score__c`,
-`Sample_Requested__c`, `Sample_Request_Date__c`, `Qualification_Notes__c`, `Next_Action__c`, `Next_Follow_up_Date__c`.
+Person 2 reads only these Lead fields: `Sample_Requested__c`, `Sample_Request_Date__c`, `Sample_Product__c`,
+`Customer_Response__c`, `Customer_Type__c`, `Estimated_Annual_Volume__c`, `Purchase_Timeline__c`, `Current_Supplier__c`,
+`Competitor__c` (name). They are referenced in two flows only: `Apex_Lead_Request_Sample` and `Apex_Sample_Request_After_Create`.
+Account.Customer Type and Opportunity.Purchase Timeline use the same picklist values as the Lead so the hand-off copies cleanly.
 
-They live in `shared-lead-contract/` so Person 2 can be deployed and tested stand-alone. When merging with Person 1:
-if Person 1 already created these fields with the same API names, drop `shared-lead-contract/` (or keep one copy); if Person 1
-used different API names, freeze the names together and update only the two places that read them —
-`flows/Apex_Lead_Request_Sample.flow-meta.xml` and `flows/Apex_Sample_Request_After_Create.flow-meta.xml` (the `$Record.Lead__r.*` references).
+Values the spreadsheet left open and that are DEMO defaults to validate: the Country list, the Reason for Switching list and
+the Competitor lookup target.
 
 ## Prerequisites
 

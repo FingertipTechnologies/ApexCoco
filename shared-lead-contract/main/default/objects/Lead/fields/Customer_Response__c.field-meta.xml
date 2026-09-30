@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Customer_Response__c</fullName>
+    <description>Response tracking</description>
+    <externalId>false</externalId>
+    <label>Customer Response</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Interested</fullName>
+                <default>false</default>
+                <label>Interested</label>
+            </value>
+            <value>
+                <fullName>Not Interested</fullName>
+                <default>false</default>
+                <label>Not Interested</label>
+            </value>
+            <value>
+                <fullName>Future Requirement</fullName>
+                <default>false</default>
+                <label>Future Requirement</label>
+            </value>
+            <value>
+                <fullName>Waiting Approval</fullName>
+                <default>false</default>
+                <label>Waiting Approval</label>
+            </value>
+            <value>
+                <fullName>Requested Sample</fullName>
+                <default>false</default>
+                <label>Requested Sample</label>
+            </value>
+            <value>
+                <fullName>Requested Quote</fullName>
+                <default>false</default>
+                <label>Requested Quote</label>
+            </value>
+            <value>
+                <fullName>No Response</fullName>
+                <default>false</default>
+                <label>No Response</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

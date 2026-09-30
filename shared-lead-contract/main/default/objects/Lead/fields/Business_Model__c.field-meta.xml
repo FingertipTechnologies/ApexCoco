@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Business_Model__c</fullName>
+    <description>Business model</description>
+    <externalId>false</externalId>
+    <label>Business Model</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bulk Ingredient Buyer</fullName>
+                <default>false</default>
+                <label>Bulk Ingredient Buyer</label>
+            </value>
+            <value>
+                <fullName>Private Label</fullName>
+                <default>false</default>
+                <label>Private Label</label>
+            </value>
+            <value>
+                <fullName>Own Brand Distribution</fullName>
+                <default>false</default>
+                <label>Own Brand Distribution</label>
+            </value>
+            <value>
+                <fullName>Manufacturing Partner</fullName>
+                <default>false</default>
+                <label>Manufacturing Partner</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

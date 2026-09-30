@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Buying_Intent__c</fullName>
+    <description>Buying stage</description>
+    <externalId>false</externalId>
+    <label>Buying Intent</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Immediate Purchase</fullName>
+                <default>false</default>
+                <label>Immediate Purchase</label>
+            </value>
+            <value>
+                <fullName>Future Requirement</fullName>
+                <default>false</default>
+                <label>Future Requirement</label>
+            </value>
+            <value>
+                <fullName>R&amp;D Evaluation</fullName>
+                <default>false</default>
+                <label>R&amp;D Evaluation</label>
+            </value>
+            <value>
+                <fullName>Price Comparison</fullName>
+                <default>false</default>
+                <label>Price Comparison</label>
+            </value>
+            <value>
+                <fullName>Existing Supplier Review</fullName>
+                <default>false</default>
+                <label>Existing Supplier Review</label>
+            </value>
+            <value>
+                <fullName>Information Gathering</fullName>
+                <default>false</default>
+                <label>Information Gathering</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

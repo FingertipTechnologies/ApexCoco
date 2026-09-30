@@ -156,7 +156,7 @@ Name field: **Integration Id** (AutoNumber, INT-{00000})
 | PO Number | `PO_Number__c` | Text |  | length 50 |
 | PO Quantity | `PO_Quantity__c` | Number |  | 16,2 |
 | Primary Product | `Primary_Product__c` | Lookup |  | > Product2 (child relationship Primary_Product_Opportunities__r) |
-| Purchase Timeline | `Purchase_Timeline__c` | Picklist |  | <3 Months, 3-6 Months, 6-12 Months, >12 Months |
+| Purchase Timeline | `Purchase_Timeline__c` | Picklist |  | Immediate, 3 Months, 6 Months, 12 Months, Long Term, <3 Months, 3-6 Months, 6-12 Months, >12 Months |
 | Quotes | `Quote_Count__c` | Number |  | 3,0 - default 0 - Maintained by flow. |
 | Sample Approved Date | `Sample_Approved_Date__c` | Date |  |  - Set automatically when a linked sample request is approved. |
 | Sample Requests | `Sample_Request_Count__c` | Number |  | 3,0 - default 0 - Maintained by flow. |
@@ -169,7 +169,7 @@ Name field: **Integration Id** (AutoNumber, INT-{00000})
 |---|---|---|---|---|
 | Average Reorder Interval (Days) | `Average_Reorder_Interval_Days__c` | Number |  | 5,0 - DEMO / TO VALIDATE: interval between the two most recent activated orders. |
 | Business Type | `Business_Type__c` | Text |  | length 100 |
-| Customer Type | `Customer_Type__c` | Picklist |  | Direct Customer, Importer, Brand, Private Label, Distributor/Other |
+| Customer Type | `Customer_Type__c` | Picklist |  | Importer, Brand Owner, Manufacturer, Distributor, Trader, Retailer, Private Label Customer, B2C Customer, Direct Customer, Brand, Private Label, Distributor/Other |
 | Expected Reorder Date | `Expected_Reorder_Date__c` | Date |  |  |
 | Last Order Value | `Last_Order_Value__c` | Currency |  | 18,2 |
 | Last Purchase Date | `Last_Purchase_Date__c` | Date |  |  - Maintained by flow when an order is activated. |
@@ -244,21 +244,42 @@ Name field: **Integration Id** (AutoNumber, INT-{00000})
 
 | Field | API Name | Type | Required | Notes / Picklist values |
 |---|---|---|---|---|
-| Business Type | `Business_Type__c` | Text |  | length 100 |
-| Competitor | `Competitor__c` | Text |  | length 100 |
-| Current Supplier | `Current_Supplier__c` | Text |  | length 100 |
-| Customer Type | `Customer_Type__c` | Picklist |  | Direct Customer, Importer, Brand, Private Label, Distributor/Other |
-| Expected Annual Volume | `Expected_Annual_Volume__c` | Number |  | 16,2 |
-| Interested Product | `Interested_Product__c` | Lookup |  | > Product2 (child relationship Interested_Leads__r) |
-| Lead Score | `Lead_Score__c` | Number |  | 3,0 |
-| Next Action | `Next_Action__c` | Text |  | length 255 |
-| Next Follow-up Date | `Next_Follow_up_Date__c` | Date |  |  |
-| Potential Rating | `Potential_Rating__c` | Picklist |  | Low, Medium, High |
-| Purchase Timeline | `Purchase_Timeline__c` | Picklist |  | <3 Months, 3-6 Months, 6-12 Months, >12 Months |
-| Qualification Notes | `Qualification_Notes__c` | LongTextArea |  | length 32768 |
-| Sample Request Date | `Sample_Request_Date__c` | Date |  |  |
-| Sample Requested | `Sample_Requested__c` | Checkbox |  |  - default false |
-| Volume Unit | `Volume_Unit__c` | Picklist |  | MT, KG, Other |
+| AI Insights | `AI_Insights__c` | LongTextArea |  | length 32768 - Generated recommendation |
+| AI Lead Score | `AI_Lead_Score__c` | Number |  | 3,0 - AI prioritization |
+| Application / Usage | `Application_Usage__c` | LongTextArea |  | length 32768 - End use |
+| Business Model | `Business_Model__c` | Picklist |  | Bulk Ingredient Buyer, Private Label, Own Brand Distribution, Manufacturing Partner - Business model |
+| Buying Intent | `Buying_Intent__c` | Picklist |  | Immediate Purchase, Future Requirement, R&D Evaluation, Price Comparison, Existing Supplier Review, Information Gathering - Buying stage |
+| Campaign Name | `Campaign__c` | Lookup |  | > Campaign (child relationship Apex_Leads__r) - Track exhibition/campaign |
+| Company Type | `Company_Type__c` | Picklist |  | Importer, Brand Owner, Manufacturer, Distributor, Trader, Retailer - Business classification |
+| Competitor Name | `Competitor__c` | Lookup |  | > Competitor__c (child relationship Leads__r) - Competitor mapping |
+| Country | `Country__c` | Picklist |  | India, United States, United Kingdom, Germany, Netherlands, France, Italy, Spain, Sweden, Poland, United Arab Emirates, Saudi Arabia, Turkey, South Africa, Egypt, Australia, New Zealand, Japan, South Korea, China, Singapore, Malaysia, Vietnam, Canada, Brazil, Mexico, Other - Customer geography (values: DEMO list, extend as needed) |
+| Current Supplier | `Current_Supplier__c` | Text |  | length 255 - Existing supplier |
+| Customer Response | `Customer_Response__c` | Picklist |  | Interested, Not Interested, Future Requirement, Waiting Approval, Requested Sample, Requested Quote, No Response - Response tracking |
+| Customer Type | `Customer_Type__c` | Picklist |  | Importer, Brand Owner, Manufacturer, Distributor, Trader, Retailer, Private Label Customer, B2C Customer - Customer segment |
+| Decision Maker Identified | `Decision_Maker_Identified__c` | Checkbox |  |  - default false - Qualification |
+| Designation | `Designation__c` | Text |  | length 255 - Contact role |
+| Employee Count | `Employee_Count__c` | Number |  | 18,0 - Company size |
+| Estimated Annual Volume | `Estimated_Annual_Volume__c` | Number |  | 16,2 - Potential volume (MT) |
+| Event Name | `Event_Name__c` | Text |  | length 255 - Trade show/event name |
+| Expected Monthly Volume | `Expected_Monthly_Volume__c` | Number |  | 16,2 - Monthly requirement (MT) |
+| Interested Product | `Interested_Product__c` | MultiselectPicklist |  |  - Product interest |
+| Last Contact Date | `Last_Contact_Date__c` | Date |  |  - Last interaction |
+| Lead Classification | `Lead_Classification__c` | Picklist |  | Potential Customer, Competitor, Price Collector, Existing Supplier Customer, Unknown, Junk Lead - Research outcome |
+| Lead Health | `Lead_Health__c` | Picklist |  | High, Medium, Low - AI insight |
+| Lead Number | `Lead_Number__c` | AutoNumber |  |  - Unique lead reference |
+| LinkedIn Profile | `LinkedIn_Profile__c` | Url |  |  - Research information |
+| Next Follow-up Date | `Next_Followup_Date__c` | Date |  |  - Reminder |
+| Potential Category | `Potential_Category__c` | Picklist |  | High, Medium, Low - Business potential |
+| Preferred Communication | `Preferred_Communication__c` | Picklist |  | Email, Phone, WhatsApp, Meeting - Channel preference |
+| Product Requirement Confirmed | `Product_Requirement_Confirmed__c` | Checkbox |  |  - default false - Qualification |
+| Purchase Timeline | `Purchase_Timeline__c` | Picklist |  | Immediate, 3 Months, 6 Months, 12 Months, Long Term - Expected buying timeline |
+| Reason for Switching | `Reason_for_Switching__c` | Picklist |  | Price, Quality Issues, Supply Reliability, Lead Time, Certification / Compliance, Product Range, Payment Terms, Other - Customer motivation (values: DEMO list, validate with Apex) |
+| Research Completed | `Research_Completed__c` | Checkbox |  |  - default false - Research status |
+| Research Notes | `Research_Notes__c` | LongTextArea |  | length 32768 - Research comments |
+| Sample Product | `Sample_Product__c` | Text |  | length 255 - Sample requirement |
+| Sample Request Date | `Sample_Request_Date__c` | Date |  |  - Sample timeline |
+| Sample Requested | `Sample_Requested__c` | Checkbox |  |  - default false - Opportunity trigger |
+| WhatsApp Number | `WhatsApp_Number__c` | Phone |  |  - Communication |
 
 ## Validation rules
 

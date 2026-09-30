@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StandardValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <sorted>false</sorted>
+    <standardValue>
+        <fullName>New</fullName>
+        <converted>false</converted>
+        <default>true</default>
+        <label>New</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Research Pending</fullName>
+        <converted>false</converted>
+        <default>false</default>
+        <label>Research Pending</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Qualified</fullName>
+        <converted>false</converted>
+        <default>false</default>
+        <label>Qualified</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Engaged</fullName>
+        <converted>false</converted>
+        <default>false</default>
+        <label>Engaged</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Sample Discussion</fullName>
+        <converted>false</converted>
+        <default>false</default>
+        <label>Sample Discussion</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Nurture</fullName>
+        <converted>false</converted>
+        <default>false</default>
+        <label>Nurture</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Junk</fullName>
+        <converted>false</converted>
+        <default>false</default>
+        <label>Junk</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Lost</fullName>
+        <converted>false</converted>
+        <default>false</default>
+        <label>Lost</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Converted</fullName>
+        <converted>true</converted>
+        <default>false</default>
+        <label>Converted</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Open - Not Contacted</fullName>
+        <converted>false</converted>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Open - Not Contacted</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Working - Contacted</fullName>
+        <converted>false</converted>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Working - Contacted</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Closed - Not Converted</fullName>
+        <converted>false</converted>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Closed - Not Converted</label>
+    </standardValue>
+    <standardValue>
+        <fullName>Closed - Converted</fullName>
+        <converted>true</converted>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Closed - Converted</label>
+    </standardValue>
+</StandardValueSet>

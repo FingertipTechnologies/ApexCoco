@@ -167,21 +167,49 @@
    "Unit_of_Measure__c"
   ],
   "Lead": [
+   "Lead_Number__c",
+   "Campaign__c",
+   "Event_Name__c",
+   "LinkedIn_Profile__c",
+   "Country__c",
+   "Company_Type__c",
+   "Employee_Count__c",
    "Customer_Type__c",
-   "Business_Type__c",
-   "Interested_Product__c",
-   "Expected_Annual_Volume__c",
-   "Volume_Unit__c",
+   "Business_Model__c",
+   "Potential_Category__c",
+   "Buying_Intent__c",
    "Purchase_Timeline__c",
+   "Estimated_Annual_Volume__c",
+   "Expected_Monthly_Volume__c",
+   "Interested_Product__c",
+   "Application_Usage__c",
+   "Lead_Classification__c",
+   "Research_Completed__c",
+   "Research_Notes__c",
    "Current_Supplier__c",
    "Competitor__c",
-   "Potential_Rating__c",
-   "Lead_Score__c",
+   "Reason_for_Switching__c",
+   "WhatsApp_Number__c",
+   "Designation__c",
+   "Last_Contact_Date__c",
+   "Next_Followup_Date__c",
+   "Preferred_Communication__c",
+   "Customer_Response__c",
    "Sample_Requested__c",
    "Sample_Request_Date__c",
-   "Qualification_Notes__c",
-   "Next_Action__c",
-   "Next_Follow_up_Date__c"
+   "Sample_Product__c",
+   "Decision_Maker_Identified__c",
+   "Product_Requirement_Confirmed__c",
+   "AI_Lead_Score__c",
+   "Lead_Health__c",
+   "AI_Insights__c"
+  ],
+  "Competitor__c": [
+   "Website__c",
+   "Country__c",
+   "Strength__c",
+   "Weakness__c",
+   "Notes__c"
   ]
  },
  "readonly": {
@@ -215,7 +243,8 @@
   "Order": [],
   "Case": [],
   "Product2": [],
-  "Lead": []
+  "Lead": [],
+  "Competitor__c": []
  },
  "required": {
   "Sample_Request__c": [
@@ -240,6 +269,7 @@
   "Order": [],
   "Case": [],
   "Product2": [],
-  "Lead": []
+  "Lead": [],
+  "Competitor__c": []
  }
 }

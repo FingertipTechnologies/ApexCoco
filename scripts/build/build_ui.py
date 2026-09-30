@@ -165,6 +165,28 @@ w(f'{FA}/layouts/Case-Case Layout.layout-meta.xml', layout_xml([
     sysinfo(),
 ], ['RelatedActivityList', 'RelatedHistoryList', 'RelatedFileList'], actions=STD))
 
+# Lead (shared contract) and Competitor layouts live in shared-lead-contract/
+SHL = FA.replace('force-app', 'shared-lead-contract')
+w(f'{SHL}/layouts/Lead-Apex Lead Layout.layout-meta.xml', layout_xml([
+    section('Lead Information', [[('Readonly', 'Lead_Number__c'), ('Required', 'Name'), ('Required', 'Company'), 'Designation__c', 'Title', ('Required', 'Status'), 'Rating', 'OwnerId'],
+                                 ['Email', 'Phone', 'MobilePhone', 'WhatsApp_Number__c', 'Preferred_Communication__c', 'Customer_Response__c', 'Last_Contact_Date__c', 'Next_Followup_Date__c']]),
+    section('Lead Source', [['LeadSource', 'Campaign__c'], ['Event_Name__c']]),
+    section('Company Research', [['Website', 'LinkedIn_Profile__c', 'Country__c', 'Industry'], ['Company_Type__c', 'Employee_Count__c', 'Research_Completed__c', 'Research_Notes__c']]),
+    section('Customer Classification & Qualification', [['Customer_Type__c', 'Business_Model__c', 'Potential_Category__c', 'Buying_Intent__c', 'Lead_Classification__c'],
+                                                         ['Purchase_Timeline__c', 'Estimated_Annual_Volume__c', 'Expected_Monthly_Volume__c', 'Decision_Maker_Identified__c', 'Product_Requirement_Confirmed__c']]),
+    section('Product Interest & Competitor', [['Interested_Product__c', 'Application_Usage__c'], ['Current_Supplier__c', 'Competitor__c', 'Reason_for_Switching__c']]),
+    section('Sample Readiness (hand-off to Sample -> Opportunity)', [['Sample_Requested__c', 'Sample_Request_Date__c'], ['Sample_Product__c']]),
+    section('AI', [['AI_Lead_Score__c', 'Lead_Health__c'], ['AI_Insights__c']]),
+    section('Address', [['Address'], ['Description']]),
+    sysinfo(),
+], ['RelatedActivityList', 'RelatedHistoryList', 'RelatedFileList'],
+    actions=[('Lead.Request_Sample', 'QuickAction'), ('Convert', 'StandardButton')] + STD))
+w(f'{SHL}/layouts/Competitor__c-Competitor Layout.layout-meta.xml', layout_xml([
+    section('Competitor', [[('Required', 'Name'), 'Website__c', 'Country__c', 'OwnerId'], ['Strength__c', 'Weakness__c']]),
+    section('Notes', [['Notes__c'], []], style='OneColumn'),
+    sysinfo(),
+], ['Lead.Competitor__c', 'RelatedActivityList', 'RelatedFileList'], actions=STD))
+
 # ------------------------------------------------------------------ flexipages
 def comp(name, ident, props=None):
     out = ['        <itemInstances>', '            <componentInstance>']

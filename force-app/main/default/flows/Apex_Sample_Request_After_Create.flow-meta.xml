@@ -200,7 +200,7 @@
         <inputAssignments>
             <field>Competitor__c</field>
             <value>
-                <elementReference>$Record.Lead__r.Competitor__c</elementReference>
+                <elementReference>$Record.Lead__r.Competitor__r.Name</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -212,7 +212,7 @@
         <inputAssignments>
             <field>Expected_Annual_Volume__c</field>
             <value>
-                <elementReference>$Record.Lead__r.Expected_Annual_Volume__c</elementReference>
+                <elementReference>$Record.Lead__r.Estimated_Annual_Volume__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
