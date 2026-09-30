@@ -35,6 +35,7 @@ Detailed documentation:
 * [docs/03-demo-script.md](docs/03-demo-script.md) — the click-by-click golden demo and the negative scenarios
 * [docs/04-test-checklist.md](docs/04-test-checklist.md) — T01–T20 configuration tests
 * [docs/05-open-validate-phase2.md](docs/05-open-validate-phase2.md) — DEMO / OPEN / VALIDATE items and Phase 2 candidates
+* [docs/06-lead-management.md](docs/06-lead-management.md) — Rating Indicator (coloured circle), Lead Aging, Hot / Warm / Cold / Action Today / This Week Closing list views
 
 ## Repository layout
 
@@ -59,7 +60,9 @@ Country, Company Type, Employee Count, Customer Type, Business Model, Potential 
 Estimated / Expected Monthly Volume, Interested Product (multi-select), Application / Usage, Lead Classification, Research
 Completed / Notes, Current Supplier, Competitor (text), Reason for Switching, WhatsApp
 Number, Designation, Last Contact / Next Follow-up Date, Preferred Communication, Customer Response, Sample Requested / Date /
-Product, Decision Maker Identified, Product Requirement Confirmed, AI Lead Score, Lead Health, AI Insights), the Lead Status
+Product, Decision Maker Identified, Product Requirement Confirmed, AI Lead Score, Lead Health, AI Insights) plus the two
+lead-management formulas `Rating_Indicator__c` (coloured circle from the standard Rating) and `Lead_Aging__c` (days since
+creation), six Lead list views (All / Hot / Warm / Cold / Action Today / This Week Closing, see docs/06), the Lead Status
 values (New, Research Pending, Qualified, Engaged, Sample Discussion, Nurture, Junk, Lost, Converted), the Lead Source values
 (Trade Show, Website, LinkedIn, Email, Referral) and a Lead page layout organised by the spreadsheet sections.
 

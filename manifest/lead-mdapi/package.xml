@@ -24,6 +24,7 @@
         <members>Lead.Event_Name__c</members>
         <members>Lead.Expected_Monthly_Volume__c</members>
         <members>Lead.Last_Contact_Date__c</members>
+        <members>Lead.Lead_Aging__c</members>
         <members>Lead.Lead_Classification__c</members>
         <members>Lead.Lead_Health__c</members>
         <members>Lead.Lead_Number__c</members>
@@ -33,6 +34,7 @@
         <members>Lead.Preferred_Communication__c</members>
         <members>Lead.Product_Requirement_Confirmed__c</members>
         <members>Lead.Purchase_Timeline__c</members>
+        <members>Lead.Rating_Indicator__c</members>
         <members>Lead.Reason_for_Switching__c</members>
         <members>Lead.Research_Completed__c</members>
         <members>Lead.Research_Notes__c</members>
@@ -53,6 +55,15 @@
     <types>
         <members>Lead-Apex Lead Layout</members>
         <name>Layout</name>
+    </types>
+    <types>
+        <members>Lead.Apex_Action_Today</members>
+        <members>Lead.Apex_All_Leads</members>
+        <members>Lead.Apex_Cold_Leads</members>
+        <members>Lead.Apex_Hot_Leads</members>
+        <members>Lead.Apex_This_Week_Closing</members>
+        <members>Lead.Apex_Warm_Leads</members>
+        <name>ListView</name>
     </types>
     <types>
         <members>Apex_Lead_Path</members>

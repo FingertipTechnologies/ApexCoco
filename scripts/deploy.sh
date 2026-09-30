@@ -3,9 +3,10 @@
 #
 #   ./scripts/deploy.sh <org-alias> [--with-lead-contract] [--data] [--golden-lead]
 #
-#   --with-lead-contract  also deploys shared-lead-contract/ (the frozen Person 1 Lead fields). Use it in an org
-#                         where Person 1's Lead fields are NOT yet present (Person 2 stand-alone testing).
-#   --data                runs scripts/apex/loadDemoData_1_Master.apex, loadDemoData_2_Pipeline.apex, loadDemoData_3_Commercial.apex and loadDemoData_4_Context.apex (in that order) after deployment
+#   --with-lead-contract  also deploys manifest/lead-mdapi (the shared Lead fields, Rating Indicator, Lead Aging, Lead list
+#                         views, layout, record page and Path). Needed on the first deployment and whenever the Lead
+#                         contract changes; it runs BEFORE force-app because the permission sets reference the Lead fields.
+#   --data                runs scripts/apex/loadDemoData_1..5 and loadLeadRatingDemo.apex (in that order) after deployment
 #   --golden-lead         runs scripts/apex/loadGoldenLead.apex (merged Person 1 + Person 2 demo start)
 set -euo pipefail
 ORG="${1:?usage: deploy.sh <org-alias> [--with-lead-contract] [--data] [--golden-lead]}"; shift || true
@@ -19,7 +20,7 @@ sf project deploy start --target-org "$ORG" --source-dir force-app/main/default/
 
 # 2. Shared Lead contract (optional, see above)
 if $WITH_LEAD; then
-  sf project deploy start --target-org "$ORG" --source-dir shared-lead-contract --wait 20
+  sf project deploy start --target-org "$ORG" --metadata-dir manifest/lead-mdapi --ignore-errors --wait 20
 fi
 
 # 3. Person 2 metadata
@@ -32,7 +33,7 @@ done
 
 # 5. Demo data
 if $DATA; then
-  for part in loadDemoData_1_Master loadDemoData_2_Pipeline loadDemoData_3_Commercial loadDemoData_4_Context loadDemoData_5_Finance; do
+  for part in loadDemoData_1_Master loadDemoData_2_Pipeline loadDemoData_3_Commercial loadDemoData_4_Context loadDemoData_5_Finance loadLeadRatingDemo; do
     sf apex run --target-org "$ORG" --file "scripts/apex/$part.apex"
   done
 fi

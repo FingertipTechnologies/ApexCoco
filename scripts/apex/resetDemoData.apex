@@ -9,7 +9,8 @@ final String MARK = 'APEX DEMO DATA';
 final Boolean KEEP_PRODUCTS = true;
 
 Set<String> demoCompanies = new Set<String>{ 'ABC Foods International', 'Global Ingredients UK', 'Nature Brands India', 'Pacific Bakers Inc', 'Euro Dairy Alternatives GmbH',
-    'Gulf Trading LLC', 'Aussie Health Foods Pty', 'Nordic Foods AB', 'Mumbai Sweets Pvt Ltd', 'Sunrise Beverages Ltd' };
+    'Gulf Trading LLC', 'Aussie Health Foods Pty', 'Nordic Foods AB', 'Mumbai Sweets Pvt Ltd', 'Sunrise Beverages Ltd',
+    'Healthy Earth Foods', 'Green Valley Organics', 'Metro Retail Solutions' };
 List<Account> accounts = [SELECT Id FROM Account WHERE Name IN :demoCompanies];
 Set<Id> accIds = new Map<Id, Account>(accounts).keySet();
 

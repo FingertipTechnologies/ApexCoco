@@ -4,6 +4,7 @@
     <fields>Name</fields>
     <fields>Company</fields>
     <fields>Status</fields>
+    <fields>Rating_Indicator__c</fields>
     <fields>Customer_Type__c</fields>
     <fields>Interested_Product__c</fields>
     <fields>Estimated_Annual_Volume__c</fields>

@@ -269,6 +269,7 @@ Name field: **Integration Id** (AutoNumber, INT-{00000})
 | Expected Monthly Volume | `Expected_Monthly_Volume__c` | Number |  | 16,2 - Monthly requirement (MT) |
 | Interested Product | `Interested_Product__c` | MultiselectPicklist |  |  - Product interest |
 | Last Contact Date | `Last_Contact_Date__c` | Date |  |  - Last interaction |
+| Lead Aging | `Lead_Aging__c` | Formula (Number) |  | `TODAY() - DATEVALUE(CreatedDate)` - Days since the lead was created (Today - Created Date). 0 on the day of creation. |
 | Lead Classification | `Lead_Classification__c` | Picklist |  | Potential Customer, Competitor, Price Collector, Existing Supplier Customer, Unknown, Junk Lead - Research outcome |
 | Lead Health | `Lead_Health__c` | Picklist |  | High, Medium, Low - AI insight |
 | Lead Number | `Lead_Number__c` | AutoNumber |  |  - Unique lead reference |
@@ -278,6 +279,7 @@ Name field: **Integration Id** (AutoNumber, INT-{00000})
 | Preferred Communication | `Preferred_Communication__c` | Picklist |  | Email, Phone, WhatsApp, Meeting - Channel preference |
 | Product Requirement Confirmed | `Product_Requirement_Confirmed__c` | Checkbox |  |  - default false - Qualification |
 | Purchase Timeline | `Purchase_Timeline__c` | Picklist |  | Immediate, 3 Months, 6 Months, 12 Months, Long Term - Expected buying timeline |
+| Rating Indicator | `Rating_Indicator__c` | Formula (Text) |  | `IF(ISPICKVAL(Rating, "Hot"), IMAGE("/resource/Apex_Rating_Indicators/red.png", "Hot", 16, 16), IF(ISPICKVAL(Rating, "Warm"), IMAGE("/resource/Apex_Rating_Indicators/amber.png", "Warm", 16, 16), IF(ISPICKVAL(Rating, "Cold"), IMAGE("/resource/Apex_Rating_Indicators/green.png", "Cold", 16, 16), "")))` - Coloured circle for the standard Rating (Hot = red, Warm = amber, Cold = green). Images come from the Apex_Rating_Indicators static resource so they render in Lightning list views, record pages and the highlights panel. |
 | Reason for Switching | `Reason_for_Switching__c` | Picklist |  | Price, Quality Issues, Supply Reliability, Lead Time, Certification / Compliance, Product Range, Payment Terms, Other - Customer motivation (values: DEMO list, validate with Apex) |
 | Research Completed | `Research_Completed__c` | Checkbox |  |  - default false - Research status |
 | Research Notes | `Research_Notes__c` | LongTextArea |  | length 32768 - Research comments |

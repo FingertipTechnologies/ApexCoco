@@ -458,6 +458,11 @@ LEAD = [
  dict(api='AI_Lead_Score__c', label='AI Lead Score', type='Number', precision=18, scale=0, description='AI prioritization'),
  dict(api='Lead_Health__c', label='Lead Health', type='Picklist', values=['High', 'Medium', 'Low'], description='AI insight'),
  dict(api='AI_Insights__c', label='AI Insights', type='LongTextArea', length=32768, visibleLines=4, description='Generated recommendation'),
+ # Lead management add-ons (Person 2): rating indicator + aging, both formulas (never entered by hand)
+ dict(api='Rating_Indicator__c', label='Rating Indicator', type='Text', formulaType='Text', description='Coloured circle for the standard Rating (Hot = red, Warm = amber, Cold = green). Images come from the Apex_Rating_Indicators static resource so they render in Lightning list views, record pages and the highlights panel.',
+      formula='IF(ISPICKVAL(Rating, "Hot"), IMAGE("/resource/Apex_Rating_Indicators/red.png", "Hot", 16, 16), IF(ISPICKVAL(Rating, "Warm"), IMAGE("/resource/Apex_Rating_Indicators/amber.png", "Warm", 16, 16), IF(ISPICKVAL(Rating, "Cold"), IMAGE("/resource/Apex_Rating_Indicators/green.png", "Cold", 16, 16), "")))'),
+ dict(api='Lead_Aging__c', label='Lead Aging', type='Number', formulaType='Number', scale=0, blanks='BlankAsZero', description='Days since the lead was created (Today - Created Date). 0 on the day of creation.',
+      formula='TODAY() - DATEVALUE(CreatedDate)'),
 ]
 
 
@@ -592,6 +597,16 @@ def main():
     write_fields(FA, 'Case', CASE)
     write_fields(FA, 'Product2', PRODUCT)
     write_fields(SHARED, 'Lead', LEAD)
+    LEAD_LV_COLS = ['FULL_NAME', 'COMPANY', 'Rating_Indicator__c', 'LEAD.RATING', 'LEAD.PHONE', 'LEAD.MOBILE', 'LEAD.EMAIL', 'LEAD.STATUS', 'Lead_Aging__c', 'CORE.USERS.ALIAS']
+    lvbase = os.path.join(SHARED, 'objects', 'Lead', 'listViews')
+    for name, label, filters in [
+        ('Apex_All_Leads', 'Apex Leads - All (Rating Indicator)', []),
+        ('Apex_Hot_Leads', 'Hot Leads', [('LEAD.RATING', 'equals', 'Hot')]),
+        ('Apex_Warm_Leads', 'Warm Leads', [('LEAD.RATING', 'equals', 'Warm')]),
+        ('Apex_Cold_Leads', 'Cold Leads', [('LEAD.RATING', 'equals', 'Cold')]),
+        ('Apex_Action_Today', 'Action Today', [('Next_Followup_Date__c', 'equals', 'TODAY')]),
+        ('Apex_This_Week_Closing', 'This Week Closing', [('Next_Followup_Date__c', 'equals', 'THIS_WEEK')])]:
+        w(os.path.join(lvbase, f'{name}.listView-meta.xml'), listview_xml(name, label, LEAD_LV_COLS, filters))
 
     inv = {
         'Sample_Request__c': [f['api'] for f in SR], 'Competitor_Intel__c': [f['api'] for f in CI], 'Customer_Onboarding__c': [f['api'] for f in ONB],

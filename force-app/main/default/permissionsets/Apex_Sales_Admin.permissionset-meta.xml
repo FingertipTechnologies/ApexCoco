@@ -500,6 +500,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Lead.Lead_Aging__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Lead.Lead_Classification__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -541,6 +546,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Lead.Purchase_Timeline__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Rating_Indicator__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

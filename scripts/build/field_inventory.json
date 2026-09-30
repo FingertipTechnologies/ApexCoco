@@ -207,7 +207,9 @@
    "Product_Requirement_Confirmed__c",
    "AI_Lead_Score__c",
    "Lead_Health__c",
-   "AI_Insights__c"
+   "AI_Insights__c",
+   "Rating_Indicator__c",
+   "Lead_Aging__c"
   ],
   "Invoice__c": [
    "Account__c",
@@ -280,7 +282,10 @@
   "Order": [],
   "Case": [],
   "Product2": [],
-  "Lead": [],
+  "Lead": [
+   "Rating_Indicator__c",
+   "Lead_Aging__c"
+  ],
   "Invoice__c": [
    "Balance__c",
    "Payment_Status__c",
