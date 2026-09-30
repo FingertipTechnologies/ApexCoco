@@ -53,6 +53,7 @@
         <members>Competitor_Intel__c.Competitor_Name__c</members>
         <members>Competitor_Intel__c.Customer_Preference__c</members>
         <members>Competitor_Intel__c.Intel_Date__c</members>
+        <members>Competitor_Intel__c.Lead__c</members>
         <members>Competitor_Intel__c.Notes__c</members>
         <members>Competitor_Intel__c.Opportunity__c</members>
         <members>Competitor_Intel__c.Price_Unit__c</members>
@@ -71,6 +72,7 @@
         <members>Customer_Onboarding__c.Due_Date__c</members>
         <members>Customer_Onboarding__c.Finance_Owner__c</members>
         <members>Customer_Onboarding__c.Finance_Status__c</members>
+        <members>Customer_Onboarding__c.Lead__c</members>
         <members>Customer_Onboarding__c.Logistics_Owner__c</members>
         <members>Customer_Onboarding__c.Logistics_Status__c</members>
         <members>Customer_Onboarding__c.Notes__c</members>
@@ -99,6 +101,7 @@
         <members>Opportunity.Is_Stale__c</members>
         <members>Opportunity.Latest_Quote_Price__c</members>
         <members>Opportunity.Latest_Sample_Status__c</members>
+        <members>Opportunity.Lead__c</members>
         <members>Opportunity.Loss_Details__c</members>
         <members>Opportunity.Loss_Reason__c</members>
         <members>Opportunity.Next_Action_Date__c</members>
@@ -115,6 +118,7 @@
         <members>Opportunity.Technical_Evaluation_Status__c</members>
         <members>Opportunity.Volume_Unit__c</members>
         <members>Order.Integration_Mode__c</members>
+        <members>Order.Lead__c</members>
         <members>Order.SAP_Invoice_Number__c</members>
         <members>Order.SAP_Last_Response__c</members>
         <members>Order.SAP_Order_Number__c</members>
@@ -126,6 +130,7 @@
         <members>Quote.Competitor_Name__c</members>
         <members>Quote.Competitor_Price__c</members>
         <members>Quote.Delivery_Terms__c</members>
+        <members>Quote.Lead__c</members>
         <members>Quote.Management_Approver__c</members>
         <members>Quote.Margin_Percent__c</members>
         <members>Quote.Payment_Terms__c</members>
@@ -288,6 +293,7 @@
     </types>
     <types>
         <members>Account.New_Sample_Request</members>
+        <members>Lead.New_Competitor_Intel</members>
         <members>Lead.Request_Sample</members>
         <members>Opportunity.New_Competitor_Intel</members>
         <members>Opportunity.New_Sample_Request</members>

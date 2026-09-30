@@ -35,6 +35,7 @@
    "Is_Open__c"
   ],
   "Competitor_Intel__c": [
+   "Lead__c",
    "Competitor_Name__c",
    "Account__c",
    "Opportunity__c",
@@ -49,6 +50,7 @@
    "Notes__c"
   ],
   "Customer_Onboarding__c": [
+   "Lead__c",
    "Account__c",
    "Opportunity__c",
    "Status__c",
@@ -83,6 +85,7 @@
    "Retry_Count__c"
   ],
   "Opportunity": [
+   "Lead__c",
    "Opportunity_Type__c",
    "Primary_Product__c",
    "Expected_Annual_Volume__c",
@@ -121,6 +124,7 @@
    "Reorder_Status__c"
   ],
   "Quote": [
+   "Lead__c",
    "Quote_Version__c",
    "Previous_Quote__c",
    "Revision_Reason__c",
@@ -148,6 +152,7 @@
    "Supply_Period_To__c"
   ],
   "Order": [
+   "Lead__c",
    "SAP_Status__c",
    "SAP_Order_Number__c",
    "SAP_Invoice_Number__c",

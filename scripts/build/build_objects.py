@@ -231,6 +231,7 @@ SR_VRS = [
 
 # ================================================================ Competitor_Intel__c
 CI = [
+ dict(api='Lead__c', label='Source Lead', type='Lookup', referenceTo='Lead', relationshipLabel='Competitor Intel', relationshipName='Lead_Competitor_Intel', help='Lead this intel belongs to (set from the opportunity when logged there).'),
  dict(api='Competitor_Name__c', label='Competitor', type='Text', length=100, required=True),
  dict(api='Account__c', label='Account', type='Lookup', referenceTo='Account', relationshipLabel='Competitor Intel', relationshipName='Competitor_Intel'),
  dict(api='Opportunity__c', label='Opportunity', type='Lookup', referenceTo='Opportunity', relationshipLabel='Competitor Intel', relationshipName='Competitor_Intel'),
@@ -252,6 +253,7 @@ def item(prefix, label, default_owner):
         dict(api=f'{prefix}_Owner__c', label=f'{label} Owner', type='Picklist', values=ITEM_OWNER, default=default_owner),
     ]
 ONB = [
+ dict(api='Lead__c', label='Source Lead', type='Lookup', referenceTo='Lead', relationshipLabel='Customer Onboardings', relationshipName='Lead_Onboardings', help='Copied from the opportunity.'),
  dict(api='Account__c', label='Account', type='Lookup', referenceTo='Account', relationshipLabel='Customer Onboardings', relationshipName='Customer_Onboardings', required=True, deleteConstraint='Restrict'),
  dict(api='Opportunity__c', label='Opportunity', type='Lookup', referenceTo='Opportunity', relationshipLabel='Customer Onboardings', relationshipName='Customer_Onboardings'),
  dict(api='Status__c', label='Status', type='Picklist', values=['Not Started', 'In Progress', 'Complete', 'On Hold'], default='Not Started', track=True),
@@ -298,6 +300,7 @@ MDT = [
 
 # ================================================================ Opportunity
 OPP = [
+ dict(api='Lead__c', label='Source Lead', type='Lookup', referenceTo='Lead', relationshipLabel='Opportunities', relationshipName='Lead_Opportunities', help='Lead this opportunity was created from (set by the Request Sample flow).'),
  dict(api='Opportunity_Type__c', label='Opportunity Type', type='Picklist', values=['New Business', 'Repeat', 'Upsell', 'Cross-sell'], default='New Business'),
  dict(api='Primary_Product__c', label='Primary Product', type='Lookup', referenceTo='Product2', relationshipLabel='Opportunities (Primary Product)', relationshipName='Primary_Product_Opportunities'),
  dict(api='Expected_Annual_Volume__c', label='Expected Annual Volume', type='Number', precision=16, scale=2),
@@ -358,6 +361,7 @@ ACC = [
 
 # ================================================================ Quote / QuoteLineItem
 QUOTE = [
+ dict(api='Lead__c', label='Source Lead', type='Lookup', referenceTo='Lead', relationshipLabel='Quotes', relationshipName='Lead_Quotes', help='Copied from the opportunity so the lead shows its quotes.'),
  dict(api='Quote_Version__c', label='Quote Version', type='Number', precision=3, scale=0, default='1'),
  dict(api='Previous_Quote__c', label='Previous Quote Version', type='Lookup', referenceTo='Quote', relationshipLabel='Revisions', relationshipName='Revisions'),
  dict(api='Revision_Reason__c', label='Revision Reason', type='Text', length=255),
@@ -392,6 +396,7 @@ QLI = [
 
 # ================================================================ Order / Case / Product2 / User
 ORDER = [
+ dict(api='Lead__c', label='Source Lead', type='Lookup', referenceTo='Lead', relationshipLabel='Orders', relationshipName='Lead_Orders', help='Copied from the opportunity so the lead shows its orders.'),
  dict(api='SAP_Status__c', label='SAP Status (DEMO)', type='Picklist', values=['Not Sent', 'Sent', 'Acknowledged', 'In Production', 'Dispatched', 'Invoiced', 'Error'], default='Not Sent', help='Simulated. Real SAP integration is Phase 2.'),
  dict(api='SAP_Order_Number__c', label='SAP Sales Order No. (DEMO)', type='Text', length=20),
  dict(api='SAP_Invoice_Number__c', label='SAP Invoice No. (DEMO)', type='Text', length=20),

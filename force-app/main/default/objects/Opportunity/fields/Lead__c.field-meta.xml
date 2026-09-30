@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lead__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <inlineHelpText>Lead this opportunity was created from (set by the Request Sample flow).</inlineHelpText>
+    <label>Source Lead</label>
+    <referenceTo>Lead</referenceTo>
+    <relationshipLabel>Opportunities</relationshipLabel>
+    <relationshipName>Lead_Opportunities</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

@@ -69,6 +69,7 @@ Name field: **Intel Number** (AutoNumber, CI-{0000})
 | Competitor | `Competitor_Name__c` | Text | Yes | length 100 |
 | Customer Preference | `Customer_Preference__c` | Text |  | length 255 |
 | Intel Date | `Intel_Date__c` | Date |  |  - default TODAY() |
+| Source Lead | `Lead__c` | Lookup |  | > Lead (child relationship Lead_Competitor_Intel__r) - Lead this intel belongs to (set from the opportunity when logged there). |
 | Notes | `Notes__c` | LongTextArea |  | length 32768 |
 | Opportunity | `Opportunity__c` | Lookup |  | > Opportunity (child relationship Competitor_Intel__r) |
 | Price Unit | `Price_Unit__c` | Picklist |  | per MT, per KG |
@@ -94,6 +95,7 @@ Name field: **Onboarding Number** (AutoNumber, ONB-{0000})
 | Due Date | `Due_Date__c` | Date |  |  |
 | Finance Owner | `Finance_Owner__c` | Picklist |  | Sales Admin, Finance, Quality, Operations, Compliance, Sales Executive |
 | Finance Status | `Finance_Status__c` | Picklist |  | Pending, In Progress, Complete, Not Required |
+| Source Lead | `Lead__c` | Lookup |  | > Lead (child relationship Lead_Onboardings__r) - Copied from the opportunity. |
 | Logistics Owner | `Logistics_Owner__c` | Picklist |  | Sales Admin, Finance, Quality, Operations, Compliance, Sales Executive |
 | Logistics Status | `Logistics_Status__c` | Picklist |  | Pending, In Progress, Complete, Not Required |
 | Notes | `Notes__c` | LongTextArea |  | length 32768 - DEMO / TO VALIDATE: exact statutory documents per checklist area are to be confirmed by Apex. |
@@ -147,6 +149,7 @@ Name field: **Integration Id** (AutoNumber, INT-{00000})
 | Is Stale | `Is_Stale__c` | Formula (Checkbox) |  | `NOT(IsClosed) && (TODAY() - BLANKVALUE(LastActivityDate, DATEVALUE(CreatedDate))) > $CustomMetadata.Apex_Demo_Setting__mdt.Default.Stale_Opportunity_Days__c` |
 | Latest Quote Price | `Latest_Quote_Price__c` | Currency |  | 18,2 - Maintained by flow from the most recent quote line. |
 | Latest Sample Status | `Latest_Sample_Status__c` | Text |  | length 255 - Maintained by flow. |
+| Source Lead | `Lead__c` | Lookup |  | > Lead (child relationship Lead_Opportunities__r) - Lead this opportunity was created from (set by the Request Sample flow). |
 | Loss Details | `Loss_Details__c` | LongTextArea |  | length 32768 - Context for re-engagement later. |
 | Loss Reason | `Loss_Reason__c` | Picklist |  | Price, Sample Rejected, Competitor Selected, No Requirement, Timing, Specification, Other |
 | Next Action Date | `Next_Action_Date__c` | Date |  |  |
@@ -187,6 +190,7 @@ Name field: **Integration Id** (AutoNumber, INT-{00000})
 | Competitor | `Competitor_Name__c` | Text |  | length 100 |
 | Competitor Price | `Competitor_Price__c` | Currency |  | 18,2 |
 | Delivery Terms (DEMO) | `Delivery_Terms__c` | Picklist |  | FOB, CIF, CFR, EXW, DDP, Other - DEMO / TO VALIDATE with Apex. |
+| Source Lead | `Lead__c` | Lookup |  | > Lead (child relationship Lead_Quotes__r) - Copied from the opportunity so the lead shows its quotes. |
 | Management Approver | `Management_Approver__c` | Lookup |  | > User (child relationship Management_Approval_Quotes__r) - Set automatically by flow from the Apex Demo Setting or the manager chain. |
 | Margin % (DEMO) | `Margin_Percent__c` | Formula (Percent) |  | `IF(TotalPrice > 0, (TotalPrice - Total_Cost__c) / TotalPrice * 100, 0)` |
 | Payment Terms (DEMO) | `Payment_Terms__c` | Picklist |  | 30% Advance / 70% against BL, LC at Sight, TT 30 Days, TT 60 Days, Other - DEMO / TO VALIDATE with Apex. |
@@ -217,6 +221,7 @@ Name field: **Integration Id** (AutoNumber, INT-{00000})
 | Field | API Name | Type | Required | Notes / Picklist values |
 |---|---|---|---|---|
 | Integration Mode (DEMO) | `Integration_Mode__c` | Picklist |  | Mock (Demo), Live |
+| Source Lead | `Lead__c` | Lookup |  | > Lead (child relationship Lead_Orders__r) - Copied from the opportunity so the lead shows its orders. |
 | SAP Invoice No. (DEMO) | `SAP_Invoice_Number__c` | Text |  | length 20 |
 | SAP Last Response (DEMO) | `SAP_Last_Response__c` | Text |  | length 255 |
 | SAP Sales Order No. (DEMO) | `SAP_Order_Number__c` | Text |  | length 20 |

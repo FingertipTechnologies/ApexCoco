@@ -14,6 +14,13 @@
             </value>
         </assignmentItems>
         <assignmentItems>
+            <assignToReference>$Record.Lead__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_Lead</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
             <assignToReference>$Record.Product__c</assignToReference>
             <operator>Assign</operator>
             <value>
@@ -27,6 +34,11 @@
         <name>f_Account</name>
         <dataType>String</dataType>
         <expression>IF(AND(ISBLANK({!$Record.Account__c}), NOT(ISBLANK({!$Record.Opportunity__c}))), {!$Record.Opportunity__r.AccountId}, {!$Record.Account__c})</expression>
+    </formulas>
+    <formulas>
+        <name>f_Lead</name>
+        <dataType>String</dataType>
+        <expression>IF(AND(ISBLANK({!$Record.Lead__c}), NOT(ISBLANK({!$Record.Opportunity__c}))), {!$Record.Opportunity__r.Lead__c}, {!$Record.Lead__c})</expression>
     </formulas>
     <formulas>
         <name>f_Product</name>

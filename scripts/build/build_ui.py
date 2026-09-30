@@ -214,8 +214,9 @@ w(f'{SHL}/layouts/Lead-Apex Lead Layout.layout-meta.xml', layout_xml([
     section('AI', [['AI_Lead_Score__c', 'Lead_Health__c'], ['AI_Insights__c']]),
     section('Address', [['Address'], ['Description']]),
     sysinfo(),
-], [('Sample_Request__c.Lead__c', SR_FIELDS), 'RelatedActivityList', 'RelatedHistoryList', 'RelatedFileList'],
-    actions=[('Lead.Request_Sample', 'QuickAction'), ('Convert', 'StandardButton')] + STD))
+], [('Sample_Request__c.Lead__c', SR_FIELDS), 'Opportunity.Lead__c', 'Quote.Lead__c', ('Competitor_Intel__c.Lead__c', ['NAME', 'Competitor_Name__c', 'Quoted_Price__c', 'Customer_Preference__c', 'Source__c']),
+    ('Customer_Onboarding__c.Lead__c', ['NAME', 'Status__c', 'Completion_Percent__c', 'Due_Date__c']), 'Order.Lead__c', 'RelatedActivityList', 'RelatedHistoryList', 'RelatedFileList'],
+    actions=[('Lead.Request_Sample', 'QuickAction'), ('Lead.New_Competitor_Intel', 'QuickAction'), ('Convert', 'StandardButton')] + STD))
 w(f'{SHL}/flexipages/Apex_Lead_Record_Page.flexipage-meta.xml', flexipage('Apex Lead Record Page', 'Lead', [DETAIL, RLC], [ACT]))
 
 

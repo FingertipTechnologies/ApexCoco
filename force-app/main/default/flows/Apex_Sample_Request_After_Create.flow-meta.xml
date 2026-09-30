@@ -186,6 +186,12 @@
             <targetReference>Fault_Error</targetReference>
         </faultConnector>
         <inputAssignments>
+            <field>Lead__c</field>
+            <value>
+                <elementReference>$Record.Lead__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
             <field>AccountId</field>
             <value>
                 <elementReference>$Record.Account__c</elementReference>

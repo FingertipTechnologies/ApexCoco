@@ -110,6 +110,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Competitor_Intel__c.Lead__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Competitor_Intel__c.Notes__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -191,6 +196,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Customer_Onboarding__c.Finance_Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Customer_Onboarding__c.Lead__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -515,6 +525,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Opportunity.Lead__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Opportunity.Loss_Details__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -595,6 +610,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Order.Lead__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Order.OpportunityId</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -661,6 +681,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Quote.Delivery_Terms__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Quote.Lead__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

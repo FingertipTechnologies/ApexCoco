@@ -7,6 +7,13 @@
         <locationX>176</locationX>
         <locationY>590</locationY>
         <assignmentItems>
+            <assignToReference>$Record.Lead__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_Lead</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
             <assignToReference>$Record.Quote_Version__c</assignToReference>
             <operator>Assign</operator>
             <value>
@@ -73,6 +80,11 @@
         <name>f_ApprovalStatus</name>
         <dataType>String</dataType>
         <expression>IF(BLANKVALUE({!$Record.Discount}, 0) &lt;= BLANKVALUE({!Get_Settings.Discount_Threshold_Percent__c}, 5), "Not Required", IF(ISBLANK(TEXT({!$Record.Approval_Status__c})), "Not Required", TEXT({!$Record.Approval_Status__c})))</expression>
+    </formulas>
+    <formulas>
+        <name>f_Lead</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK({!$Record.Lead__c}), {!$Record.Opportunity.Lead__c}, {!$Record.Lead__c})</expression>
     </formulas>
     <formulas>
         <name>f_ManagementApprover</name>
