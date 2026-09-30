@@ -32,7 +32,7 @@ done
 
 # 5. Demo data
 if $DATA; then
-  for part in loadDemoData_1_Master loadDemoData_2_Pipeline loadDemoData_3_Commercial loadDemoData_4_Context; do
+  for part in loadDemoData_1_Master loadDemoData_2_Pipeline loadDemoData_3_Commercial loadDemoData_4_Context loadDemoData_5_Finance; do
     sf apex run --target-org "$ORG" --file "scripts/apex/$part.apex"
   done
 fi

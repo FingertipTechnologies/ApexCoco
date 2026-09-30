@@ -21,6 +21,7 @@ qualification) is built separately; Person 2 starts from the qualified Lead that
 | Customer onboarding | `Customer_Onboarding__c` (5 checklist areas with owner/status), 2 flows | Created automatically at Customer Approval. Checklist areas are DEMO placeholders. |
 | PO → Order → SAP | Order fields, automatic Order + Order Product at PO Received, `Send to SAP (Simulated)` action, `Integration_Log__c` | **No live SAP.** The handoff is a labelled mock with outbound/inbound logs. |
 | Repeat business | Account roll-ups (last purchase, interval, expected reorder, reorder status), daily scheduled flow | Creates one follow-up task and one pre-filled Repeat opportunity when a reorder is due. |
+| Finance mirror | `Invoice__c`, `Payment__c`, `Credit_Note__c` (DEMO copies of SAP documents), invoice roll-up flows, related lists on Account / Order / Case | Balance Due, Payment Status and Days Overdue are calculated; SAP stays the system of record. |
 | Service linkage | Case fields (complaint type, product `Complaint_Product__c`, batch, order), Quality Team queue, routing flow | Email-to-Case routing address is a manual org step (see below). |
 | UX | Apex Sales app, 5 Lightning record pages (Sample Request, Opportunity, Account 360, Quote, Order), 9 layouts, 8 compact layouts, 4 tabs | Critical fields above the fold; related lists for samples, quotes, competitors, onboarding, orders, cases, activities. |
 | Analytics | 11 reports, 2 dashboards (Sales Management, Sample Management), 2 custom report types | Dynamic dashboards (logged-in user). |
@@ -99,6 +100,7 @@ sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_1_Master.apex
 sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_2_Pipeline.apex
 sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_3_Commercial.apex
 sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_4_Context.apex
+sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_5_Finance.apex
 sf org open --target-org apexdemo --path /lightning/app/c__Apex_Sales
 ```
 
@@ -123,6 +125,7 @@ sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_1_Master.apex
 sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_2_Pipeline.apex
 sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_3_Commercial.apex
 sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_4_Context.apex
+sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_5_Finance.apex
 ```
 
 ## Golden demo in one screen (details in docs/03-demo-script.md)
