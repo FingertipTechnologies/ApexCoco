@@ -163,6 +163,22 @@ w(f'{FA}/layouts/Case-Case Layout.layout-meta.xml', layout_xml([
     section('Web Information', [[('Readonly', 'SuppliedEmail'), ('Readonly', 'SuppliedName')], [('Readonly', 'SuppliedPhone'), ('Readonly', 'SuppliedCompany')]]),
     section('Description', [['Subject', 'Description'], ['Resolution__c']], style='OneColumn'),
     sysinfo(),
+], [('Credit_Note__c.Case__c', ['NAME', 'Invoice__c', 'Credit_Date__c', 'Amount__c', 'Reason__c', 'Status__c']), 'RelatedActivityList', 'RelatedHistoryList', 'RelatedFileList'], actions=STD))
+
+# Finance mirror objects
+w(f'{FA}/layouts/Invoice__c-Apex Invoice Layout.layout-meta.xml', layout_xml([
+    section('Invoice (DEMO mirror of SAP)', [[('Readonly', 'Name'), ('Required', 'Account__c'), 'Order__c', 'Opportunity__c', 'Invoice_Number__c', 'Source_System__c', 'OwnerId'],
+                                            [('Required', 'Invoice_Date__c'), 'Due_Date__c', 'Payment_Terms__c', 'Status__c', ('Readonly', 'Payment_Status__c'), ('Readonly', 'Days_Overdue__c')]]),
+    section('Amounts', [[('Required', 'Amount__c'), ('Readonly', 'Amount_Paid__c')], [('Readonly', 'Credit_Amount__c'), ('Readonly', 'Balance__c')]]),
+    section('Notes', [['Notes__c'], []], style='OneColumn'), sysinfo(),
+], [('Payment__c.Invoice__c', ['NAME', 'Payment_Date__c', 'Amount__c', 'Method__c', 'Reference__c', 'Status__c']), ('Credit_Note__c.Invoice__c', ['NAME', 'Credit_Date__c', 'Amount__c', 'Reason__c', 'Status__c']), 'RelatedActivityList', 'RelatedHistoryList', 'RelatedFileList'], actions=STD))
+w(f'{FA}/layouts/Payment__c-Apex Payment Layout.layout-meta.xml', layout_xml([
+    section('Payment (DEMO mirror of SAP)', [[('Readonly', 'Name'), ('Required', 'Account__c'), 'Invoice__c', 'OwnerId'], [('Required', 'Payment_Date__c'), ('Required', 'Amount__c'), 'Method__c', 'Reference__c', 'Status__c']]),
+    section('Notes', [['Notes__c'], []], style='OneColumn'), sysinfo(),
+], ['RelatedActivityList', 'RelatedHistoryList', 'RelatedFileList'], actions=STD))
+w(f'{FA}/layouts/Credit_Note__c-Apex Credit Note Layout.layout-meta.xml', layout_xml([
+    section('Credit Note (DEMO mirror of SAP)', [[('Readonly', 'Name'), ('Required', 'Account__c'), 'Invoice__c', 'Case__c', 'OwnerId'], [('Required', 'Credit_Date__c'), ('Required', 'Amount__c'), 'Reason__c', 'Status__c', 'SAP_Reference__c']]),
+    section('Notes', [['Notes__c'], []], style='OneColumn'), sysinfo(),
 ], ['RelatedActivityList', 'RelatedHistoryList', 'RelatedFileList'], actions=STD))
 
 # ------------------------------------------------------------------ flexipages

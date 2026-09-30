@@ -208,6 +208,45 @@
    "AI_Lead_Score__c",
    "Lead_Health__c",
    "AI_Insights__c"
+  ],
+  "Invoice__c": [
+   "Account__c",
+   "Order__c",
+   "Opportunity__c",
+   "Invoice_Number__c",
+   "Invoice_Date__c",
+   "Due_Date__c",
+   "Amount__c",
+   "Amount_Paid__c",
+   "Credit_Amount__c",
+   "Balance__c",
+   "Status__c",
+   "Payment_Status__c",
+   "Days_Overdue__c",
+   "Payment_Terms__c",
+   "Source_System__c",
+   "Notes__c"
+  ],
+  "Payment__c": [
+   "Account__c",
+   "Invoice__c",
+   "Payment_Date__c",
+   "Amount__c",
+   "Method__c",
+   "Reference__c",
+   "Status__c",
+   "Notes__c"
+  ],
+  "Credit_Note__c": [
+   "Account__c",
+   "Invoice__c",
+   "Case__c",
+   "Credit_Date__c",
+   "Amount__c",
+   "Reason__c",
+   "Status__c",
+   "SAP_Reference__c",
+   "Notes__c"
   ]
  },
  "readonly": {
@@ -241,7 +280,14 @@
   "Order": [],
   "Case": [],
   "Product2": [],
-  "Lead": []
+  "Lead": [],
+  "Invoice__c": [
+   "Balance__c",
+   "Payment_Status__c",
+   "Days_Overdue__c"
+  ],
+  "Payment__c": [],
+  "Credit_Note__c": []
  },
  "required": {
   "Sample_Request__c": [
@@ -266,6 +312,21 @@
   "Order": [],
   "Case": [],
   "Product2": [],
-  "Lead": []
+  "Lead": [],
+  "Invoice__c": [
+   "Account__c",
+   "Invoice_Date__c",
+   "Amount__c"
+  ],
+  "Payment__c": [
+   "Account__c",
+   "Payment_Date__c",
+   "Amount__c"
+  ],
+  "Credit_Note__c": [
+   "Account__c",
+   "Credit_Date__c",
+   "Amount__c"
+  ]
  }
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason__c</fullName>
+    <externalId>false</externalId>
+    <label>Reason</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Quality Complaint</fullName>
+                <default>false</default>
+                <label>Quality Complaint</label>
+            </value>
+            <value>
+                <fullName>Short Shipment</fullName>
+                <default>false</default>
+                <label>Short Shipment</label>
+            </value>
+            <value>
+                <fullName>Price Adjustment</fullName>
+                <default>false</default>
+                <label>Price Adjustment</label>
+            </value>
+            <value>
+                <fullName>Returned Goods</fullName>
+                <default>false</default>
+                <label>Returned Goods</label>
+            </value>
+            <value>
+                <fullName>Damaged in Transit</fullName>
+                <default>false</default>
+                <label>Damaged in Transit</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

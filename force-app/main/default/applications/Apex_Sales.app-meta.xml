@@ -23,6 +23,9 @@
     <tabs>standard-Order</tabs>
     <tabs>Competitor_Intel__c</tabs>
     <tabs>standard-Case</tabs>
+    <tabs>Invoice__c</tabs>
+    <tabs>Payment__c</tabs>
+    <tabs>Credit_Note__c</tabs>
     <tabs>standard-Product2</tabs>
     <tabs>Integration_Log__c</tabs>
     <tabs>standard-Dashboard</tabs>

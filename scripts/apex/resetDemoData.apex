@@ -14,6 +14,9 @@ List<Account> accounts = [SELECT Id FROM Account WHERE Name IN :demoCompanies];
 Set<Id> accIds = new Map<Id, Account>(accounts).keySet();
 
 delete [SELECT Id FROM Integration_Log__c WHERE Order__c IN (SELECT Id FROM Order WHERE AccountId IN :accIds) OR Opportunity__c IN (SELECT Id FROM Opportunity WHERE AccountId IN :accIds)];
+delete [SELECT Id FROM Credit_Note__c WHERE Account__c IN :accIds];
+delete [SELECT Id FROM Payment__c WHERE Account__c IN :accIds];
+delete [SELECT Id FROM Invoice__c WHERE Account__c IN :accIds];
 delete [SELECT Id FROM Case WHERE AccountId IN :accIds];
 List<Order> orders = [SELECT Id, Status FROM Order WHERE AccountId IN :accIds];
 for (Order o : orders) { o.Status = 'Draft'; }

@@ -460,6 +460,50 @@ LEAD = [
  dict(api='AI_Insights__c', label='AI Insights', type='LongTextArea', length=32768, visibleLines=4, description='Generated recommendation'),
 ]
 
+
+# ================================================================ Finance mirror (SAP is the system of record; DEMO copies)
+INVOICE = [
+ dict(api='Account__c', label='Account', type='Lookup', referenceTo='Account', relationshipLabel='Invoices', relationshipName='Invoices', required=True, deleteConstraint='Restrict'),
+ dict(api='Order__c', label='Order', type='Lookup', referenceTo='Order', relationshipLabel='Invoices', relationshipName='Invoices'),
+ dict(api='Opportunity__c', label='Opportunity', type='Lookup', referenceTo='Opportunity', relationshipLabel='Invoices', relationshipName='Invoices'),
+ dict(api='Invoice_Number__c', label='SAP Invoice Number', type='Text', length=40, help='Invoice number in SAP (system of record). DEMO copy.'),
+ dict(api='Invoice_Date__c', label='Invoice Date', type='Date', required=True),
+ dict(api='Due_Date__c', label='Due Date', type='Date'),
+ dict(api='Amount__c', label='Invoice Amount', type='Currency', precision=18, scale=2, required=True),
+ dict(api='Amount_Paid__c', label='Amount Paid', type='Currency', precision=18, scale=2, default='0', help='Maintained by flow from Payments.'),
+ dict(api='Credit_Amount__c', label='Credit Notes Applied', type='Currency', precision=18, scale=2, default='0', help='Maintained by flow from Credit Notes.'),
+ dict(api='Balance__c', label='Balance Due', type='Currency', formulaType='Currency', scale=2, blanks='BlankAsZero', formula='Amount__c - Amount_Paid__c - Credit_Amount__c'),
+ dict(api='Status__c', label='Status', type='Picklist', values=['Issued', 'Cancelled'], default='Issued'),
+ dict(api='Payment_Status__c', label='Payment Status', type='Text', formulaType='Text',
+      formula='IF(ISPICKVAL(Status__c, "Cancelled"), "Cancelled", IF(Amount__c - Amount_Paid__c - Credit_Amount__c <= 0, "Paid", IF(Amount_Paid__c > 0, "Partially Paid", IF(NOT(ISBLANK(Due_Date__c)) && Due_Date__c < TODAY(), "Overdue", "Open"))))'),
+ dict(api='Days_Overdue__c', label='Days Overdue', type='Number', formulaType='Number', scale=0, blanks='BlankAsZero',
+      formula='IF(AND(NOT(ISPICKVAL(Status__c, "Cancelled")), Amount__c - Amount_Paid__c - Credit_Amount__c > 0, NOT(ISBLANK(Due_Date__c)), Due_Date__c < TODAY()), TODAY() - Due_Date__c, 0)'),
+ dict(api='Payment_Terms__c', label='Payment Terms', type='Picklist', values=['30% Advance / 70% against BL', 'LC at Sight', 'TT 30 Days', 'TT 60 Days', 'Other']),
+ dict(api='Source_System__c', label='Source System', type='Picklist', values=['SAP (Mock)', 'Manual'], default='SAP (Mock)', help='DEMO: invoices are mirrored from SAP in the real integration (Phase 2).'),
+ dict(api='Notes__c', label='Notes', type='LongTextArea', length=32768, visibleLines=3),
+]
+PAYMENT = [
+ dict(api='Account__c', label='Account', type='Lookup', referenceTo='Account', relationshipLabel='Payments', relationshipName='Payments', required=True, deleteConstraint='Restrict'),
+ dict(api='Invoice__c', label='Invoice', type='Lookup', referenceTo='Invoice__c', relationshipLabel='Payments', relationshipName='Payments'),
+ dict(api='Payment_Date__c', label='Payment Date', type='Date', required=True),
+ dict(api='Amount__c', label='Amount', type='Currency', precision=18, scale=2, required=True),
+ dict(api='Method__c', label='Payment Method', type='Picklist', values=['Telegraphic Transfer', 'Letter of Credit', 'Advance', 'Cheque', 'Other'], default='Telegraphic Transfer'),
+ dict(api='Reference__c', label='Bank / SAP Reference', type='Text', length=60),
+ dict(api='Status__c', label='Status', type='Picklist', values=['Received', 'Pending', 'Reversed'], default='Received'),
+ dict(api='Notes__c', label='Notes', type='LongTextArea', length=32768, visibleLines=3),
+]
+CREDIT_NOTE = [
+ dict(api='Account__c', label='Account', type='Lookup', referenceTo='Account', relationshipLabel='Credit Notes', relationshipName='Credit_Notes', required=True, deleteConstraint='Restrict'),
+ dict(api='Invoice__c', label='Invoice', type='Lookup', referenceTo='Invoice__c', relationshipLabel='Credit Notes', relationshipName='Credit_Notes'),
+ dict(api='Case__c', label='Complaint Case', type='Lookup', referenceTo='Case', relationshipLabel='Credit Notes', relationshipName='Credit_Notes'),
+ dict(api='Credit_Date__c', label='Credit Note Date', type='Date', required=True),
+ dict(api='Amount__c', label='Amount', type='Currency', precision=18, scale=2, required=True),
+ dict(api='Reason__c', label='Reason', type='Picklist', values=['Quality Complaint', 'Short Shipment', 'Price Adjustment', 'Returned Goods', 'Damaged in Transit', 'Other']),
+ dict(api='Status__c', label='Status', type='Picklist', values=['Draft', 'Issued', 'Applied', 'Cancelled'], default='Issued'),
+ dict(api='SAP_Reference__c', label='SAP Reference', type='Text', length=40),
+ dict(api='Notes__c', label='Notes', type='LongTextArea', length=32768, visibleLines=3),
+]
+
 # ---------------------------------------------------------------- write everything
 def main():
     # Sample_Request__c
@@ -549,15 +593,26 @@ def main():
     write_fields(FA, 'Product2', PRODUCT)
     write_fields(SHARED, 'Lead', LEAD)
 
-    # Field inventory for permission sets / docs
     inv = {
         'Sample_Request__c': [f['api'] for f in SR], 'Competitor_Intel__c': [f['api'] for f in CI], 'Customer_Onboarding__c': [f['api'] for f in ONB],
         'Integration_Log__c': [f['api'] for f in IL], 'Opportunity': [f['api'] for f in OPP], 'Account': [f['api'] for f in ACC], 'Quote': [f['api'] for f in QUOTE],
         'QuoteLineItem': [f['api'] for f in QLI], 'Order': [f['api'] for f in ORDER], 'Case': [f['api'] for f in CASE], 'Product2': [f['api'] for f in PRODUCT], 'Lead': [f['api'] for f in LEAD],
     }
+
+    for obj, label, plural, nl, an, flds, comp_fields, lv_cols in [
+        ('Invoice__c', 'Invoice', 'Invoices', 'Invoice Number', 'INV-{00000}', INVOICE, ['Name', 'Account__c', 'Invoice_Number__c', 'Invoice_Date__c', 'Due_Date__c', 'Amount__c', 'Balance__c', 'Payment_Status__c'], ['NAME', 'Account__c', 'Invoice_Number__c', 'Invoice_Date__c', 'Due_Date__c', 'Amount__c', 'Amount_Paid__c', 'Balance__c', 'Payment_Status__c']),
+        ('Payment__c', 'Payment', 'Payments', 'Payment Number', 'PAY-{00000}', PAYMENT, ['Name', 'Account__c', 'Invoice__c', 'Payment_Date__c', 'Amount__c', 'Method__c', 'Status__c'], ['NAME', 'Account__c', 'Invoice__c', 'Payment_Date__c', 'Amount__c', 'Method__c', 'Reference__c', 'Status__c']),
+        ('Credit_Note__c', 'Credit Note', 'Credit Notes', 'Credit Note Number', 'CN-{00000}', CREDIT_NOTE, ['Name', 'Account__c', 'Invoice__c', 'Case__c', 'Credit_Date__c', 'Amount__c', 'Reason__c', 'Status__c'], ['NAME', 'Account__c', 'Invoice__c', 'Case__c', 'Credit_Date__c', 'Amount__c', 'Reason__c', 'Status__c'])]:
+        base = os.path.join(FA, 'objects', obj)
+        cl = f'Apex_{obj.replace("__c", "")}_Compact'
+        w(os.path.join(base, f'{obj}.object-meta.xml'), custom_object_xml(label, plural, nl, autonumber=an, compact=cl, description=f'DEMO mirror of SAP {plural.lower()} so the Customer 360 shows finance history. SAP stays the system of record.'))
+        write_fields(FA, obj, flds, track_history=True)
+        w(os.path.join(base, 'compactLayouts', f'{cl}.compactLayout-meta.xml'), compact_xml(cl, f'Apex {label} Compact', comp_fields))
+        w(os.path.join(base, 'listViews', 'All.listView-meta.xml'), listview_xml('All', f'All {plural}', lv_cols))
+    inv['Invoice__c'] = [f['api'] for f in INVOICE]; inv['Payment__c'] = [f['api'] for f in PAYMENT]; inv['Credit_Note__c'] = [f['api'] for f in CREDIT_NOTE]
     readonly = {}
     required = {}
-    for obj, lst in [('Sample_Request__c', SR), ('Competitor_Intel__c', CI), ('Customer_Onboarding__c', ONB), ('Integration_Log__c', IL), ('Opportunity', OPP), ('Account', ACC), ('Quote', QUOTE), ('QuoteLineItem', QLI), ('Order', ORDER), ('Case', CASE), ('Product2', PRODUCT), ('Lead', LEAD)]:
+    for obj, lst in [('Sample_Request__c', SR), ('Competitor_Intel__c', CI), ('Customer_Onboarding__c', ONB), ('Integration_Log__c', IL), ('Opportunity', OPP), ('Account', ACC), ('Quote', QUOTE), ('QuoteLineItem', QLI), ('Order', ORDER), ('Case', CASE), ('Product2', PRODUCT), ('Lead', LEAD), ('Invoice__c', INVOICE), ('Payment__c', PAYMENT), ('Credit_Note__c', CREDIT_NOTE)]:
         readonly[obj] = [f['api'] for f in lst if f.get('formula') or f['type'] == 'Summary']
         required[obj] = [f['api'] for f in lst if f.get('required')]
     with open(os.path.join(os.path.dirname(__file__), 'field_inventory.json'), 'w') as fh:

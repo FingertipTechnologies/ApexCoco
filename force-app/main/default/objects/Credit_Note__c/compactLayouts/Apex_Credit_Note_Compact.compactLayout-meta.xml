@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Apex_Credit_Note_Compact</fullName>
+    <fields>Name</fields>
+    <fields>Account__c</fields>
+    <fields>Invoice__c</fields>
+    <fields>Case__c</fields>
+    <fields>Credit_Date__c</fields>
+    <fields>Amount__c</fields>
+    <fields>Reason__c</fields>
+    <fields>Status__c</fields>
+    <label>Apex Credit Note Compact</label>
+</CompactLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Payment_Status__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISPICKVAL(Status__c, "Cancelled"), "Cancelled", IF(Amount__c - Amount_Paid__c - Credit_Amount__c &lt;= 0, "Paid", IF(Amount_Paid__c &gt; 0, "Partially Paid", IF(NOT(ISBLANK(Due_Date__c)) &amp;&amp; Due_Date__c &lt; TODAY(), "Overdue", "Open"))))</formula>
+    <label>Payment Status</label>
+    <type>Text</type>
+</CustomField>

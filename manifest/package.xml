@@ -12,10 +12,13 @@
     <types>
         <members>Account.Apex_Account_Compact</members>
         <members>Competitor_Intel__c.Apex_Competitor_Intel_Compact</members>
+        <members>Credit_Note__c.Apex_Credit_Note_Compact</members>
         <members>Customer_Onboarding__c.Apex_Customer_Onboarding_Compact</members>
         <members>Integration_Log__c.Apex_Integration_Log_Compact</members>
+        <members>Invoice__c.Apex_Invoice_Compact</members>
         <members>Opportunity.Apex_Opportunity_Compact</members>
         <members>Order.Apex_Order_Compact</members>
+        <members>Payment__c.Apex_Payment_Compact</members>
         <members>Quote.Apex_Quote_Compact</members>
         <members>Sample_Request__c.Apex_Sample_Request_Compact</members>
         <name>CompactLayout</name>
@@ -62,6 +65,15 @@
         <members>Competitor_Intel__c.Source__c</members>
         <members>Competitor_Intel__c.Strength__c</members>
         <members>Competitor_Intel__c.Weakness__c</members>
+        <members>Credit_Note__c.Account__c</members>
+        <members>Credit_Note__c.Amount__c</members>
+        <members>Credit_Note__c.Case__c</members>
+        <members>Credit_Note__c.Credit_Date__c</members>
+        <members>Credit_Note__c.Invoice__c</members>
+        <members>Credit_Note__c.Notes__c</members>
+        <members>Credit_Note__c.Reason__c</members>
+        <members>Credit_Note__c.SAP_Reference__c</members>
+        <members>Credit_Note__c.Status__c</members>
         <members>Customer_Onboarding__c.Account__c</members>
         <members>Customer_Onboarding__c.Company_Information_Owner__c</members>
         <members>Customer_Onboarding__c.Company_Information_Status__c</members>
@@ -93,6 +105,22 @@
         <members>Integration_Log__c.Sent_Date_Time__c</members>
         <members>Integration_Log__c.Status__c</members>
         <members>Integration_Log__c.Target_System__c</members>
+        <members>Invoice__c.Account__c</members>
+        <members>Invoice__c.Amount_Paid__c</members>
+        <members>Invoice__c.Amount__c</members>
+        <members>Invoice__c.Balance__c</members>
+        <members>Invoice__c.Credit_Amount__c</members>
+        <members>Invoice__c.Days_Overdue__c</members>
+        <members>Invoice__c.Due_Date__c</members>
+        <members>Invoice__c.Invoice_Date__c</members>
+        <members>Invoice__c.Invoice_Number__c</members>
+        <members>Invoice__c.Notes__c</members>
+        <members>Invoice__c.Opportunity__c</members>
+        <members>Invoice__c.Order__c</members>
+        <members>Invoice__c.Payment_Status__c</members>
+        <members>Invoice__c.Payment_Terms__c</members>
+        <members>Invoice__c.Source_System__c</members>
+        <members>Invoice__c.Status__c</members>
         <members>Opportunity.Competitor__c</members>
         <members>Opportunity.Current_Supplier__c</members>
         <members>Opportunity.Customer_Approval_Date__c</members>
@@ -124,6 +152,14 @@
         <members>Order.SAP_Order_Number__c</members>
         <members>Order.SAP_Sent_Date_Time__c</members>
         <members>Order.SAP_Status__c</members>
+        <members>Payment__c.Account__c</members>
+        <members>Payment__c.Amount__c</members>
+        <members>Payment__c.Invoice__c</members>
+        <members>Payment__c.Method__c</members>
+        <members>Payment__c.Notes__c</members>
+        <members>Payment__c.Payment_Date__c</members>
+        <members>Payment__c.Reference__c</members>
+        <members>Payment__c.Status__c</members>
         <members>Product2.Standard_Cost__c</members>
         <members>Product2.Unit_of_Measure__c</members>
         <members>Quote.Approval_Status__c</members>
@@ -196,18 +232,24 @@
         <members>Account</members>
         <members>Apex_Demo_Setting__mdt</members>
         <members>Competitor_Intel__c</members>
+        <members>Credit_Note__c</members>
         <members>Customer_Onboarding__c</members>
         <members>Integration_Log__c</members>
+        <members>Invoice__c</members>
         <members>Opportunity</members>
         <members>Order</members>
+        <members>Payment__c</members>
         <members>Quote</members>
         <members>Sample_Request__c</members>
         <name>CustomObject</name>
     </types>
     <types>
         <members>Competitor_Intel__c</members>
+        <members>Credit_Note__c</members>
         <members>Customer_Onboarding__c</members>
         <members>Integration_Log__c</members>
+        <members>Invoice__c</members>
+        <members>Payment__c</members>
         <members>Sample_Request__c</members>
         <name>CustomTab</name>
     </types>
@@ -229,6 +271,7 @@
         <members>Apex_Account_Reorder_Follow_Up</members>
         <members>Apex_Case_Before_Save</members>
         <members>Apex_Competitor_Intel_Before_Save</members>
+        <members>Apex_Credit_Note_After_Save</members>
         <members>Apex_Customer_Onboarding_After_Save</members>
         <members>Apex_Customer_Onboarding_Before_Save</members>
         <members>Apex_Lead_Request_Sample</members>
@@ -237,6 +280,7 @@
         <members>Apex_Opportunity_Stale_Check</members>
         <members>Apex_Order_After_Save</members>
         <members>Apex_Order_Send_To_SAP</members>
+        <members>Apex_Payment_After_Save</members>
         <members>Apex_Quote_After_Save</members>
         <members>Apex_Quote_Before_Save</members>
         <members>Apex_Quote_Line_Item_After_Save</members>
@@ -252,10 +296,13 @@
         <members>Account-Account Layout</members>
         <members>Case-Case Layout</members>
         <members>Competitor_Intel__c-Apex Competitor Intel Layout</members>
+        <members>Credit_Note__c-Apex Credit Note Layout</members>
         <members>Customer_Onboarding__c-Apex Customer Onboarding Layout</members>
         <members>Integration_Log__c-Apex Integration Log Layout</members>
+        <members>Invoice__c-Apex Invoice Layout</members>
         <members>Opportunity-Opportunity Layout</members>
         <members>Order-Order Layout</members>
+        <members>Payment__c-Apex Payment Layout</members>
         <members>Quote-Quote Layout</members>
         <members>Sample_Request__c-Apex Sample Request Layout</members>
         <name>Layout</name>
@@ -263,11 +310,14 @@
     <types>
         <members>Account.Apex_Reorder_Due</members>
         <members>Competitor_Intel__c.All</members>
+        <members>Credit_Note__c.All</members>
         <members>Customer_Onboarding__c.All</members>
         <members>Customer_Onboarding__c.Open_Onboardings</members>
         <members>Integration_Log__c.All</members>
+        <members>Invoice__c.All</members>
         <members>Opportunity.Apex_Open_Pipeline</members>
         <members>Opportunity.Apex_Stale_Opportunities</members>
+        <members>Payment__c.All</members>
         <members>Sample_Request__c.All</members>
         <members>Sample_Request__c.Awaiting_Customer_Feedback</members>
         <members>Sample_Request__c.Open_Sample_Aging</members>

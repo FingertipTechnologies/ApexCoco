@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Days_Overdue__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND(NOT(ISPICKVAL(Status__c, "Cancelled")), Amount__c - Amount_Paid__c - Credit_Amount__c &gt; 0, NOT(ISBLANK(Due_Date__c)), Due_Date__c &lt; TODAY()), TODAY() - Due_Date__c, 0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Days Overdue</label>
+    <precision>18</precision>
+    <scale>0</scale>
+    <type>Number</type>
+</CustomField>

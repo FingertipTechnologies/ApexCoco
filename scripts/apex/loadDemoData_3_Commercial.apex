@@ -101,4 +101,25 @@ for (Order ord : giOrders) {
 }
 update giOrders;
 insert logs;
+
+// ------------------------------------------------------------------ 8b. Invoices and payments mirrored from SAP (DEMO): GI paid, paid, partially paid / overdue; Mumbai paid
+List<Order> giSorted = [SELECT Id, OrderNumber, EffectiveDate, TotalAmount, OpportunityId FROM Order WHERE AccountId = :acc.get('Global Ingredients UK').Id ORDER BY EffectiveDate ASC];
+List<Invoice__c> invoices = new List<Invoice__c>();
+for (Integer i = 0; i < giSorted.size(); i++) {
+    Order gio = giSorted[i];
+    invoices.add(new Invoice__c(Account__c = acc.get('Global Ingredients UK').Id, Order__c = gio.Id, Opportunity__c = gio.OpportunityId, Invoice_Number__c = '90' + gio.OrderNumber.right(6), Invoice_Date__c = gio.EffectiveDate.addDays(20), Due_Date__c = gio.EffectiveDate.addDays(50), Amount__c = gio.TotalAmount, Payment_Terms__c = 'TT 30 Days', Source_System__c = 'SAP (Mock)', Notes__c = MARK));
+}
+List<Order> msSorted = [SELECT Id, OrderNumber, EffectiveDate, TotalAmount, OpportunityId FROM Order WHERE AccountId = :acc.get('Mumbai Sweets Pvt Ltd').Id ORDER BY EffectiveDate ASC];
+for (Order mso : msSorted) {
+    invoices.add(new Invoice__c(Account__c = acc.get('Mumbai Sweets Pvt Ltd').Id, Order__c = mso.Id, Opportunity__c = mso.OpportunityId, Invoice_Number__c = '90' + mso.OrderNumber.right(6), Invoice_Date__c = mso.EffectiveDate.addDays(5), Due_Date__c = mso.EffectiveDate.addDays(35), Amount__c = mso.TotalAmount, Payment_Terms__c = 'TT 30 Days', Source_System__c = 'SAP (Mock)', Notes__c = MARK));
+}
+insert invoices;
+List<Payment__c> payments = new List<Payment__c>();
+for (Integer i = 0; i < invoices.size(); i++) {
+    Invoice__c inv = invoices[i];
+    Boolean lastGi = (i == giSorted.size() - 1);           // latest GI invoice: 40% paid, now overdue
+    Decimal amt = lastGi ? (inv.Amount__c * 0.4).setScale(2) : inv.Amount__c;
+    payments.add(new Payment__c(Account__c = inv.Account__c, Invoice__c = inv.Id, Payment_Date__c = inv.Due_Date__c.addDays(lastGi ? 3 : -2), Amount__c = amt, Method__c = 'Telegraphic Transfer', Reference__c = 'TT-' + inv.Invoice_Number__c, Status__c = 'Received', Notes__c = MARK));
+}
+insert payments;   // the after-save flow rolls Amount Paid up to each invoice
 System.debug('Part 3 done: quotes=' + (quotes.size() + 1) + ' orders activated=' + toActivate.size());
