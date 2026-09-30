@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+/* Salesforce Lightning-inspired design tokens */
+@theme {
+  --font-sans: "Salesforce Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --color-sf-brand: #0176d3;
+  --color-sf-brand-dark: #014486;
+  --color-sf-brand-darker: #032d60;
+  --color-sf-brand-light: #e5f0fb;
+  --color-sf-brand-accent: #1b96ff;
+
+  --color-sf-bg: #f3f3f3;
+  --color-sf-surface: #ffffff;
+  --color-sf-border: #e5e5e5;
+  --color-sf-border-strong: #c9c9c9;
+
+  --color-sf-text: #181818;
+  --color-sf-text-weak: #444444;
+  --color-sf-text-muted: #706e6b;
+
+  --color-sf-success: #2e844a;
+  --color-sf-success-bg: #eaf5ec;
+  --color-sf-warning: #dd7a01;
+  --color-sf-warning-bg: #fef3e2;
+  --color-sf-error: #ba0517;
+  --color-sf-error-bg: #fdecee;
+  --color-sf-info-bg: #eef4ff;
+
+  --radius-sf: 0.25rem;
+  --shadow-sf-card: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+  --shadow-sf-raised: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-sf-bg);
+  color: var(--color-sf-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Safe-area aware sticky action bar on phones */
+.sf-action-bar {
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+@keyframes sf-progress {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+.sf-progress-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, var(--color-sf-brand-accent), transparent);
+  animation: sf-progress 1.4s ease-in-out infinite;
+}
+
+@keyframes sf-scan {
+  0% { top: 0; }
+  50% { top: calc(100% - 3px); }
+  100% { top: 0; }
+}
+.sf-scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-sf-brand-accent);
+  box-shadow: 0 0 12px 2px rgba(27, 150, 255, 0.7);
+  animation: sf-scan 2.2s ease-in-out infinite;
+}
+
+@keyframes sf-pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  70% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.sf-pop { animation: sf-pop 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sf-progress-bar::after, .sf-scan-line, .sf-pop { animation: none; }
+}

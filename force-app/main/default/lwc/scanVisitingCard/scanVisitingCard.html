@@ -1,0 +1,344 @@
+<template>
+    <div class="scan-card slds-is-relative">
+        <!-- Progress path -->
+        <lightning-progress-indicator current-step={stage} type="path" variant="base" class="slds-m-bottom_small">
+            <template for:each={steps} for:item="step">
+                <lightning-progress-step key={step.value} label={step.label} value={step.value}></lightning-progress-step>
+            </template>
+        </lightning-progress-indicator>
+
+        <!-- 1. CAPTURE -->
+        <template lwc:if={isCapture}>
+            <lightning-card title="Scan Visiting Card" icon-name="custom:custom93">
+                <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+                    <input type="file" accept="image/*" class="camera-input slds-hide" onchange={handleFileChange} />
+                    <input type="file" accept="image/jpeg,image/png,image/webp" class="file-input slds-hide" onchange={handleFileChange} />
+
+                    <template lwc:if={hasPreview}>
+                        <div class="preview-frame">
+                            <img src={previewUrl} alt="Visiting card preview" />
+                        </div>
+                        <p class="slds-text-body_small slds-text-color_weak slds-m-top_x-small slds-truncate">{fileLabel}</p>
+                        <div class="button-stack slds-m-top_medium">
+                            <lightning-button variant="brand" label="Process Card" icon-name="utility:scan" onclick={handleProcess} stretch></lightning-button>
+                            <lightning-button variant="neutral" label="Retake" icon-name="utility:refresh" onclick={handleRetake} stretch></lightning-button>
+                        </div>
+                    </template>
+                    <template lwc:else>
+                        <div class="dropzone">
+                            <lightning-icon icon-name="utility:photo" size="large" alternative-text="Camera" class="dropzone-icon"></lightning-icon>
+                            <p class="slds-text-heading_small slds-m-top_small">Capture the visiting card</p>
+                            <p class="slds-text-body_small slds-text-color_weak slds-m-top_xx-small">Hold the card flat, fill the frame and avoid glare. The details are extracted automatically.</p>
+                        </div>
+                        <div class="button-stack slds-m-top_medium">
+                            <lightning-button variant="brand" label="Take Photo" icon-name="utility:photo" onclick={handleTakePhoto} stretch></lightning-button>
+                            <lightning-button variant="neutral" label="Upload Image" icon-name="utility:upload" onclick={handleUpload} stretch></lightning-button>
+                            <lightning-button variant="base" label="Enter details manually" icon-name="utility:edit_form" onclick={handleManualEntry} stretch></lightning-button>
+                        </div>
+                    </template>
+
+                    <template lwc:if={captureError}>
+                        <div class="slds-notify slds-notify_alert slds-alert_error slds-m-top_medium" role="alert">
+                            <lightning-icon icon-name="utility:error" size="x-small" variant="inverse" class="slds-m-right_x-small"></lightning-icon>
+                            <span>{captureError}</span>
+                        </div>
+                    </template>
+                </div>
+            </lightning-card>
+            <lightning-card class="slds-m-top_small">
+                <div class="slds-p-horizontal_medium slds-p-bottom_small">
+                    <p class="slds-text-title_bold">How it works</p>
+                    <ol class="slds-list_ordered slds-text-body_small slds-m-top_x-small">
+                        <li>The card photo is read (QR code on the device, text through the OCR adapter).</li>
+                        <li>You review and correct the extracted details.</li>
+                        <li>Salesforce is checked for existing Leads, Contacts and Accounts by email, phone and company.</li>
+                        <li>A Lead is created, or you open the existing record.</li>
+                        <li>Enrich and qualify the Lead until it is ready for a Sample Request.</li>
+                    </ol>
+                </div>
+            </lightning-card>
+        </template>
+
+        <!-- 2. EXTRACTING -->
+        <template lwc:if={isExtracting}>
+            <lightning-card title="Extracting Information" icon-name="utility:scan">
+                <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+                    <div class="preview-frame preview-frame_scanning">
+                        <img src={previewUrl} alt="Visiting card being processed" />
+                        <div class="scan-line"></div>
+                    </div>
+                    <ul class="status-list slds-m-top_medium" aria-live="polite">
+                        <template for:each={extractRows} for:item="row">
+                            <li key={row.key} class={row.cls}>
+                                <span class={row.iconCls}>
+                                    <template lwc:if={row.isRunning}><lightning-spinner size="x-small" alternative-text="Working"></lightning-spinner></template>
+                                    <template lwc:else><lightning-icon icon-name={row.icon} size="xx-small" variant="inverse"></lightning-icon></template>
+                                </span>
+                                <span class="status-text">
+                                    <span class="status-label">{row.label}</span>
+                                    <template lwc:if={row.detail}><span class="status-detail">{row.detail}</span></template>
+                                </span>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </lightning-card>
+        </template>
+
+        <!-- 3. REVIEW -->
+        <template lwc:if={isReview}>
+            <lightning-card title={reviewTitle} icon-name="utility:preview">
+                <span slot="actions" class="slds-badge">{filledCount} fields</span>
+                <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+                    <template lwc:if={manualEntry}>
+                        <p class="slds-text-body_small slds-text-color_weak">Enter the details from the card. Only a name and company are required to create the Lead.</p>
+                    </template>
+                    <template lwc:else>
+                        <div class="review-intro">
+                            <template lwc:if={hasPreview}><div class="thumb"><img src={previewUrl} alt="Scanned visiting card" /></div></template>
+                            <div class="slds-grow">
+                                <p class="slds-text-body_small slds-text-color_weak">Check the details against the card. Anything the scanner missed or misread can be corrected before continuing.</p>
+                                <div class="slds-m-top_x-small pill-row">
+                                    <span class="slds-badge">{providerSummary}</span>
+                                    <span class="slds-badge">{qrSummary}</span>
+                                    <template lwc:if={confidenceSummary}><span class="slds-badge">{confidenceSummary}</span></template>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template lwc:if={hasWarnings}>
+                        <div class="slds-scoped-notification slds-media slds-media_center slds-theme_warning slds-m-top_small" role="status">
+                            <div class="slds-media__figure"><lightning-icon icon-name="utility:warning" size="small" variant="inverse"></lightning-icon></div>
+                            <div class="slds-media__body">
+                                <p class="slds-text-title_bold">Please double-check</p>
+                                <template for:each={extraction.warnings} for:item="w"><p key={w} class="slds-text-body_small">{w}</p></template>
+                            </div>
+                        </div>
+                    </template>
+                    <template lwc:if={hasFieldErrors}>
+                        <div class="slds-scoped-notification slds-media slds-media_center slds-theme_error slds-m-top_small" role="alert">
+                            <div class="slds-media__figure"><lightning-icon icon-name="utility:error" size="small" variant="inverse"></lightning-icon></div>
+                            <div class="slds-media__body"><p>Some details need attention. Fix the highlighted fields to continue.</p></div>
+                        </div>
+                    </template>
+
+                    <div class="field-grid slds-m-top_medium">
+                        <template for:each={reviewFields} for:item="f">
+                            <div key={f.name} class="field">
+                                <template lwc:if={editing}>
+                                    <lightning-input
+                                        label={f.label}
+                                        name={f.name}
+                                        data-field={f.name}
+                                        type={f.type}
+                                        value={f.value}
+                                        required={f.required}
+                                        placeholder={f.placeholder}
+                                        autocomplete={f.autocomplete}
+                                        onchange={handleFieldChange}
+                                        class="review-input">
+                                    </lightning-input>
+                                    <template lwc:if={f.error}><p class="slds-text-color_error slds-text-body_small slds-m-top_xx-small">{f.error}</p></template>
+                                </template>
+                                <template lwc:else>
+                                    <div class="field-header">
+                                        <span class="slds-form-element__label">{f.label}</span>
+                                        <template lwc:if={f.badge}><span class={f.badgeClass}>{f.badge}</span></template>
+                                    </div>
+                                    <p class={f.valueClass}>{f.displayValue}</p>
+                                    <template lwc:if={f.error}><p class="slds-text-color_error slds-text-body_small">{f.error}</p></template>
+                                </template>
+                            </div>
+                        </template>
+                        <div class="field">
+                            <template lwc:if={editing}>
+                                <lightning-input label="Lead Source" name="leadSource" value={leadSourceValue} onchange={handleLeadSourceChange} class="review-input"></lightning-input>
+                            </template>
+                            <template lwc:else>
+                                <div class="field-header"><span class="slds-form-element__label">Lead Source</span></div>
+                                <p class="slds-text-body_regular">{leadSourceValue}</p>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div class="button-stack slds-m-top_medium">
+                        <lightning-button variant={editVariant} label={editLabel} icon-name={editIcon} onclick={handleToggleEdit} stretch></lightning-button>
+                        <lightning-button variant="brand" label="Confirm &amp; Check Existing Records" icon-name="utility:search" onclick={handleConfirm} stretch></lightning-button>
+                        <lightning-button variant="base" label="Scan a different card" onclick={handleRescan} stretch></lightning-button>
+                    </div>
+                </div>
+            </lightning-card>
+
+            <template lwc:if={extraction}>
+                <lightning-card class="slds-m-top_small">
+                    <button class="details-toggle" onclick={handleToggleDetails} aria-expanded={detailsExpanded}>
+                        <lightning-icon icon-name="utility:file" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                        <span class="slds-grow slds-text-align_left slds-text-title_bold">Scanner details</span>
+                        <lightning-icon icon-name={detailsIcon} size="x-small"></lightning-icon>
+                    </button>
+                    <template lwc:if={showDetails}>
+                        <div class="slds-p-horizontal_medium slds-p-bottom_medium slds-text-body_small">
+                            <p class="slds-text-color_weak slds-text-title_caps">Raw OCR text</p>
+                            <pre class="raw-text">{extraction.rawText}</pre>
+                            <template lwc:if={extraction.qr}>
+                                <p class="slds-text-color_weak slds-text-title_caps slds-m-top_small">QR payload</p>
+                                <pre class="raw-text">{extraction.qr.raw}</pre>
+                            </template>
+                        </div>
+                    </template>
+                </lightning-card>
+            </template>
+        </template>
+
+        <!-- 4. DUPLICATE CHECK -->
+        <template lwc:if={isChecking}>
+            <lightning-card title="Checking Existing Records" icon-name="utility:search">
+                <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+                    <p class="slds-text-body_small slds-text-color_weak">Looking for <strong>{displayName}</strong> at <strong>{contact.company}</strong> across Salesforce using email, phone and company.</p>
+                    <ul class="status-list slds-m-top_medium" aria-live="polite">
+                        <template for:each={checkRows} for:item="row">
+                            <li key={row.key} class={row.cls}>
+                                <span class={row.iconCls}>
+                                    <template lwc:if={row.isRunning}><lightning-spinner size="x-small" alternative-text="Checking"></lightning-spinner></template>
+                                    <template lwc:else><lightning-icon icon-name={row.icon} size="xx-small" variant="inverse"></lightning-icon></template>
+                                </span>
+                                <span class="status-text"><span class="status-label">{row.label}</span></span>
+                            </li>
+                        </template>
+                    </ul>
+                    <template lwc:if={checkError}>
+                        <div class="slds-scoped-notification slds-media slds-media_center slds-theme_error slds-m-top_small" role="alert">
+                            <div class="slds-media__figure"><lightning-icon icon-name="utility:error" size="small" variant="inverse"></lightning-icon></div>
+                            <div class="slds-media__body"><p class="slds-text-title_bold">Salesforce lookup failed</p><p class="slds-text-body_small">{checkError}</p></div>
+                        </div>
+                        <div class="button-stack slds-m-top_medium">
+                            <lightning-button variant="brand" label="Retry" icon-name="utility:refresh" onclick={handleRetryCheck} stretch></lightning-button>
+                            <lightning-button variant="neutral" label="Back to review" onclick={handleBackToReview} stretch></lightning-button>
+                        </div>
+                    </template>
+                </div>
+            </lightning-card>
+        </template>
+
+        <!-- 5. RESULT -->
+        <template lwc:if={isResult}>
+            <template lwc:if={isNewProspect}>
+                <lightning-card title="New Prospect" icon-name="standard:lead">
+                    <span slot="actions" class="slds-badge slds-theme_success">No duplicates</span>
+                    <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+                        <ul class="status-list">
+                            <template for:each={duplicateRows} for:item="row">
+                                <li key={row.key} class="status-row status-done"><span class="status-icon status-icon_done"><lightning-icon icon-name="utility:check" size="xx-small" variant="inverse"></lightning-icon></span><span class="status-text"><span class="status-label">{row.label}</span></span></li>
+                            </template>
+                        </ul>
+                        <div class="slds-scoped-notification slds-media slds-media_center slds-theme_success slds-m-top_small" role="status">
+                            <div class="slds-media__figure"><lightning-icon icon-name="utility:success" size="small" variant="inverse"></lightning-icon></div>
+                            <div class="slds-media__body"><p class="slds-text-title_bold">No existing customer found.</p><p class="slds-text-body_small">This appears to be a new prospect.</p></div>
+                        </div>
+                        <div class="summary-box slds-m-top_medium">
+                            <p class="slds-text-title_caps slds-text-color_weak">Lead to be created</p>
+                            <p class="slds-text-heading_small">{fullName}</p>
+                            <p class="slds-text-body_small">{contact.title}</p>
+                            <p class="slds-text-body_small slds-text-title_bold">{contact.company}</p>
+                            <p class="slds-text-body_small slds-text-color_weak slds-m-top_x-small">Lead Source: {leadSourceValue}</p>
+                        </div>
+                        <template lwc:if={createError}>
+                            <div class="slds-scoped-notification slds-media slds-media_center slds-theme_error slds-m-top_small" role="alert">
+                                <div class="slds-media__figure"><lightning-icon icon-name="utility:error" size="small" variant="inverse"></lightning-icon></div>
+                                <div class="slds-media__body"><p class="slds-text-title_bold">Lead not created</p><p class="slds-text-body_small">{createError}</p></div>
+                            </div>
+                        </template>
+                        <div class="button-stack slds-m-top_medium">
+                            <lightning-button variant="brand" label="Create Lead" icon-name="utility:adduser" onclick={handleCreateLead} disabled={creating} stretch></lightning-button>
+                            <lightning-button variant="neutral" label="Back to review" icon-name="utility:back" onclick={handleBackToReview} disabled={creating} stretch></lightning-button>
+                        </div>
+                    </div>
+                </lightning-card>
+            </template>
+
+            <template lwc:if={isMatchFound}>
+                <lightning-card title="Potential Existing Customer Found" icon-name="utility:warning">
+                    <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+                        <div class="match-banner">
+                            <div class="confidence-ring" style={confidenceStyle}>
+                                <span class="confidence-value">{duplicates.confidence}%</span>
+                                <span class="confidence-label">match</span>
+                            </div>
+                            <div class="slds-grow">
+                                <p class="slds-text-title_bold">{fullName} · {contact.company} may already be in Salesforce.</p>
+                                <p class="slds-text-body_small slds-m-top_xx-small">Review the existing records before creating a new Lead. No duplicate is created automatically.</p>
+                            </div>
+                        </div>
+                        <ul class="status-list slds-m-top_small">
+                            <template for:each={duplicateRows} for:item="row">
+                                <li key={row.key} class={row.cls}><span class="status-icon"><lightning-icon icon-name={row.icon} size="xx-small" variant="inverse"></lightning-icon></span><span class="status-text"><span class="status-label">{row.label}</span></span></li>
+                            </template>
+                        </ul>
+
+                        <template for:each={allMatches} for:item="m">
+                            <div key={m.key} class="match-card slds-m-top_small">
+                                <div class="slds-media slds-media_center">
+                                    <div class="slds-media__figure"><lightning-icon icon-name={m.icon} size="small"></lightning-icon></div>
+                                    <div class="slds-media__body slds-truncate">
+                                        <p class="slds-text-title_caps slds-text-color_weak">{m.heading} <span class={m.badgeClass}>{m.confidenceLabel}</span></p>
+                                        <p class="slds-text-heading_small slds-truncate">{m.name}</p>
+                                        <p class="slds-text-body_small slds-truncate">{m.detail}</p>
+                                        <p class="slds-text-body_small slds-m-top_xx-small"><strong>Matched on:</strong> {m.matched}</p>
+                                    </div>
+                                </div>
+                                <div class="slds-m-top_x-small slds-text-align_right">
+                                    <lightning-button variant="base" label="Open" icon-name="utility:new_window" data-id={m.recordId} onclick={handleOpenRecord}></lightning-button>
+                                </div>
+                            </div>
+                        </template>
+
+                        <template lwc:if={createAnyway}>
+                            <div class="slds-scoped-notification slds-media slds-media_center slds-theme_warning slds-m-top_medium" role="alert">
+                                <div class="slds-media__figure"><lightning-icon icon-name="utility:warning" size="small" variant="inverse"></lightning-icon></div>
+                                <div class="slds-media__body"><p class="slds-text-title_bold">This may create a duplicate Lead.</p><p class="slds-text-body_small">A matching record already exists. Only continue if this is genuinely a separate opportunity.</p></div>
+                            </div>
+                            <template lwc:if={createError}>
+                                <div class="slds-scoped-notification slds-media slds-media_center slds-theme_error slds-m-top_small" role="alert">
+                                    <div class="slds-media__figure"><lightning-icon icon-name="utility:error" size="small" variant="inverse"></lightning-icon></div>
+                                    <div class="slds-media__body"><p class="slds-text-body_small">{createError}</p></div>
+                                </div>
+                            </template>
+                            <div class="button-stack slds-m-top_medium">
+                                <lightning-button variant="destructive" label="Create New Lead Anyway" icon-name="utility:adduser" onclick={handleCreateLead} disabled={creating} stretch></lightning-button>
+                                <lightning-button variant="neutral" label="Cancel" onclick={handleCancelAnyway} disabled={creating} stretch></lightning-button>
+                            </div>
+                        </template>
+                        <template lwc:else>
+                            <div class="button-stack slds-m-top_medium">
+                                <lightning-button variant="brand" label="Open Existing Customer" icon-name="utility:new_window" onclick={handleOpenRecord} stretch></lightning-button>
+                                <lightning-button variant="neutral" label="Create New Lead Anyway" icon-name="utility:adduser" onclick={handleCreateAnyway} stretch></lightning-button>
+                                <lightning-button variant="base" label="Back to review" onclick={handleBackToReview} stretch></lightning-button>
+                            </div>
+                        </template>
+                    </div>
+                </lightning-card>
+            </template>
+        </template>
+
+        <!-- 6. COMPLETE -->
+        <template lwc:if={isComplete}>
+            <lightning-card>
+                <div class="slds-p-horizontal_medium slds-p-bottom_medium slds-text-align_center">
+                    <div class="success-orb"><lightning-icon icon-name="utility:success" size="medium" variant="inverse"></lightning-icon></div>
+                    <h2 class="slds-text-heading_medium slds-m-top_small">Lead Created</h2>
+                    <p class="slds-text-body_small slds-m-top_xx-small">A new Lead for <strong>{createdLead.name}</strong> at <strong>{createdLead.company}</strong> is in Salesforce with no manual data entry.</p>
+                    <div class="pill-row slds-m-top_small slds-grid slds-grid_align-center">
+                        <span class="slds-badge">Status · {createdLead.status}</span>
+                        <span class="slds-badge">Source · {createdLead.leadSource}</span>
+                    </div>
+                    <div class="button-stack slds-m-top_medium">
+                        <lightning-button variant="brand" label="Open Lead &amp; Qualify" icon-name="utility:new_window" onclick={handleOpenLead} stretch></lightning-button>
+                        <lightning-button variant="neutral" label="Scan Another Card" icon-name="utility:scan" onclick={handleScanAnother} stretch></lightning-button>
+                    </div>
+                </div>
+            </lightning-card>
+            <c-lead-qualification record-id={createdLead.leadId} class="slds-m-top_small"></c-lead-qualification>
+        </template>
+    </div>
+</template>

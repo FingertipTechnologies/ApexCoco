@@ -1,0 +1,13 @@
+# Salesforce DX
+.sf/
+.sfdx/
+.localdevserver/
+deploy-options.json
+**/*.tsbuildinfo
+
+# Node (root-level tooling only; ocr-service has its own .gitignore)
+node_modules/
+
+# OS / editor
+.DS_Store
+.vscode/

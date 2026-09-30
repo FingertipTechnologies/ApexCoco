@@ -1,0 +1,22 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+
+# env
+.env
+.env.local
+.env.*.local
+
+# tesseract language data cache
+*.traineddata
+*.traineddata.gz
+.tesseract-cache/
+
+# misc
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+coverage/

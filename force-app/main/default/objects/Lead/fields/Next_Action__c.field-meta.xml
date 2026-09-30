@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Next_Action__c</fullName>
+    <description>Sales next step. 'Create Sample Request' is the handoff to Workstream 2.</description>
+    <externalId>false</externalId>
+    <label>Next Action</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Create Sample Request</fullName>
+                <default>false</default>
+                <label>Create Sample Request</label>
+            </value>
+            <value>
+                <fullName>Follow Up Call</fullName>
+                <default>false</default>
+                <label>Follow Up Call</label>
+            </value>
+            <value>
+                <fullName>Send Product Information</fullName>
+                <default>false</default>
+                <label>Send Product Information</label>
+            </value>
+            <value>
+                <fullName>Schedule Meeting</fullName>
+                <default>false</default>
+                <label>Schedule Meeting</label>
+            </value>
+            <value>
+                <fullName>No Action</fullName>
+                <default>false</default>
+                <label>No Action</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

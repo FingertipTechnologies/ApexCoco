@@ -1,0 +1,24 @@
+{
+  "records": [
+    {
+      "attributes": { "type": "Account", "referenceId": "FingertipAccount" },
+      "Name": "Fingertip",
+      "Website": "https://www.fingertipplus.com",
+      "Phone": "+91 94950 72255",
+      "Industry": "Technology",
+      "Type": "Customer - Direct",
+      "Contacts": {
+        "records": [
+          {
+            "attributes": { "type": "Contact", "referenceId": "AmeenContact" },
+            "FirstName": "Ameen",
+            "LastName": "Azeez",
+            "Title": "Head of Sales",
+            "Email": "ameen@fingertipplus.com",
+            "MobilePhone": "9495072255"
+          }
+        ]
+      }
+    }
+  ]
+}

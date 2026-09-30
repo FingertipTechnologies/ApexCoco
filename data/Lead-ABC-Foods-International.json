@@ -1,0 +1,30 @@
+{
+  "records": [
+    {
+      "attributes": { "type": "Lead", "referenceId": "ABCFoodsLead" },
+      "FirstName": "John",
+      "LastName": "Smith",
+      "Title": "Procurement Manager",
+      "Company": "ABC Foods International",
+      "Email": "john.smith@abcfoods.com",
+      "Phone": "+1 415 555 0100",
+      "Website": "abcfoods.com",
+      "Country": "USA",
+      "LeadSource": "Trade Show / Exhibition",
+      "Event_Name__c": "Gulfood 2026",
+      "Customer_Type__c": "Importer",
+      "Interested_Product__c": "Coconut Milk Powder",
+      "Expected_Annual_Volume__c": 500,
+      "Volume_Unit__c": "MT",
+      "Purchase_Timeline__c": "3–6 Months",
+      "Current_Supplier__c": "Competitor A",
+      "Competitor__c": "Competitor A",
+      "Potential_Rating__c": "High",
+      "Qualification_Notes__c": "Requires coconut milk powder. Met at Gulfood 2026, visiting card scanned on site.",
+      "Scan_Source__c": "Visiting Card Scan",
+      "Scan_Status__c": "Extracted",
+      "Scan_Provider__c": "Demo data",
+      "Status": "Open - Not Contacted"
+    }
+  ]
+}

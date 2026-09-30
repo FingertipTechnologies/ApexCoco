@@ -1,0 +1,66 @@
+<template>
+    <lightning-card title="Enrich &amp; Qualify Lead" icon-name="standard:lead_list">
+        <span slot="actions" class={statusBadgeClass}>{status}</span>
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <!-- Score + handoff checklist -->
+            <div class="score-block">
+                <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                    <span class="slds-text-title_caps slds-text-color_weak">Lead Score</span>
+                    <span class="slds-text-heading_small">{leadScore}<span class="slds-text-body_small slds-text-color_weak">/100</span></span>
+                </div>
+                <div class="score-track"><div class="score-fill" style={scoreStyle}></div></div>
+            </div>
+
+            <p class="slds-text-title_caps slds-text-color_weak slds-m-top_medium">Sample Request handoff</p>
+            <p class="slds-text-body_small slds-text-color_weak">{progressLabel}</p>
+            <ul class="check-list slds-m-top_x-small">
+                <template for:each={rows} for:item="row">
+                    <li key={row.key} class={row.cls}>
+                        <span class={row.iconCls}><lightning-icon icon-name={row.icon} size="xx-small" variant="inverse"></lightning-icon></span>
+                        <span>{row.label}</span>
+                    </li>
+                </template>
+            </ul>
+            <template lwc:if={isReady}>
+                <div class="slds-scoped-notification slds-media slds-media_center slds-theme_success slds-m-top_small" role="status">
+                    <div class="slds-media__figure"><lightning-icon icon-name="utility:success" size="small" variant="inverse"></lightning-icon></div>
+                    <div class="slds-media__body"><p class="slds-text-title_bold">Ready for Sample Request</p><p class="slds-text-body_small">Workstream 1 is complete for this Lead. Workstream 2 takes over from Next Action = Create Sample Request.</p></div>
+                </div>
+            </template>
+
+            <!-- Enrichment -->
+            <lightning-record-edit-form record-id={recordId} object-api-name="Lead" onsubmit={handleSubmit} onsuccess={handleSuccess} onerror={handleError} class="slds-m-top_medium">
+                <lightning-messages></lightning-messages>
+                <p class="slds-text-title_caps slds-text-color_weak slds-m-bottom_x-small">Enrich Lead</p>
+                <div class="field-grid">
+                    <template for:each={enrichmentFields} for:item="f">
+                        <lightning-input-field key={f} field-name={f}></lightning-input-field>
+                    </template>
+                </div>
+                <p class="slds-text-title_caps slds-text-color_weak slds-m-top_medium slds-m-bottom_x-small">Qualify Lead</p>
+                <div class="field-grid">
+                    <template for:each={qualificationFields} for:item="f">
+                        <lightning-input-field key={f} field-name={f}></lightning-input-field>
+                    </template>
+                </div>
+                <div class="slds-m-top_small">
+                    <lightning-button variant="brand" type="submit" label="Save Qualification" icon-name="utility:save" disabled={saving} stretch></lightning-button>
+                </div>
+            </lightning-record-edit-form>
+
+            <!-- Handoff -->
+            <lightning-record-edit-form record-id={recordId} object-api-name="Lead" onsubmit={handleSubmit} onsuccess={handleSuccess} onerror={handleError} class="handoff-form slds-m-top_medium">
+                <p class="slds-text-title_caps slds-text-color_weak slds-m-bottom_x-small">Sample Request</p>
+                <div class="field-grid">
+                    <template for:each={handoffFields} for:item="f">
+                        <lightning-input-field key={f} field-name={f} data-field={f}></lightning-input-field>
+                    </template>
+                </div>
+                <div class="button-stack slds-m-top_small">
+                    <lightning-button variant="success" label="Mark Ready for Sample Request" icon-name="utility:check" onclick={handleMarkReady} disabled={saving} stretch></lightning-button>
+                    <lightning-button variant="neutral" type="submit" label="Save" disabled={saving} stretch></lightning-button>
+                </div>
+            </lightning-record-edit-form>
+        </div>
+    </lightning-card>
+</template>

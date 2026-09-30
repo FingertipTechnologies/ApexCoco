@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Interested_Product__c</fullName>
+    <description>Product the lead is interested in (e.g. Coconut Milk Powder).</description>
+    <externalId>false</externalId>
+    <label>Interested Product</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Coconut Milk Powder</fullName>
+                <default>false</default>
+                <label>Coconut Milk Powder</label>
+            </value>
+            <value>
+                <fullName>Desiccated Coconut</fullName>
+                <default>false</default>
+                <label>Desiccated Coconut</label>
+            </value>
+            <value>
+                <fullName>Virgin Coconut Oil</fullName>
+                <default>false</default>
+                <label>Virgin Coconut Oil</label>
+            </value>
+            <value>
+                <fullName>Coconut Cream</fullName>
+                <default>false</default>
+                <label>Coconut Cream</label>
+            </value>
+            <value>
+                <fullName>Coconut Water</fullName>
+                <default>false</default>
+                <label>Coconut Water</label>
+            </value>
+            <value>
+                <fullName>Coconut Sugar</fullName>
+                <default>false</default>
+                <label>Coconut Sugar</label>
+            </value>
+            <value>
+                <fullName>Coconut Flour</fullName>
+                <default>false</default>
+                <label>Coconut Flour</label>
+            </value>
+            <value>
+                <fullName>Solar Products</fullName>
+                <default>false</default>
+                <label>Solar Products</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Scan Visiting Card</label>
+    <description>Opens the Workstream 1 visiting-card scanner from a Lead record (Lightning web component screen action).</description>
+    <lightningWebComponent>scanVisitingCard</lightningWebComponent>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <type>LightningWebComponent</type>
+</QuickAction>

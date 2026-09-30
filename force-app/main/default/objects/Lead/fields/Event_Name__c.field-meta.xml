@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Event_Name__c</fullName>
+    <description>Optional event context where the visiting card was captured (e.g. Gulfood 2026).</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Trade show or exhibition where the card was collected.</inlineHelpText>
+    <label>Event Name</label>
+    <length>255</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
