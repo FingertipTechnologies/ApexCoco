@@ -70,7 +70,7 @@ w(f'{FA}/layouts/Sample_Request__c-Apex Sample Request Layout.layout-meta.xml', 
     section('Notes', [['Notes__c'], []], style='OneColumn'),
     sysinfo(),
 ], [('Sample_Request__c.Parent_Sample_Request__c', SR_FIELDS), 'RelatedActivityList', 'RelatedHistoryList', 'RelatedFileList'],
-    actions=[('Sample_Request__c.New_Iteration', 'QuickAction')] + STD, quick_actions=['Sample_Request__c.New_Iteration']))
+    actions=[('Sample_Request__c.New_Iteration', 'QuickAction')] + STD))
 
 # Competitor_Intel__c
 w(f'{FA}/layouts/Competitor_Intel__c-Apex Competitor Intel Layout.layout-meta.xml', layout_xml([
@@ -138,13 +138,13 @@ w(f'{FA}/layouts/Quote-Quote Layout.layout-meta.xml', layout_xml([
     section('Quote Information', [[('Required', 'Name'), ('Readonly', 'QuoteNumber'), 'OpportunityId', ('Readonly', 'AccountId'), 'ContactId', 'OwnerId'],
                                   ['Status', 'Quote_Version__c', 'Previous_Quote__c', 'Revision_Reason__c', 'Quote_Date__c', 'ExpirationDate']]),
     section('Commercial Terms (DEMO - validate with Apex)', [['Payment_Terms__c', 'Delivery_Terms__c'], ['Competitor_Name__c', 'Competitor_Price__c', 'Description']]),
-    section('Totals & Margin', [[('Readonly', 'Subtotal'), 'Discount', ('Readonly', 'TotalPrice'), ('Readonly', 'GrandTotal')],
+    section('Totals & Margin', [[('Readonly', 'Subtotal'), ('Readonly', 'Discount'), ('Readonly', 'TotalPrice'), ('Readonly', 'GrandTotal')],
                                 [('Readonly', 'Total_Cost__c'), ('Readonly', 'Total_Margin__c'), ('Readonly', 'Margin_Percent__c')]]),
     section('Approval', [[('Readonly', 'Requires_Approval__c'), 'Approval_Status__c'], ['Sales_Manager_Approver__c', 'Management_Approver__c']]),
     section('Contact & Address', [['Email', 'Phone', 'BillingAddress'], ['ShippingAddress']]),
     sysinfo(),
 ], ['RelatedQuoteLineItemList', ('Quote.Previous_Quote__c', ['NAME', 'Quote_Version__c', 'Status', 'TotalPrice', 'Discount', 'Approval_Status__c']), 'RelatedProcessHistoryList', 'RelatedActivityList', 'RelatedFileList'],
-    actions=[('Quote.Revise_Quote', 'QuickAction'), ('SubmitForApproval', 'StandardButton')] + STD, quick_actions=['Quote.Revise_Quote']))
+    actions=[('Quote.Revise_Quote', 'QuickAction'), ('SubmitForApproval', 'StandardButton')] + STD))
 
 # Order
 w(f'{FA}/layouts/Order-Order Layout.layout-meta.xml', layout_xml([
@@ -154,7 +154,7 @@ w(f'{FA}/layouts/Order-Order Layout.layout-meta.xml', layout_xml([
     section('Address Information', [['BillingAddress'], ['ShippingAddress']]),
     sysinfo(),
 ], ['RelatedOrderItemList', ('Integration_Log__c.Order__c', ['NAME', 'Direction__c', 'Status__c', 'Sent_Date_Time__c', 'Response_Summary__c']), ('Case.Order__c', ['CASES.CASE_NUMBER', 'CASES.SUBJECT', 'CASES.STATUS']), 'RelatedActivityList', 'RelatedHistoryList', 'RelatedFileList'],
-    actions=[('Order.Send_to_SAP', 'QuickAction'), ('Activate', 'StandardButton')] + STD, quick_actions=['Order.Send_to_SAP']))
+    actions=[('Order.Send_to_SAP', 'QuickAction'), ('Activate', 'StandardButton')] + STD))
 
 # Case
 w(f'{FA}/layouts/Case-Case Layout.layout-meta.xml', layout_xml([

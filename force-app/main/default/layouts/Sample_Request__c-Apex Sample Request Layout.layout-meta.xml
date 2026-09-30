@@ -236,11 +236,6 @@
             <sortOrder>4</sortOrder>
         </platformActionListItems>
     </platformActionList>
-    <quickActionList>
-        <quickActionListItems>
-            <quickActionName>Sample_Request__c.New_Iteration</quickActionName>
-        </quickActionListItems>
-    </quickActionList>
     <relatedLists>
         <fields>NAME</fields>
         <fields>Product__c</fields>

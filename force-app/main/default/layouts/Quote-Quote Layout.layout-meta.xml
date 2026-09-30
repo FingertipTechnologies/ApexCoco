@@ -101,7 +101,7 @@
                 <field>Subtotal</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Readonly</behavior>
                 <field>Discount</field>
             </layoutItems>
             <layoutItems>
@@ -235,11 +235,6 @@
             <sortOrder>5</sortOrder>
         </platformActionListItems>
     </platformActionList>
-    <quickActionList>
-        <quickActionListItems>
-            <quickActionName>Quote.Revise_Quote</quickActionName>
-        </quickActionListItems>
-    </quickActionList>
     <relatedLists>
         <relatedList>RelatedQuoteLineItemList</relatedList>
     </relatedLists>

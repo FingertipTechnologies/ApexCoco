@@ -161,11 +161,6 @@
             <sortOrder>5</sortOrder>
         </platformActionListItems>
     </platformActionList>
-    <quickActionList>
-        <quickActionListItems>
-            <quickActionName>Order.Send_to_SAP</quickActionName>
-        </quickActionListItems>
-    </quickActionList>
     <relatedLists>
         <relatedList>RelatedOrderItemList</relatedList>
     </relatedLists>

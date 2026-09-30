@@ -38,7 +38,7 @@
             <assignToReference>varNewLine.Discount</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Loop_Lines.Discount</elementReference>
+                <elementReference>f_NewDiscount</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -80,8 +80,14 @@
             <targetReference>Loop_Lines</targetReference>
         </connector>
     </assignments>
-    <description>Person 2 quote revisions. Quick action on Quote: creates version n+1 as a new Quote (same opportunity, terms and lines, with an optional new unit price and discount), links it to this version via Previous Quote, and marks this version Revised. Every version is kept for price history.</description>
+    <description>Person 2 quote revisions. Quick action on Quote: creates version n+1 as a new Quote (same opportunity, terms and lines, with an optional new unit price and line discount; the quote-level Discount is calculated from the lines), links it to this version via Previous Quote, and marks this version Revised. Every version is kept for price history.</description>
     <environments>Default</environments>
+    <formulas>
+        <name>f_NewDiscount</name>
+        <dataType>Number</dataType>
+        <expression>IF(ISBLANK({!New_Discount}), BLANKVALUE({!Loop_Lines.Discount}, 0), {!New_Discount})</expression>
+        <scale>2</scale>
+    </formulas>
     <formulas>
         <name>f_NewUnitPrice</name>
         <dataType>Currency</dataType>
@@ -193,12 +199,6 @@
             <field>Description</field>
             <value>
                 <elementReference>Get_Quote.Description</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Discount</field>
-            <value>
-                <elementReference>New_Discount</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -430,7 +430,7 @@
             <defaultValue>
                 <elementReference>Get_Quote.Discount</elementReference>
             </defaultValue>
-            <fieldText>Discount % on the new version</fieldText>
+            <fieldText>Discount % applied to every line of the new version</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
             <scale>2</scale>
