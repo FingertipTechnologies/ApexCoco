@@ -182,8 +182,10 @@ def region(name, items):
 def flexipage(label, sobject, main, sidebar, path=True):
     out = HDR + f'<FlexiPage xmlns="{NS}">\n'
     header = [comp('force:highlightsPanel', 'force_highlightsPanel')] + ([comp('runtime_sales_pathassistant:pathAssistant', 'runtime_sales_pathassistant_pathAssistant')] if path else [])
+    # related lists in the full-width header band render as tables; the main column keeps the record detail
+    header += [c for c in main if 'relatedListContainer' in c]
     out += region('header', header)
-    out += region('main', main)
+    out += region('main', [c for c in main if 'relatedListContainer' not in c])
     out += region('sidebar', sidebar)
     out += f'    <masterLabel>{X(label)}</masterLabel>\n    <sobjectType>{sobject}</sobjectType>\n    <template>\n        <name>flexipage:recordHomeTemplateDesktop</name>\n    </template>\n    <type>RecordPage</type>\n</FlexiPage>\n'
     return out
@@ -193,20 +195,17 @@ RLC = comp('force:relatedListContainer', 'force_relatedListContainer')
 ACT = comp('runtime_sales_activities:activityPanel', 'runtime_sales_activities_activityPanel')
 
 w(f'{FA}/flexipages/Apex_Sample_Request_Record_Page.flexipage-meta.xml', flexipage('Apex Sample Request Record Page', 'Sample_Request__c',
-    [DETAIL, rl('Parent_Sample_Request__c', 'Sample_Iterations__r', 'rl_iterations')], [ACT]))
+    [DETAIL, RLC], [ACT]))
 
 w(f'{FA}/flexipages/Apex_Opportunity_Record_Page.flexipage-meta.xml', flexipage('Apex Opportunity Record Page', 'Opportunity',
-    [DETAIL, rl('Opportunity__c', 'Sample_Requests__r', 'rl_samples'), rl('OpportunityId', 'Quotes', 'rl_quotes'), rl('Opportunity__c', 'Competitor_Intel__r', 'rl_competitors'),
-     rl('Opportunity__c', 'Customer_Onboardings__r', 'rl_onboarding'), rl('OpportunityId', 'Orders', 'rl_orders')], [ACT]))
+    [DETAIL, RLC], [ACT]))
 
 w(f'{FA}/flexipages/Apex_Account_Record_Page.flexipage-meta.xml', flexipage('Apex Account Record Page (Customer 360)', 'Account',
-    [DETAIL, rl('AccountId', 'Contacts', 'rl_contacts'), rl('AccountId', 'Opportunities', 'rl_opps'), rl('Account__c', 'Sample_Requests__r', 'rl_samples'),
-     rl('AccountId', 'Quotes', 'rl_quotes'), rl('AccountId', 'Orders', 'rl_orders'), rl('Account__c', 'Competitor_Intel__r', 'rl_competitors'),
-     rl('Account__c', 'Customer_Onboardings__r', 'rl_onboarding'), rl('AccountId', 'Cases', 'rl_cases')], [ACT], path=False))
+    [DETAIL, RLC], [ACT], path=False))
 
 w(f'{FA}/flexipages/Apex_Quote_Record_Page.flexipage-meta.xml', flexipage('Apex Quote Record Page', 'Quote',
-    [DETAIL, rl('QuoteId', 'QuoteLineItems', 'rl_lines'), rl('Previous_Quote__c', 'Revisions__r', 'rl_revisions'), RLC], [ACT], path=False))
+    [DETAIL, RLC], [ACT], path=False))
 
 w(f'{FA}/flexipages/Apex_Order_Record_Page.flexipage-meta.xml', flexipage('Apex Order Record Page', 'Order',
-    [DETAIL, rl('OrderId', 'OrderItems', 'rl_items'), rl('Order__c', 'Integration_Logs__r', 'rl_logs'), rl('Order__c', 'Cases', 'rl_cases')], [ACT], path=False))
+    [DETAIL, RLC], [ACT], path=False))
 print('ui written')
