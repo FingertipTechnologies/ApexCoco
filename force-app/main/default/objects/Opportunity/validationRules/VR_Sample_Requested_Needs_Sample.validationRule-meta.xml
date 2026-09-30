@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Sample_Requested_Needs_Sample</fullName>
+    <active>true</active>
+    <description>Stage = Sample Requested requires at least one Sample Request.</description>
+    <errorConditionFormula>NOT(ISNEW()) &amp;&amp; ISCHANGED(StageName) &amp;&amp; ISPICKVAL(StageName, "Sample Requested") &amp;&amp; Sample_Request_Count__c = 0</errorConditionFormula>
+    <errorDisplayField>StageName</errorDisplayField>
+    <errorMessage>Create a Sample Request for this opportunity before setting the stage to Sample Requested.</errorMessage>
+</ValidationRule>

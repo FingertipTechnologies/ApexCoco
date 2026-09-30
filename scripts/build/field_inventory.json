@@ -1,0 +1,247 @@
+{
+ "fields": {
+  "Sample_Request__c": [
+   "Account__c",
+   "Contact__c",
+   "Lead__c",
+   "Opportunity__c",
+   "Product__c",
+   "Specification__c",
+   "Sample_Quantity__c",
+   "Sample_Unit__c",
+   "Batch_Number__c",
+   "Requested_Date__c",
+   "Prepared_Date__c",
+   "Dispatch_Date__c",
+   "Expected_Delivery__c",
+   "Courier_Partner__c",
+   "Tracking_Number__c",
+   "Tracking_Link__c",
+   "Status__c",
+   "Feedback_Due_Date__c",
+   "Customer_Feedback__c",
+   "Feedback_Received_Date__c",
+   "Result__c",
+   "Rejection_Reason__c",
+   "Approval_Date__c",
+   "Iteration_Number__c",
+   "Parent_Sample_Request__c",
+   "Next_Action__c",
+   "Next_Action_Date__c",
+   "Closure_Reason__c",
+   "Notes__c",
+   "Days_Since_Request__c",
+   "Days_Pending_Feedback__c",
+   "Is_Open__c"
+  ],
+  "Competitor_Intel__c": [
+   "Competitor_Name__c",
+   "Account__c",
+   "Opportunity__c",
+   "Product__c",
+   "Quoted_Price__c",
+   "Price_Unit__c",
+   "Customer_Preference__c",
+   "Strength__c",
+   "Weakness__c",
+   "Source__c",
+   "Intel_Date__c",
+   "Notes__c"
+  ],
+  "Customer_Onboarding__c": [
+   "Account__c",
+   "Opportunity__c",
+   "Status__c",
+   "Due_Date__c",
+   "Completed_Date__c",
+   "Company_Information_Status__c",
+   "Company_Information_Owner__c",
+   "Finance_Status__c",
+   "Finance_Owner__c",
+   "Quality_Status__c",
+   "Quality_Owner__c",
+   "Logistics_Status__c",
+   "Logistics_Owner__c",
+   "Compliance_Status__c",
+   "Compliance_Owner__c",
+   "Completion_Percent__c",
+   "Notes__c"
+  ],
+  "Integration_Log__c": [
+   "Order__c",
+   "Opportunity__c",
+   "Record_Type_Name__c",
+   "Salesforce_Record_Id__c",
+   "Target_System__c",
+   "Direction__c",
+   "Integration_Mode__c",
+   "Status__c",
+   "Payload_Summary__c",
+   "Sent_Date_Time__c",
+   "Response_Summary__c",
+   "Error_Message__c",
+   "Retry_Count__c"
+  ],
+  "Opportunity": [
+   "Opportunity_Type__c",
+   "Primary_Product__c",
+   "Expected_Annual_Volume__c",
+   "Volume_Unit__c",
+   "Purchase_Timeline__c",
+   "Current_Supplier__c",
+   "Competitor__c",
+   "Sample_Approved_Date__c",
+   "Technical_Evaluation_Status__c",
+   "Customer_Approval_Date__c",
+   "PO_Number__c",
+   "PO_Date__c",
+   "PO_Quantity__c",
+   "Loss_Reason__c",
+   "Loss_Details__c",
+   "Next_Action__c",
+   "Next_Action_Date__c",
+   "Sample_Request_Count__c",
+   "Latest_Sample_Status__c",
+   "Quote_Count__c",
+   "Latest_Quote_Price__c",
+   "Days_Since_Last_Activity__c",
+   "Is_Stale__c"
+  ],
+  "Account": [
+   "Customer_Type__c",
+   "Business_Type__c",
+   "Market__c",
+   "Onboarding_Status__c",
+   "Last_Purchase_Date__c",
+   "Last_Order_Value__c",
+   "Last_Purchased_Product__c",
+   "Average_Reorder_Interval_Days__c",
+   "Expected_Reorder_Date__c",
+   "Orders_Last_12_Months__c",
+   "Reorder_Status__c"
+  ],
+  "Quote": [
+   "Quote_Version__c",
+   "Previous_Quote__c",
+   "Revision_Reason__c",
+   "Quote_Date__c",
+   "Payment_Terms__c",
+   "Delivery_Terms__c",
+   "Competitor_Name__c",
+   "Competitor_Price__c",
+   "Approval_Status__c",
+   "Requires_Approval__c",
+   "Sales_Manager_Approver__c",
+   "Management_Approver__c",
+   "Total_Cost__c",
+   "Total_Margin__c",
+   "Margin_Percent__c"
+  ],
+  "QuoteLineItem": [
+   "Account__c",
+   "Unit_Cost__c",
+   "Line_Cost__c",
+   "Margin_Percent__c",
+   "Last_Quoted_Price__c",
+   "Last_Quoted_Date__c",
+   "Supply_Period_From__c",
+   "Supply_Period_To__c"
+  ],
+  "Order": [
+   "SAP_Status__c",
+   "SAP_Order_Number__c",
+   "SAP_Invoice_Number__c",
+   "SAP_Sent_Date_Time__c",
+   "SAP_Last_Response__c",
+   "Integration_Mode__c"
+  ],
+  "Case": [
+   "Complaint_Type__c",
+   "Product__c",
+   "Batch_Number__c",
+   "Order__c",
+   "Resolution__c"
+  ],
+  "Product2": [
+   "Standard_Cost__c",
+   "Unit_of_Measure__c"
+  ],
+  "Lead": [
+   "Customer_Type__c",
+   "Business_Type__c",
+   "Interested_Product__c",
+   "Expected_Annual_Volume__c",
+   "Volume_Unit__c",
+   "Purchase_Timeline__c",
+   "Current_Supplier__c",
+   "Competitor__c",
+   "Potential_Rating__c",
+   "Lead_Score__c",
+   "Sample_Requested__c",
+   "Sample_Request_Date__c",
+   "Qualification_Notes__c",
+   "Next_Action__c",
+   "Next_Follow_up_Date__c"
+  ]
+ },
+ "readonly": {
+  "Sample_Request__c": [
+   "Tracking_Link__c",
+   "Days_Since_Request__c",
+   "Days_Pending_Feedback__c",
+   "Is_Open__c"
+  ],
+  "Competitor_Intel__c": [],
+  "Customer_Onboarding__c": [
+   "Completion_Percent__c"
+  ],
+  "Integration_Log__c": [],
+  "Opportunity": [
+   "Days_Since_Last_Activity__c",
+   "Is_Stale__c"
+  ],
+  "Account": [
+   "Reorder_Status__c"
+  ],
+  "Quote": [
+   "Requires_Approval__c",
+   "Total_Cost__c",
+   "Total_Margin__c",
+   "Margin_Percent__c"
+  ],
+  "QuoteLineItem": [
+   "Margin_Percent__c"
+  ],
+  "Order": [],
+  "Case": [],
+  "Product2": [],
+  "Lead": []
+ },
+ "required": {
+  "Sample_Request__c": [
+   "Account__c",
+   "Contact__c",
+   "Product__c",
+   "Sample_Quantity__c",
+   "Sample_Unit__c",
+   "Requested_Date__c",
+   "Status__c",
+   "Iteration_Number__c"
+  ],
+  "Competitor_Intel__c": [
+   "Competitor_Name__c"
+  ],
+  "Customer_Onboarding__c": [
+   "Account__c"
+  ],
+  "Integration_Log__c": [],
+  "Opportunity": [],
+  "Account": [],
+  "Quote": [],
+  "QuoteLineItem": [],
+  "Order": [],
+  "Case": [],
+  "Product2": [],
+  "Lead": []
+ }
+}

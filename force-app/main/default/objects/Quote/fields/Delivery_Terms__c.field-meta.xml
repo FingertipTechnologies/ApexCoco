@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Delivery_Terms__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>DEMO / TO VALIDATE with Apex.</inlineHelpText>
+    <label>Delivery Terms (DEMO)</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>FOB</fullName>
+                <default>false</default>
+                <label>FOB</label>
+            </value>
+            <value>
+                <fullName>CIF</fullName>
+                <default>false</default>
+                <label>CIF</label>
+            </value>
+            <value>
+                <fullName>CFR</fullName>
+                <default>false</default>
+                <label>CFR</label>
+            </value>
+            <value>
+                <fullName>EXW</fullName>
+                <default>false</default>
+                <label>EXW</label>
+            </value>
+            <value>
+                <fullName>DDP</fullName>
+                <default>false</default>
+                <label>DDP</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

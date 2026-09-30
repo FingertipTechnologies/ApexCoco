@@ -1,0 +1,11 @@
+{
+  "orgName": "Apex Coco Person 2 Demo",
+  "edition": "Developer",
+  "features": ["Quotes", "EnableSetPasswordInApi"],
+  "settings": {
+    "quoteSettings": { "enableQuote": true },
+    "orderSettings": { "enableOrders": true },
+    "pathAssistantSettings": { "pathAssistantEnabled": true },
+    "lightningExperienceSettings": { "enableS1DesktopEnabled": true }
+  }
+}

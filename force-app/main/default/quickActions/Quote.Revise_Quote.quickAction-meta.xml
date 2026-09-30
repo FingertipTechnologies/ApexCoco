@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Clones the quote and its lines into a new version and marks this version Revised. History is preserved.</description>
+    <flowDefinition>Apex_Quote_Revise</flowDefinition>
+    <label>Revise Quote</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <type>Flow</type>
+</QuickAction>

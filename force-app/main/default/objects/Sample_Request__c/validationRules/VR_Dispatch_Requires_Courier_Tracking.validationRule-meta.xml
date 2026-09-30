@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Dispatch_Requires_Courier_Tracking</fullName>
+    <active>true</active>
+    <description>VR-Sample-Dispatch-Tracking</description>
+    <errorConditionFormula>ISPICKVAL(Status__c, "Dispatched") &amp;&amp; (ISBLANK(Courier_Partner__c) || ISBLANK(Tracking_Number__c))</errorConditionFormula>
+    <errorDisplayField>Tracking_Number__c</errorDisplayField>
+    <errorMessage>Courier partner and tracking number are required before a sample can be marked Dispatched.</errorMessage>
+</ValidationRule>

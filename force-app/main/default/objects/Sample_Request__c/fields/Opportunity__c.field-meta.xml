@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opportunity__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Commercial context. Populated automatically by the flow Apex_Sample_Request_After_Create when left blank.</description>
+    <externalId>false</externalId>
+    <label>Opportunity</label>
+    <referenceTo>Opportunity</referenceTo>
+    <relationshipLabel>Sample Requests</relationshipLabel>
+    <relationshipName>Sample_Requests</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>Lookup</type>
+</CustomField>

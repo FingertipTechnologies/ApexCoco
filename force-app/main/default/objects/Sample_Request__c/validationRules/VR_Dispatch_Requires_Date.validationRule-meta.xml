@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Dispatch_Requires_Date</fullName>
+    <active>true</active>
+    <description>VR-Sample-Dispatch-Date</description>
+    <errorConditionFormula>ISPICKVAL(Status__c, "Dispatched") &amp;&amp; ISBLANK(Dispatch_Date__c)</errorConditionFormula>
+    <errorDisplayField>Dispatch_Date__c</errorDisplayField>
+    <errorMessage>Dispatch date is required when the status is Dispatched.</errorMessage>
+</ValidationRule>

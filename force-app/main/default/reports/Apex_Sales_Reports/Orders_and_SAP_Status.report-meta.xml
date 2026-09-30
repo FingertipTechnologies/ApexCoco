@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Order$OrderNumber</field>
+    </columns>
+    <columns>
+        <field>Order$Status</field>
+    </columns>
+    <columns>
+        <field>Order$EffectiveDate</field>
+    </columns>
+    <columns>
+        <field>Order$PoNumber</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Order$TotalAmount</field>
+    </columns>
+    <columns>
+        <field>Order$SAP_Order_Number__c</field>
+    </columns>
+    <columns>
+        <field>Order$SAP_Invoice_Number__c</field>
+    </columns>
+    <columns>
+        <field>Order$Integration_Mode__c</field>
+    </columns>
+    <description>Order visibility with the simulated SAP status. Integration is a labelled mock.</description>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Order$SAP_Status__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Orders and SAP Status (DEMO)</name>
+    <reportType>Apex_Orders__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Order$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

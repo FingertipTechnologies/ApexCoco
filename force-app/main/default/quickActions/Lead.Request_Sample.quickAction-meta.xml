@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Person 2 entry point. Converts the qualified Lead (Account + Contact), finds or creates the Opportunity at Sample Requested and creates Sample Request #1.</description>
+    <flowDefinition>Apex_Lead_Request_Sample</flowDefinition>
+    <label>Request Sample</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <type>Flow</type>
+</QuickAction>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <assignments>
+        <name>Apply_Defaults</name>
+        <label>Apply defaults and status sync</label>
+        <locationX>176</locationX>
+        <locationY>350</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Requested_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_RequestedDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Iteration_Number__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_Iteration</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Account__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_Account</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Contact__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_Contact</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Opportunity__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_Opportunity</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Product__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_Product</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_Status</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Result__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_Result</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Prepared_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_PreparedDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Dispatch_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_DispatchDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Feedback_Due_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_FeedbackDue</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Feedback_Received_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_FeedbackReceivedDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Approval_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_ApprovalDate</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>Person 2. Before-save defaults for Sample Request: requested date, iteration number from the parent sample, inherit account/contact/opportunity/product from the parent iteration, status &lt;-&gt; result synchronisation (Feedback Received + Result = Approved/Rejected moves the status), milestone dates, and Approval Pending for sample quantities above the DEMO limit.</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>f_Account</name>
+        <dataType>String</dataType>
+        <expression>IF(AND(ISBLANK({!$Record.Account__c}), NOT(ISBLANK({!$Record.Parent_Sample_Request__c}))), {!$Record.Parent_Sample_Request__r.Account__c}, {!$Record.Account__c})</expression>
+    </formulas>
+    <formulas>
+        <name>f_ApprovalDate</name>
+        <dataType>Date</dataType>
+        <expression>IF(AND(ISBLANK({!$Record.Approval_Date__c}), OR(ISPICKVAL({!$Record.Status__c}, "Approved"), AND(ISPICKVAL({!$Record.Status__c}, "Feedback Received"), ISPICKVAL({!$Record.Result__c}, "Approved")))), TODAY(), {!$Record.Approval_Date__c})</expression>
+    </formulas>
+    <formulas>
+        <name>f_Contact</name>
+        <dataType>String</dataType>
+        <expression>IF(AND(ISBLANK({!$Record.Contact__c}), NOT(ISBLANK({!$Record.Parent_Sample_Request__c}))), {!$Record.Parent_Sample_Request__r.Contact__c}, {!$Record.Contact__c})</expression>
+    </formulas>
+    <formulas>
+        <name>f_DispatchDate</name>
+        <dataType>Date</dataType>
+        <expression>IF(AND(ISBLANK({!$Record.Dispatch_Date__c}), OR(ISPICKVAL({!$Record.Status__c}, "Dispatched"), ISPICKVAL({!$Record.Status__c}, "Customer Testing"))), TODAY(), {!$Record.Dispatch_Date__c})</expression>
+    </formulas>
+    <formulas>
+        <name>f_FeedbackDue</name>
+        <dataType>Date</dataType>
+        <expression>IF(AND(ISBLANK({!$Record.Feedback_Due_Date__c}), OR(ISPICKVAL({!$Record.Status__c}, "Dispatched"), ISPICKVAL({!$Record.Status__c}, "Customer Testing"))), TODAY() + {!Get_Settings.Feedback_Follow_Up_Days__c}, {!$Record.Feedback_Due_Date__c})</expression>
+    </formulas>
+    <formulas>
+        <name>f_FeedbackReceivedDate</name>
+        <dataType>Date</dataType>
+        <expression>IF(AND(ISBLANK({!$Record.Feedback_Received_Date__c}), OR(ISPICKVAL({!$Record.Status__c}, "Feedback Received"), ISPICKVAL({!$Record.Status__c}, "Approved"), ISPICKVAL({!$Record.Status__c}, "Rejected"))), TODAY(), {!$Record.Feedback_Received_Date__c})</expression>
+    </formulas>
+    <formulas>
+        <name>f_Iteration</name>
+        <dataType>Number</dataType>
+        <expression>IF(ISBLANK({!$Record.Iteration_Number__c}) || {!$Record.Iteration_Number__c} = 0, IF(ISBLANK({!$Record.Parent_Sample_Request__c}), 1, {!$Record.Parent_Sample_Request__r.Iteration_Number__c} + 1), {!$Record.Iteration_Number__c})</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>f_Opportunity</name>
+        <dataType>String</dataType>
+        <expression>IF(AND(ISBLANK({!$Record.Opportunity__c}), NOT(ISBLANK({!$Record.Parent_Sample_Request__c}))), {!$Record.Parent_Sample_Request__r.Opportunity__c}, {!$Record.Opportunity__c})</expression>
+    </formulas>
+    <formulas>
+        <name>f_PreparedDate</name>
+        <dataType>Date</dataType>
+        <expression>IF(AND(ISBLANK({!$Record.Prepared_Date__c}), OR(ISPICKVAL({!$Record.Status__c}, "Prepared"), ISPICKVAL({!$Record.Status__c}, "Dispatched"))), TODAY(), {!$Record.Prepared_Date__c})</expression>
+    </formulas>
+    <formulas>
+        <name>f_Product</name>
+        <dataType>String</dataType>
+        <expression>IF(AND(ISBLANK({!$Record.Product__c}), NOT(ISBLANK({!$Record.Parent_Sample_Request__c}))), {!$Record.Parent_Sample_Request__r.Product__c}, {!$Record.Product__c})</expression>
+    </formulas>
+    <formulas>
+        <name>f_RequestedDate</name>
+        <dataType>Date</dataType>
+        <expression>IF(ISBLANK({!$Record.Requested_Date__c}), TODAY(), {!$Record.Requested_Date__c})</expression>
+    </formulas>
+    <formulas>
+        <name>f_Result</name>
+        <dataType>String</dataType>
+        <expression>IF(ISPICKVAL({!$Record.Status__c}, "Approved"), "Approved", IF(ISPICKVAL({!$Record.Status__c}, "Rejected"), "Rejected", IF(ISBLANK(TEXT({!$Record.Result__c})), "Pending", TEXT({!$Record.Result__c}))))</expression>
+    </formulas>
+    <formulas>
+        <name>f_Status</name>
+        <dataType>String</dataType>
+        <expression>IF(AND(ISNEW(), ISPICKVAL({!$Record.Status__c}, "Requested"), ISPICKVAL({!$Record.Sample_Unit__c}, "KG"), NOT(ISBLANK({!Get_Settings.Sample_Approval_Quantity_Limit_KG__c})), {!$Record.Sample_Quantity__c} &gt; {!Get_Settings.Sample_Approval_Quantity_Limit_KG__c}), "Approval Pending",
+IF(ISPICKVAL({!$Record.Status__c}, "Approved"), "Approved",
+IF(ISPICKVAL({!$Record.Status__c}, "Rejected"), "Rejected",
+IF(AND(ISPICKVAL({!$Record.Status__c}, "Feedback Received"), ISPICKVAL({!$Record.Result__c}, "Approved")), "Approved",
+IF(AND(ISPICKVAL({!$Record.Status__c}, "Feedback Received"), ISPICKVAL({!$Record.Result__c}, "Rejected")), "Rejected",
+TEXT({!$Record.Status__c}))))))</expression>
+    </formulas>
+    <interviewLabel>Apex Sample Request Before Save {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Apex Sample Request - Before Save</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Settings</name>
+        <label>Get Apex Demo Settings</label>
+        <locationX>176</locationX>
+        <locationY>230</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Apply_Defaults</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Default</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Apex_Demo_Setting__mdt</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Settings</targetReference>
+        </connector>
+        <object>Sample_Request__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

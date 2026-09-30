@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Purchase_Timeline__c</fullName>
+    <externalId>false</externalId>
+    <label>Purchase Timeline</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>&lt;3 Months</fullName>
+                <default>false</default>
+                <label>&lt;3 Months</label>
+            </value>
+            <value>
+                <fullName>3-6 Months</fullName>
+                <default>false</default>
+                <label>3-6 Months</label>
+            </value>
+            <value>
+                <fullName>6-12 Months</fullName>
+                <default>false</default>
+                <label>6-12 Months</label>
+            </value>
+            <value>
+                <fullName>&gt;12 Months</fullName>
+                <default>false</default>
+                <label>&gt;12 Months</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

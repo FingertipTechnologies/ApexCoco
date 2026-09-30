@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Opportunity_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Opportunity Type</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New Business</fullName>
+                <default>true</default>
+                <label>New Business</label>
+            </value>
+            <value>
+                <fullName>Repeat</fullName>
+                <default>false</default>
+                <label>Repeat</label>
+            </value>
+            <value>
+                <fullName>Upsell</fullName>
+                <default>false</default>
+                <label>Upsell</label>
+            </value>
+            <value>
+                <fullName>Cross-sell</fullName>
+                <default>false</default>
+                <label>Cross-sell</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

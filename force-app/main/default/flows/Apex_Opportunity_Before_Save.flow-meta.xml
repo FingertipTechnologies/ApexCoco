@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <assignments>
+        <name>Apply_Defaults</name>
+        <label>Apply stage defaults</label>
+        <locationX>176</locationX>
+        <locationY>230</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Customer_Approval_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_CustomerApprovalDate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Opportunity_Type__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_OpportunityType</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Sample_Request_Count__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_SampleCount</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Quote_Count__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_QuoteCount</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>Person 2. Before-save defaults on Opportunity: Customer Approval Date when the stage reaches Customer Approval, Opportunity Type default, and zero defaults for the flow-maintained counters.</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>f_CustomerApprovalDate</name>
+        <dataType>Date</dataType>
+        <expression>IF(AND(ISBLANK({!$Record.Customer_Approval_Date__c}), OR(ISPICKVAL({!$Record.StageName}, "Customer Approval"), ISPICKVAL({!$Record.StageName}, "PO Received"), ISPICKVAL({!$Record.StageName}, "Closed Won"))), TODAY(), {!$Record.Customer_Approval_Date__c})</expression>
+    </formulas>
+    <formulas>
+        <name>f_OpportunityType</name>
+        <dataType>String</dataType>
+        <expression>IF(ISBLANK(TEXT({!$Record.Opportunity_Type__c})), "New Business", TEXT({!$Record.Opportunity_Type__c}))</expression>
+    </formulas>
+    <formulas>
+        <name>f_QuoteCount</name>
+        <dataType>Number</dataType>
+        <expression>BLANKVALUE({!$Record.Quote_Count__c}, 0)</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>f_SampleCount</name>
+        <dataType>Number</dataType>
+        <expression>BLANKVALUE({!$Record.Sample_Request_Count__c}, 0)</expression>
+        <scale>0</scale>
+    </formulas>
+    <interviewLabel>Apex Opportunity Before Save {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Apex Opportunity - Before Save</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Apply_Defaults</targetReference>
+        </connector>
+        <object>Opportunity</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

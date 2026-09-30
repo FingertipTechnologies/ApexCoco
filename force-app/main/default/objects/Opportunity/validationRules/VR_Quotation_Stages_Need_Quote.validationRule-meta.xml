@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Quotation_Stages_Need_Quote</fullName>
+    <active>true</active>
+    <errorConditionFormula>CASE(TEXT(StageName), "Quotation Sent", 1, "Negotiation", 1, "Customer Approval", 1, 0) = 1 &amp;&amp; Quote_Count__c = 0</errorConditionFormula>
+    <errorDisplayField>StageName</errorDisplayField>
+    <errorMessage>Create a Quote for this opportunity before moving to Quotation Sent, Negotiation or Customer Approval.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sales_Manager_Approver__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <inlineHelpText>Set automatically by flow: owner's manager, or the owner when no manager is set.</inlineHelpText>
+    <label>Sales Manager Approver</label>
+    <referenceTo>User</referenceTo>
+    <relationshipLabel>Quotes (Sales Manager Approver)</relationshipLabel>
+    <relationshipName>Sales_Manager_Approval_Quotes</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

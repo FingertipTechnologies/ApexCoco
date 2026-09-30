@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Feedback_Requires_Result</fullName>
+    <active>true</active>
+    <description>VR-Sample-Result</description>
+    <errorConditionFormula>ISPICKVAL(Status__c, "Feedback Received") &amp;&amp; (ISBLANK(TEXT(Result__c)) || ISPICKVAL(Result__c, "Pending"))</errorConditionFormula>
+    <errorDisplayField>Result__c</errorDisplayField>
+    <errorMessage>Select the sample result (Approved or Rejected) when feedback is received.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Integration_Mode__c</fullName>
+    <externalId>false</externalId>
+    <label>Integration Mode (DEMO)</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Mock (Demo)</fullName>
+                <default>true</default>
+                <label>Mock (Demo)</label>
+            </value>
+            <value>
+                <fullName>Live</fullName>
+                <default>false</default>
+                <label>Live</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

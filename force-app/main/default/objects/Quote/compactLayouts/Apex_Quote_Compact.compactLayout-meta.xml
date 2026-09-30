@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Apex_Quote_Compact</fullName>
+    <fields>Name</fields>
+    <fields>QuoteNumber</fields>
+    <fields>Quote_Version__c</fields>
+    <fields>Status</fields>
+    <fields>TotalPrice</fields>
+    <fields>Discount</fields>
+    <fields>Margin_Percent__c</fields>
+    <fields>Approval_Status__c</fields>
+    <fields>ExpirationDate</fields>
+    <label>Apex Quote Compact</label>
+</CompactLayout>

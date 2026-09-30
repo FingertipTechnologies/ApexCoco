@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <customErrors>
+        <name>Fault_Error</name>
+        <label>Show fault</label>
+        <locationX>440</locationX>
+        <locationY>230</locationY>
+        <customErrorMessages>
+            <errorMessage>Quote line automation could not update the opportunity: {!$Flow.FaultMessage}</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <description>Person 2. After a Quote Line Item is saved, the opportunity's Latest Quote Price is refreshed so the Path and highlights panel show the current commercial position.</description>
+    <environments>Default</environments>
+    <interviewLabel>Apex Quote Line Item After Save {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Apex Quote Line Item - After Save</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_Opportunity_Price</name>
+        <label>Update opportunity latest quote price</label>
+        <locationX>176</locationX>
+        <locationY>110</locationY>
+        <faultConnector>
+            <targetReference>Fault_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Quote.OpportunityId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Latest_Quote_Price__c</field>
+            <value>
+                <elementReference>$Record.UnitPrice</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Update_Opportunity_Price</targetReference>
+        </connector>
+        <object>QuoteLineItem</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Specification__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Spec or grade requested by the customer. Change it on the next iteration when the customer asks for an adjustment.</inlineHelpText>
+    <label>Specification / Grade</label>
+    <length>255</length>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>Text</type>
+</CustomField>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Configurable DEMO thresholds for the Apex Person 2 build. Every value is marked DEMO / TO VALIDATE with Apex.</description>
+    <label>Apex Demo Setting</label>
+    <pluralLabel>Apex Demo Settings</pluralLabel>
+    <visibility>Public</visibility>
+</CustomObject>

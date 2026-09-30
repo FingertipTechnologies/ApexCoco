@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Apex_Order_Compact</fullName>
+    <fields>OrderNumber</fields>
+    <fields>AccountId</fields>
+    <fields>PoNumber</fields>
+    <fields>Status</fields>
+    <fields>TotalAmount</fields>
+    <fields>SAP_Status__c</fields>
+    <fields>SAP_Order_Number__c</fields>
+    <fields>SAP_Invoice_Number__c</fields>
+    <label>Apex Order Compact</label>
+</CompactLayout>

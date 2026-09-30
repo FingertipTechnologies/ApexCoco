@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>ACCOUNT_NAME</field>
+    </columns>
+    <columns>
+        <field>Account.Customer_Type__c</field>
+    </columns>
+    <columns>
+        <field>Account.Market__c</field>
+    </columns>
+    <columns>
+        <field>Account.Last_Purchase_Date__c</field>
+    </columns>
+    <columns>
+        <field>Account.Last_Order_Value__c</field>
+    </columns>
+    <columns>
+        <field>Account.Average_Reorder_Interval_Days__c</field>
+    </columns>
+    <columns>
+        <field>Account.Expected_Reorder_Date__c</field>
+    </columns>
+    <columns>
+        <field>Account.Orders_Last_12_Months__c</field>
+    </columns>
+    <description>Customers due or overdue for a repeat order, with cadence and last purchase.</description>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.Reorder_Status__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Repeat Business - Reorder Status</name>
+    <reportType>AccountList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

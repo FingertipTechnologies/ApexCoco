@@ -1,0 +1,10 @@
+{
+  "packageDirectories": [
+    { "path": "shared-lead-contract", "default": false },
+    { "path": "force-app", "default": true }
+  ],
+  "name": "ApexCoco-Person2-SampleToOrder",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "61.0"
+}

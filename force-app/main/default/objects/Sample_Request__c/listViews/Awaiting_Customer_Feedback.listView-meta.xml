@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Awaiting_Customer_Feedback</fullName>
+    <columns>NAME</columns>
+    <columns>Account__c</columns>
+    <columns>Product__c</columns>
+    <columns>Iteration_Number__c</columns>
+    <columns>Status__c</columns>
+    <columns>Result__c</columns>
+    <columns>Requested_Date__c</columns>
+    <columns>Dispatch_Date__c</columns>
+    <columns>Tracking_Number__c</columns>
+    <columns>Next_Action__c</columns>
+    <columns>Days_Pending_Feedback__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Dispatched,Customer Testing</value>
+    </filters>
+    <label>Awaiting Customer Feedback</label>
+</ListView>

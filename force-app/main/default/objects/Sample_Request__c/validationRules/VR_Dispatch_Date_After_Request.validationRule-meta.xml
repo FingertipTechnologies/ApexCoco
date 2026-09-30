@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Dispatch_Date_After_Request</fullName>
+    <active>true</active>
+    <description>VR-Sample-Dates</description>
+    <errorConditionFormula>NOT(ISBLANK(Dispatch_Date__c)) &amp;&amp; NOT(ISBLANK(Requested_Date__c)) &amp;&amp; Dispatch_Date__c &lt; Requested_Date__c</errorConditionFormula>
+    <errorDisplayField>Dispatch_Date__c</errorDisplayField>
+    <errorMessage>Dispatch date cannot be earlier than the requested date.</errorMessage>
+</ValidationRule>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Closed_Lost_Needs_Reason</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL(StageName, "Closed Lost") &amp;&amp; ISBLANK(TEXT(Loss_Reason__c))</errorConditionFormula>
+    <errorDisplayField>Loss_Reason__c</errorDisplayField>
+    <errorMessage>Select a Loss Reason before closing the opportunity as lost, so the relationship can be re-engaged later.</errorMessage>
+</ValidationRule>

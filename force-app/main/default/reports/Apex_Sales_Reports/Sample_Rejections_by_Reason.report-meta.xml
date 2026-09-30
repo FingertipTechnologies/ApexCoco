@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>Sample_Request__c.Account__c</field>
+    </columns>
+    <columns>
+        <field>Sample_Request__c.Product__c</field>
+    </columns>
+    <columns>
+        <field>Sample_Request__c.Iteration_Number__c</field>
+    </columns>
+    <columns>
+        <field>Sample_Request__c.Customer_Feedback__c</field>
+    </columns>
+    <columns>
+        <field>Sample_Request__c.Next_Action__c</field>
+    </columns>
+    <description>Why samples are rejected, to drive specification improvements.</description>
+    <filter>
+        <criteriaItems>
+            <column>Sample_Request__c.Result__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Rejected</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Sample_Request__c.Rejection_Reason__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Sample Rejections by Reason</name>
+    <reportType>CustomEntity$Sample_Request__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

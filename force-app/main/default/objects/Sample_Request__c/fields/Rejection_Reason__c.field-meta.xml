@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rejection_Reason__c</fullName>
+    <externalId>false</externalId>
+    <label>Rejection Reason</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Texture / Specification</fullName>
+                <default>false</default>
+                <label>Texture / Specification</label>
+            </value>
+            <value>
+                <fullName>Taste</fullName>
+                <default>false</default>
+                <label>Taste</label>
+            </value>
+            <value>
+                <fullName>Colour</fullName>
+                <default>false</default>
+                <label>Colour</label>
+            </value>
+            <value>
+                <fullName>Moisture</fullName>
+                <default>false</default>
+                <label>Moisture</label>
+            </value>
+            <value>
+                <fullName>Particle Size</fullName>
+                <default>false</default>
+                <label>Particle Size</label>
+            </value>
+            <value>
+                <fullName>Fat Content</fullName>
+                <default>false</default>
+                <label>Fat Content</label>
+            </value>
+            <value>
+                <fullName>Microbiology</fullName>
+                <default>false</default>
+                <label>Microbiology</label>
+            </value>
+            <value>
+                <fullName>Packaging</fullName>
+                <default>false</default>
+                <label>Packaging</label>
+            </value>
+            <value>
+                <fullName>Price</fullName>
+                <default>false</default>
+                <label>Price</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

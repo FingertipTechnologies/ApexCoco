@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Requires_Approval__c</fullName>
+    <externalId>false</externalId>
+    <formula>BLANKVALUE(Discount, 0) &gt; $CustomMetadata.Apex_Demo_Setting__mdt.Default.Discount_Threshold_Percent__c</formula>
+    <label>Requires Approval</label>
+    <type>Checkbox</type>
+</CustomField>

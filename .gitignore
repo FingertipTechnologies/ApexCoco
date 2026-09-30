@@ -1,0 +1,7 @@
+.sf/
+.sfdx/
+.vscode/
+node_modules/
+*.log
+.DS_Store
+deploy-output/

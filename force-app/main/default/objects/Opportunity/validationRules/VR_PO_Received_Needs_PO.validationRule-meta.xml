@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_PO_Received_Needs_PO</fullName>
+    <active>true</active>
+    <errorConditionFormula>CASE(TEXT(StageName), "PO Received", 1, "Closed Won", 1, 0) = 1 &amp;&amp; (ISBLANK(PO_Number__c) || ISBLANK(PO_Date__c))</errorConditionFormula>
+    <errorDisplayField>PO_Number__c</errorDisplayField>
+    <errorMessage>PO Number and PO Date are required for PO Received and Closed Won.</errorMessage>
+</ValidationRule>

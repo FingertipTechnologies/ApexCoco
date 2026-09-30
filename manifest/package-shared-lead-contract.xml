@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>Lead.Business_Type__c</members>
+        <members>Lead.Competitor__c</members>
+        <members>Lead.Current_Supplier__c</members>
+        <members>Lead.Customer_Type__c</members>
+        <members>Lead.Expected_Annual_Volume__c</members>
+        <members>Lead.Interested_Product__c</members>
+        <members>Lead.Lead_Score__c</members>
+        <members>Lead.Next_Action__c</members>
+        <members>Lead.Next_Follow_up_Date__c</members>
+        <members>Lead.Potential_Rating__c</members>
+        <members>Lead.Purchase_Timeline__c</members>
+        <members>Lead.Qualification_Notes__c</members>
+        <members>Lead.Sample_Request_Date__c</members>
+        <members>Lead.Sample_Requested__c</members>
+        <members>Lead.Volume_Unit__c</members>
+        <name>CustomField</name>
+    </types>
+    <version>61.0</version>
+</Package>

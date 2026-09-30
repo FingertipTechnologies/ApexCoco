@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <assignments>
+        <name>Apply_Status</name>
+        <label>Derive status from checklist</label>
+        <locationX>176</locationX>
+        <locationY>110</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_Status</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Completed_Date__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>f_CompletedDate</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>Person 2. Derives the onboarding Status from the five checklist areas: all Complete/Not Required = Complete (with Completed Date); any progress = In Progress; On Hold is preserved.</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>f_AllDone</name>
+        <dataType>Boolean</dataType>
+        <expression>AND(
+OR(ISPICKVAL({!$Record.Company_Information_Status__c}, "Complete"), ISPICKVAL({!$Record.Company_Information_Status__c}, "Not Required")),
+OR(ISPICKVAL({!$Record.Finance_Status__c}, "Complete"), ISPICKVAL({!$Record.Finance_Status__c}, "Not Required")),
+OR(ISPICKVAL({!$Record.Quality_Status__c}, "Complete"), ISPICKVAL({!$Record.Quality_Status__c}, "Not Required")),
+OR(ISPICKVAL({!$Record.Logistics_Status__c}, "Complete"), ISPICKVAL({!$Record.Logistics_Status__c}, "Not Required")),
+OR(ISPICKVAL({!$Record.Compliance_Status__c}, "Complete"), ISPICKVAL({!$Record.Compliance_Status__c}, "Not Required")))</expression>
+    </formulas>
+    <formulas>
+        <name>f_AnyProgress</name>
+        <dataType>Boolean</dataType>
+        <expression>OR(
+NOT(ISPICKVAL({!$Record.Company_Information_Status__c}, "Pending")),
+NOT(ISPICKVAL({!$Record.Finance_Status__c}, "Pending")),
+NOT(ISPICKVAL({!$Record.Quality_Status__c}, "Pending")),
+NOT(ISPICKVAL({!$Record.Logistics_Status__c}, "Pending")),
+NOT(ISPICKVAL({!$Record.Compliance_Status__c}, "Pending")))</expression>
+    </formulas>
+    <formulas>
+        <name>f_CompletedDate</name>
+        <dataType>Date</dataType>
+        <expression>IF({!f_AllDone}, BLANKVALUE({!$Record.Completed_Date__c}, TODAY()), NULL)</expression>
+    </formulas>
+    <formulas>
+        <name>f_Status</name>
+        <dataType>String</dataType>
+        <expression>IF({!f_AllDone}, "Complete", IF(ISPICKVAL({!$Record.Status__c}, "On Hold"), "On Hold", IF({!f_AnyProgress}, "In Progress", "Not Started")))</expression>
+    </formulas>
+    <interviewLabel>Apex Customer Onboarding Before Save {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Apex Customer Onboarding - Before Save</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Apply_Status</targetReference>
+        </connector>
+        <object>Customer_Onboarding__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

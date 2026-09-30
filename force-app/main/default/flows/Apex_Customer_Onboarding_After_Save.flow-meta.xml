@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <customErrors>
+        <name>Fault_Error</name>
+        <label>Show fault</label>
+        <locationX>440</locationX>
+        <locationY>230</locationY>
+        <customErrorMessages>
+            <errorMessage>Onboarding status could not be copied to the account: {!$Flow.FaultMessage}</errorMessage>
+            <isFieldError>false</isFieldError>
+        </customErrorMessages>
+    </customErrors>
+    <description>Person 2. Copies the onboarding Status to Account.Onboarding Status so the Customer 360 shows it without opening the checklist.</description>
+    <environments>Default</environments>
+    <interviewLabel>Apex Customer Onboarding After Save {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Apex Customer Onboarding - After Save</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Update_Account_Status</name>
+        <label>Update account onboarding status</label>
+        <locationX>176</locationX>
+        <locationY>110</locationY>
+        <faultConnector>
+            <targetReference>Fault_Error</targetReference>
+        </faultConnector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.Account__c</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Onboarding_Status__c</field>
+            <value>
+                <elementReference>$Record.Status__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Account</object>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Update_Account_Status</targetReference>
+        </connector>
+        <object>Customer_Onboarding__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

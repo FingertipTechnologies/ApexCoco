@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Creates the next sample iteration for the same Opportunity after a rejection.</description>
+    <flowDefinition>Apex_Sample_Request_New_Iteration</flowDefinition>
+    <label>New Sample Iteration</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <type>Flow</type>
+</QuickAction>

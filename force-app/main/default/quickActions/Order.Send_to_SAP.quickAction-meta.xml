@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>DEMO ONLY: simulated Salesforce to SAP order handoff with integration log entries.</description>
+    <flowDefinition>Apex_Order_Send_To_SAP</flowDefinition>
+    <label>Send to SAP (Simulated)</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <type>Flow</type>
+</QuickAction>

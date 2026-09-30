@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Default_Close_Days__c</fullName>
+    <description>DEMO / TO VALIDATE. Used only to default the Close Date of an opportunity created from a sample request.</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Default Opportunity Close Days (DEMO)</label>
+    <precision>5</precision>
+    <scale>0</scale>
+    <type>Number</type>
+</CustomField>

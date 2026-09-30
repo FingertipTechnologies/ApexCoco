@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Opportunity</entityName>
+    <fieldName>StageName</fieldName>
+    <masterLabel>Apex B2B Opportunity Path</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>Primary_Product__c</fieldNames>
+        <fieldNames>Expected_Annual_Volume__c</fieldNames>
+        <fieldNames>Sample_Request_Count__c</fieldNames>
+        <fieldNames>Latest_Sample_Status__c</fieldNames>
+        <info>&lt;p&gt;Opportunity opened by a sample request, which is Apex's real buying signal. A price enquiry alone does not create an opportunity.&lt;/p&gt;</info>
+        <picklistValueName>Sample Requested</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Latest_Sample_Status__c</fieldNames>
+        <fieldNames>Next_Action__c</fieldNames>
+        <fieldNames>Next_Action_Date__c</fieldNames>
+        <info>&lt;p&gt;Customer is evaluating the sample. If it is rejected the opportunity stays here and the next iteration is created from the Sample Request.&lt;/p&gt;</info>
+        <picklistValueName>Sample Testing</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Sample_Approved_Date__c</fieldNames>
+        <fieldNames>Technical_Evaluation_Status__c</fieldNames>
+        <info>&lt;p&gt;Set automatically when a sample is approved. Schedule the technical evaluation.&lt;/p&gt;</info>
+        <picklistValueName>Sample Approved</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Technical_Evaluation_Status__c</fieldNames>
+        <fieldNames>Next_Action__c</fieldNames>
+        <info>&lt;p&gt;Specification, COA and documentation review. DEMO / TO VALIDATE the exact technical evaluation fields with Apex.&lt;/p&gt;</info>
+        <picklistValueName>Technical Evaluation</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Expected_Annual_Volume__c</fieldNames>
+        <fieldNames>Current_Supplier__c</fieldNames>
+        <fieldNames>Competitor__c</fieldNames>
+        <fieldNames>Latest_Quote_Price__c</fieldNames>
+        <info>&lt;p&gt;Commercial discussion. Check the last price quoted to this customer and log competitor intel before quoting.&lt;/p&gt;</info>
+        <picklistValueName>Pricing Discussion</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Quote_Count__c</fieldNames>
+        <fieldNames>Latest_Quote_Price__c</fieldNames>
+        <info>&lt;p&gt;Formal quote issued from the Quotes related list. Requires at least one quote.&lt;/p&gt;</info>
+        <picklistValueName>Quotation Sent</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Latest_Quote_Price__c</fieldNames>
+        <fieldNames>Competitor__c</fieldNames>
+        <info>&lt;p&gt;Use &lt;b&gt;Revise Quote&lt;/b&gt; for every price change so the history is kept. Discounts above the threshold route for approval.&lt;/p&gt;</info>
+        <picklistValueName>Negotiation</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Customer_Approval_Date__c</fieldNames>
+        <info>&lt;p&gt;Customer has agreed to proceed. The onboarding checklist is created automatically.&lt;/p&gt;</info>
+        <picklistValueName>Customer Approval</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>PO_Number__c</fieldNames>
+        <fieldNames>PO_Date__c</fieldNames>
+        <fieldNames>PO_Quantity__c</fieldNames>
+        <info>&lt;p&gt;PO number, date and quantity are mandatory. The Salesforce Order is created automatically and can be sent to SAP (simulated).&lt;/p&gt;</info>
+        <picklistValueName>PO Received</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>PO_Number__c</fieldNames>
+        <fieldNames>Amount</fieldNames>
+        <info>&lt;p&gt;Order activated. The repeat-business engine now tracks this customer.&lt;/p&gt;</info>
+        <picklistValueName>Closed Won</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Loss_Reason__c</fieldNames>
+        <fieldNames>Loss_Details__c</fieldNames>
+        <fieldNames>Competitor__c</fieldNames>
+        <info>&lt;p&gt;Loss reason is mandatory so the relationship can be re-engaged. A follow-up task is created in 90 days.&lt;/p&gt;</info>
+        <picklistValueName>Closed Lost</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>__MASTER__</recordTypeName>
+</PathAssistant>

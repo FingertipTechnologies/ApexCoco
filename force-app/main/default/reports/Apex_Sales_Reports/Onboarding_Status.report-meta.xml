@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>Customer_Onboarding__c.Account__c</field>
+    </columns>
+    <columns>
+        <field>Customer_Onboarding__c.Opportunity__c</field>
+    </columns>
+    <columns>
+        <field>Customer_Onboarding__c.Completion_Percent__c</field>
+    </columns>
+    <columns>
+        <field>Customer_Onboarding__c.Due_Date__c</field>
+    </columns>
+    <columns>
+        <field>Customer_Onboarding__c.Quality_Status__c</field>
+    </columns>
+    <columns>
+        <field>Customer_Onboarding__c.Finance_Status__c</field>
+    </columns>
+    <columns>
+        <field>Customer_Onboarding__c.Logistics_Status__c</field>
+    </columns>
+    <description>Pending and completed onboarding checklists.</description>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Customer_Onboarding__c.Status__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Customer Onboarding Status</name>
+    <reportType>CustomEntity$Customer_Onboarding__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

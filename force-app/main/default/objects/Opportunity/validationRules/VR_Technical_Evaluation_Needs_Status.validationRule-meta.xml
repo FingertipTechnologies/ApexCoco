@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Technical_Evaluation_Needs_Status</fullName>
+    <active>true</active>
+    <errorConditionFormula>ISPICKVAL(StageName, "Technical Evaluation") &amp;&amp; ISBLANK(TEXT(Technical_Evaluation_Status__c))</errorConditionFormula>
+    <errorDisplayField>Technical_Evaluation_Status__c</errorDisplayField>
+    <errorMessage>Set the Technical Evaluation Status when the opportunity is in Technical Evaluation.</errorMessage>
+</ValidationRule>

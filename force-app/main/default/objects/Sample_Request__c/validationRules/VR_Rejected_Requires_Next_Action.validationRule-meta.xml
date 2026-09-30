@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Rejected_Requires_Next_Action</fullName>
+    <active>true</active>
+    <description>VR-Sample-Rejection-Action</description>
+    <errorConditionFormula>ISPICKVAL(Result__c, "Rejected") &amp;&amp; ISBLANK(Next_Action__c)</errorConditionFormula>
+    <errorDisplayField>Next_Action__c</errorDisplayField>
+    <errorMessage>Enter the next action (for example: send revised sample with adjusted specification) when a sample is rejected.</errorMessage>
+</ValidationRule>

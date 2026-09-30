@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Sample_Request__c</entityName>
+    <fieldName>Status__c</fieldName>
+    <masterLabel>Apex Sample Request Path</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>Product__c</fieldNames>
+        <fieldNames>Specification__c</fieldNames>
+        <fieldNames>Sample_Quantity__c</fieldNames>
+        <fieldNames>Sample_Unit__c</fieldNames>
+        <fieldNames>Requested_Date__c</fieldNames>
+        <info>&lt;p&gt;Customer has asked for a sample. Confirm product, specification and quantity. Sales Admin picks this up from the &lt;b&gt;Sales Admin - To Prepare / Dispatch&lt;/b&gt; list view.&lt;/p&gt;</info>
+        <picklistValueName>Requested</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Sample_Quantity__c</fieldNames>
+        <fieldNames>Contact__c</fieldNames>
+        <info>&lt;p&gt;Internal approval needed (sample quantity above the demo limit or unqualified account). DEMO / TO VALIDATE the real approval rule with Apex.&lt;/p&gt;</info>
+        <picklistValueName>Approval Pending</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Batch_Number__c</fieldNames>
+        <fieldNames>Prepared_Date__c</fieldNames>
+        <info>&lt;p&gt;Sample prepared at the factory. Record the batch number so quality history stays traceable.&lt;/p&gt;</info>
+        <picklistValueName>Prepared</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Courier_Partner__c</fieldNames>
+        <fieldNames>Tracking_Number__c</fieldNames>
+        <fieldNames>Dispatch_Date__c</fieldNames>
+        <fieldNames>Expected_Delivery__c</fieldNames>
+        <info>&lt;p&gt;Courier and tracking number are mandatory. The opportunity moves to Sample Testing automatically.&lt;/p&gt;</info>
+        <picklistValueName>Dispatched</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Feedback_Due_Date__c</fieldNames>
+        <fieldNames>Expected_Delivery__c</fieldNames>
+        <info>&lt;p&gt;Customer is testing. A follow-up task is created automatically. Chase feedback before the due date.&lt;/p&gt;</info>
+        <picklistValueName>Customer Testing</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Customer_Feedback__c</fieldNames>
+        <fieldNames>Result__c</fieldNames>
+        <fieldNames>Rejection_Reason__c</fieldNames>
+        <fieldNames>Next_Action__c</fieldNames>
+        <info>&lt;p&gt;Record the feedback and the result. Approved advances the opportunity; Rejected keeps the opportunity open and asks for the next action.&lt;/p&gt;</info>
+        <picklistValueName>Feedback Received</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Approval_Date__c</fieldNames>
+        <fieldNames>Customer_Feedback__c</fieldNames>
+        <info>&lt;p&gt;Sample approved. The opportunity is now at Sample Approved and the owner has a task to schedule technical evaluation.&lt;/p&gt;</info>
+        <picklistValueName>Approved</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Rejection_Reason__c</fieldNames>
+        <fieldNames>Next_Action__c</fieldNames>
+        <fieldNames>Next_Action_Date__c</fieldNames>
+        <info>&lt;p&gt;Rejected, but the deal is not lost. Use &lt;b&gt;New Sample Iteration&lt;/b&gt; to send the revised sample against the same opportunity.&lt;/p&gt;</info>
+        <picklistValueName>Rejected</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Closure_Reason__c</fieldNames>
+        <info>&lt;p&gt;No further action on this sample.&lt;/p&gt;</info>
+        <picklistValueName>Closed</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>__MASTER__</recordTypeName>
+</PathAssistant>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Quote$Name</field>
+    </columns>
+    <columns>
+        <field>Quote$QuoteNumber</field>
+    </columns>
+    <columns>
+        <field>Quote$Quote_Version__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Quote$TotalPrice</field>
+    </columns>
+    <columns>
+        <field>Quote$Discount</field>
+    </columns>
+    <columns>
+        <field>Quote$Margin_Percent__c</field>
+    </columns>
+    <columns>
+        <field>Quote$Approval_Status__c</field>
+    </columns>
+    <columns>
+        <field>Quote$Quote_Date__c</field>
+    </columns>
+    <columns>
+        <field>Quote$Revision_Reason__c</field>
+    </columns>
+    <description>Every quote version with discount, margin and approval status. Centralised pricing history instead of Excel.</description>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Quote$Status</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Quotes and Revisions</name>
+    <reportType>Apex_Quotes__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Quote$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

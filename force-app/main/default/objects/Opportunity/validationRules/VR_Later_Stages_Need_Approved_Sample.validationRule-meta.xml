@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Later_Stages_Need_Approved_Sample</fullName>
+    <active>true</active>
+    <description>Stage = Sample Approved (and later) requires an approved Sample Request.</description>
+    <errorConditionFormula>ISPICKVAL(Opportunity_Type__c, "New Business") &amp;&amp; ISBLANK(Sample_Approved_Date__c) &amp;&amp; CASE(TEXT(StageName), "Sample Approved", 1, "Technical Evaluation", 1, "Pricing Discussion", 1, "Quotation Sent", 1, "Negotiation", 1, "Customer Approval", 1, "PO Received", 1, "Closed Won", 1, 0) = 1</errorConditionFormula>
+    <errorDisplayField>StageName</errorDisplayField>
+    <errorMessage>A new-business opportunity needs an approved Sample Request before it can move past Sample Testing. Approve the sample first (the Sample Approved Date is set automatically).</errorMessage>
+</ValidationRule>

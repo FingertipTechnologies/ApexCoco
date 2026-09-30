@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VR_Rejected_Requires_Reason</fullName>
+    <active>true</active>
+    <description>VR-Sample-Rejection</description>
+    <errorConditionFormula>ISPICKVAL(Result__c, "Rejected") &amp;&amp; ISBLANK(TEXT(Rejection_Reason__c))</errorConditionFormula>
+    <errorDisplayField>Rejection_Reason__c</errorDisplayField>
+    <errorMessage>A rejection reason is required when a sample is rejected. The opportunity stays open for the next iteration.</errorMessage>
+</ValidationRule>

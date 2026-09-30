@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>creator</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>QuoteNumber</field>
+        <field>Quote_Version__c</field>
+        <field>Discount</field>
+        <field>TotalPrice</field>
+        <field>Margin_Percent__c</field>
+        <field>Competitor_Name__c</field>
+        <field>Competitor_Price__c</field>
+        <field>Revision_Reason__c</field>
+        <field>Owner</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Sales_Manager_Approver__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Step 1 of the configurable example chain: Sales Executive -&gt; Sales Manager. DEMO / TO VALIDATE the real hierarchy with Apex.</description>
+        <label>Sales Manager Approval</label>
+        <name>Sales_Manager_Approval</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>Management_Approver__c</name>
+                <type>relatedUserField</type>
+            </approver>
+            <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Step 2: Management approval (approve from the mobile app in the demo).</description>
+        <label>Management Approval</label>
+        <name>Management_Approval</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <description>DEMO / TO VALIDATE: routes quotes whose discount exceeds Apex Demo Setting.Discount Threshold % through Sales Manager and Management. Approvers are resolved by flow into the two approver lookup fields.</description>
+    <enableMobileDeviceAccess>true</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>Requires_Approval__c</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Apex_Quote_Approval_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Apex_Quote_Approval_Rejected</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Apex_Quote_Approval_Pending</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Apex Quote Discount Approval (DEMO)</label>
+    <processOrder>1</processOrder>
+    <recallActions>
+        <action>
+            <name>Apex_Quote_Approval_Recalled</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

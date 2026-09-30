@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Margin_Percent__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(UnitPrice &gt; 0, (UnitPrice - BLANKVALUE(Unit_Cost__c, 0)) / UnitPrice * 100, 0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Margin % (DEMO)</label>
+    <precision>18</precision>
+    <scale>1</scale>
+    <type>Percent</type>
+</CustomField>
