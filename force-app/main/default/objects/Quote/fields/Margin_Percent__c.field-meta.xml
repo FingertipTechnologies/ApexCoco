@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Margin_Percent__c</fullName>
     <externalId>false</externalId>
-    <formula>IF(TotalPrice &gt; 0, (TotalPrice - Total_Cost__c) / TotalPrice * 100, 0)</formula>
+    <formula>IF(TotalPrice &gt; 0, (TotalPrice - Total_Cost__c) / TotalPrice, 0)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Margin % (DEMO)</label>
     <precision>18</precision>

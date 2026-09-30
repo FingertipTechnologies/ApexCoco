@@ -265,7 +265,7 @@ ONB = [
               'IF(OR(ISPICKVAL(Finance_Status__c, "Complete"), ISPICKVAL(Finance_Status__c, "Not Required")), 1, 0) + '
               'IF(OR(ISPICKVAL(Quality_Status__c, "Complete"), ISPICKVAL(Quality_Status__c, "Not Required")), 1, 0) + '
               'IF(OR(ISPICKVAL(Logistics_Status__c, "Complete"), ISPICKVAL(Logistics_Status__c, "Not Required")), 1, 0) + '
-              'IF(OR(ISPICKVAL(Compliance_Status__c, "Complete"), ISPICKVAL(Compliance_Status__c, "Not Required")), 1, 0)) / 5 * 100'),
+              'IF(OR(ISPICKVAL(Compliance_Status__c, "Complete"), ISPICKVAL(Compliance_Status__c, "Not Required")), 1, 0)) / 5'),
  dict(api='Notes__c', label='Notes', type='LongTextArea', length=32768, visibleLines=3, help='DEMO / TO VALIDATE: exact statutory documents per checklist area are to be confirmed by Apex.'),
 ]
 
@@ -377,7 +377,7 @@ QUOTE = [
  dict(api='Management_Approver__c', label='Management Approver', type='Lookup', referenceTo='User', relationshipLabel='Quotes (Management Approver)', relationshipName='Management_Approval_Quotes', help='Set automatically by flow from the Apex Demo Setting or the manager chain.'),
  dict(api='Total_Cost__c', label='Total Cost (DEMO)', type='Summary', summarizedField='QuoteLineItem.Line_Cost__c', summaryForeignKey='QuoteLineItem.QuoteId', summaryOperation='sum'),
  dict(api='Total_Margin__c', label='Total Margin (DEMO)', type='Currency', formulaType='Currency', scale=2, blanks='BlankAsZero', formula='TotalPrice - Total_Cost__c'),
- dict(api='Margin_Percent__c', label='Margin % (DEMO)', type='Percent', formulaType='Percent', scale=1, blanks='BlankAsZero', formula='IF(TotalPrice > 0, (TotalPrice - Total_Cost__c) / TotalPrice * 100, 0)'),
+ dict(api='Margin_Percent__c', label='Margin % (DEMO)', type='Percent', formulaType='Percent', scale=1, blanks='BlankAsZero', formula='IF(TotalPrice > 0, (TotalPrice - Total_Cost__c) / TotalPrice, 0)'),
 ]
 QUOTE_VRS = [
  ('VR_Sent_Requires_Approval', 'AND(OR(ISPICKVAL(Status, "Sent"), ISPICKVAL(Status, "Presented"), ISPICKVAL(Status, "Accepted")), BLANKVALUE(Discount, 0) > 5, NOT(ISPICKVAL(Approval_Status__c, "Approved")))',
@@ -387,7 +387,7 @@ QLI = [
  dict(api='Account__c', label='Account', type='Lookup', referenceTo='Account', relationshipLabel='Quote Line Items', relationshipName='Quote_Line_Items', help='Set by flow from the quote, so price history can be reported per customer and product.'),
  dict(api='Unit_Cost__c', label='Unit Cost (DEMO)', type='Currency', precision=18, scale=2, help='DEMO / TO VALIDATE: defaults from Product Standard Cost.'),
  dict(api='Line_Cost__c', label='Line Cost (DEMO)', type='Currency', precision=18, scale=2, help='Unit Cost x Quantity. Maintained by flow.'),
- dict(api='Margin_Percent__c', label='Margin % (DEMO)', type='Percent', formulaType='Percent', scale=1, blanks='BlankAsZero', formula='IF(UnitPrice > 0, (UnitPrice - BLANKVALUE(Unit_Cost__c, 0)) / UnitPrice * 100, 0)'),
+ dict(api='Margin_Percent__c', label='Margin % (DEMO)', type='Percent', formulaType='Percent', scale=1, blanks='BlankAsZero', formula='IF(UnitPrice > 0, (UnitPrice - BLANKVALUE(Unit_Cost__c, 0)) / UnitPrice, 0)'),
  dict(api='Last_Quoted_Price__c', label='Last Price to This Customer', type='Currency', precision=18, scale=2, help='Previous quoted unit price for the same account and product. Set by flow.'),
  dict(api='Last_Quoted_Date__c', label='Last Quoted Date', type='Date'),
  dict(api='Supply_Period_From__c', label='Supply Period From', type='Date'),

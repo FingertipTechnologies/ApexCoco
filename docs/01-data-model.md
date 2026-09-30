@@ -89,7 +89,7 @@ Name field: **Onboarding Number** (AutoNumber, ONB-{0000})
 | Company Information Owner | `Company_Information_Owner__c` | Picklist |  | Sales Admin, Finance, Quality, Operations, Compliance, Sales Executive |
 | Company Information Status | `Company_Information_Status__c` | Picklist |  | Pending, In Progress, Complete, Not Required |
 | Completed Date | `Completed_Date__c` | Date |  |  |
-| Completion % | `Completion_Percent__c` | Formula (Percent) |  | `(IF(OR(ISPICKVAL(Company_Information_Status__c, "Complete"), ISPICKVAL(Company_Information_Status__c, "Not Required")), 1, 0) + IF(OR(ISPICKVAL(Finance_Status__c, "Complete"), ISPICKVAL(Finance_Status__c, "Not Required")), 1, 0) + IF(OR(ISPICKVAL(Quality_Status__c, "Complete"), ISPICKVAL(Quality_Status__c, "Not Required")), 1, 0) + IF(OR(ISPICKVAL(Logistics_Status__c, "Complete"), ISPICKVAL(Logistics_Status__c, "Not Required")), 1, 0) + IF(OR(ISPICKVAL(Compliance_Status__c, "Complete"), ISPICKVAL(Compliance_Status__c, "Not Required")), 1, 0)) / 5 * 100` |
+| Completion % | `Completion_Percent__c` | Formula (Percent) |  | `(IF(OR(ISPICKVAL(Company_Information_Status__c, "Complete"), ISPICKVAL(Company_Information_Status__c, "Not Required")), 1, 0) + IF(OR(ISPICKVAL(Finance_Status__c, "Complete"), ISPICKVAL(Finance_Status__c, "Not Required")), 1, 0) + IF(OR(ISPICKVAL(Quality_Status__c, "Complete"), ISPICKVAL(Quality_Status__c, "Not Required")), 1, 0) + IF(OR(ISPICKVAL(Logistics_Status__c, "Complete"), ISPICKVAL(Logistics_Status__c, "Not Required")), 1, 0) + IF(OR(ISPICKVAL(Compliance_Status__c, "Complete"), ISPICKVAL(Compliance_Status__c, "Not Required")), 1, 0)) / 5` |
 | Compliance Owner | `Compliance_Owner__c` | Picklist |  | Sales Admin, Finance, Quality, Operations, Compliance, Sales Executive |
 | Compliance Status | `Compliance_Status__c` | Picklist |  | Pending, In Progress, Complete, Not Required |
 | Due Date | `Due_Date__c` | Date |  |  |
@@ -192,7 +192,7 @@ Name field: **Integration Id** (AutoNumber, INT-{00000})
 | Delivery Terms (DEMO) | `Delivery_Terms__c` | Picklist |  | FOB, CIF, CFR, EXW, DDP, Other - DEMO / TO VALIDATE with Apex. |
 | Source Lead | `Lead__c` | Lookup |  | > Lead (child relationship Lead_Quotes__r) - Copied from the opportunity so the lead shows its quotes. |
 | Management Approver | `Management_Approver__c` | Lookup |  | > User (child relationship Management_Approval_Quotes__r) - Set automatically by flow from the Apex Demo Setting or the manager chain. |
-| Margin % (DEMO) | `Margin_Percent__c` | Formula (Percent) |  | `IF(TotalPrice > 0, (TotalPrice - Total_Cost__c) / TotalPrice * 100, 0)` |
+| Margin % (DEMO) | `Margin_Percent__c` | Formula (Percent) |  | `IF(TotalPrice > 0, (TotalPrice - Total_Cost__c) / TotalPrice, 0)` |
 | Payment Terms (DEMO) | `Payment_Terms__c` | Picklist |  | 30% Advance / 70% against BL, LC at Sight, TT 30 Days, TT 60 Days, Other - DEMO / TO VALIDATE with Apex. |
 | Previous Quote Version | `Previous_Quote__c` | Lookup |  | > Quote (child relationship Revisions__r) |
 | Quote Date | `Quote_Date__c` | Date |  |  - Defaults to the creation date; editable for historical demo data. |
@@ -211,7 +211,7 @@ Name field: **Integration Id** (AutoNumber, INT-{00000})
 | Last Quoted Date | `Last_Quoted_Date__c` | Date |  |  |
 | Last Price to This Customer | `Last_Quoted_Price__c` | Currency |  | 18,2 - Previous quoted unit price for the same account and product. Set by flow. |
 | Line Cost (DEMO) | `Line_Cost__c` | Currency |  | 18,2 - Unit Cost x Quantity. Maintained by flow. |
-| Margin % (DEMO) | `Margin_Percent__c` | Formula (Percent) |  | `IF(UnitPrice > 0, (UnitPrice - BLANKVALUE(Unit_Cost__c, 0)) / UnitPrice * 100, 0)` |
+| Margin % (DEMO) | `Margin_Percent__c` | Formula (Percent) |  | `IF(UnitPrice > 0, (UnitPrice - BLANKVALUE(Unit_Cost__c, 0)) / UnitPrice, 0)` |
 | Supply Period From | `Supply_Period_From__c` | Date |  |  |
 | Supply Period To | `Supply_Period_To__c` | Date |  |  |
 | Unit Cost (DEMO) | `Unit_Cost__c` | Currency |  | 18,2 - DEMO / TO VALIDATE: defaults from Product Standard Cost. |
