@@ -10,9 +10,11 @@
 final String MARK = 'APEX DEMO DATA';
 Date today = Date.today();
 User me = [SELECT Id, Name FROM User WHERE Id = :UserInfo.getUserId()];
+Set<String> demoCompanies = new Set<String>{ 'ABC Foods International', 'Global Ingredients UK', 'Nature Brands India', 'Pacific Bakers Inc', 'Euro Dairy Alternatives GmbH', 'Gulf Trading LLC', 'Aussie Health Foods Pty', 'Nordic Foods AB', 'Mumbai Sweets Pvt Ltd', 'Sunrise Beverages Ltd' };
+Set<String> demoProducts = new Set<String>{ 'Coconut Milk Powder', 'Coconut Cream Powder', 'Coconut Cream', 'Desiccated Coconut - Fine', 'Desiccated Coconut - Medium', 'Low-Fat Desiccated Coconut', 'Virgin Coconut Oil', 'Coconut Flour', 'Coconut Milk Powder - Private Label' };
 Pricebook2 standardPb = [SELECT Id FROM Pricebook2 WHERE IsStandard = true LIMIT 1];
 Map<String, Product2> products = new Map<String, Product2>();
-for (Product2 p : [SELECT Id, Name FROM Product2 WHERE Description = :MARK]) { products.put(p.Name, p); }
+for (Product2 p : [SELECT Id, Name FROM Product2 WHERE Name IN :demoProducts]) { products.put(p.Name, p); }
 Map<Id, PricebookEntry> pbeByProduct = new Map<Id, PricebookEntry>();
 for (PricebookEntry pbe : [SELECT Id, Product2Id, UnitPrice FROM PricebookEntry WHERE Pricebook2Id = :standardPb.Id AND Product2Id IN :products.values()]) { pbeByProduct.put(pbe.Product2Id, pbe); }
 Product2 cmp = products.get('Coconut Milk Powder');
@@ -25,13 +27,13 @@ Product2 vco = products.get('Virgin Coconut Oil');
 Product2 flour = products.get('Coconut Flour');
 Product2 cmpPl = products.get('Coconut Milk Powder - Private Label');
 Map<String, Account> acc = new Map<String, Account>();
-for (Account a : [SELECT Id, Name FROM Account WHERE Description = :MARK]) { acc.put(a.Name, a); }
+for (Account a : [SELECT Id, Name FROM Account WHERE Name IN :demoCompanies]) { acc.put(a.Name, a); }
 Map<String, Contact> con = new Map<String, Contact>();
 for (Contact c : [SELECT Id, Email FROM Contact WHERE AccountId IN :acc.values()]) { con.put(c.Email, c); }
 Contact michael = con.get('michael.anderson@abcfoods-intl.example');
 Contact laura = con.get('laura.chen@abcfoods-intl.example');
 Map<String, Opportunity> opp = new Map<String, Opportunity>();
-for (Opportunity o0 : [SELECT Id, Name FROM Opportunity WHERE AccountId IN :acc.values() AND Description = :MARK]) { opp.put(o0.Name, o0); }
+for (Opportunity o0 : [SELECT Id, Name FROM Opportunity WHERE AccountId IN :acc.values() AND Opportunity_Type__c = 'New Business']) { opp.put(o0.Name, o0); }
 List<Opportunity> opps = opp.values();
 // ---- Quotes and quote lines (price history, revisions, approval status)
 List<Quote> quotes = new List<Quote>{
