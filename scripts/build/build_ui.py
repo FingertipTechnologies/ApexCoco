@@ -179,14 +179,20 @@ def rl(parent_field, rel_name, ident, rows=10):
 def region(name, items):
     return f'    <flexiPageRegions>\n' + ''.join(items) + f'        <name>{name}</name>\n        <type>Region</type>\n    </flexiPageRegions>\n'
 
+def facet_tab(title, facet, ident):
+    return comp('flexipage:tab', ident, [('body', facet), ('title', title)])
+
 def flexipage(label, sobject, main, sidebar, path=True):
+    """Standard Salesforce record page: header (highlights + Path), main column with Details / Related tabs, activity sidebar."""
     out = HDR + f'<FlexiPage xmlns="{NS}">\n'
     header = [comp('force:highlightsPanel', 'force_highlightsPanel')] + ([comp('runtime_sales_pathassistant:pathAssistant', 'runtime_sales_pathassistant_pathAssistant')] if path else [])
-    # related lists in the full-width header band render as tables; the main column keeps the record detail
-    header += [c for c in main if 'relatedListContainer' in c]
     out += region('header', header)
-    out += region('main', [c for c in main if 'relatedListContainer' not in c])
+    out += region('main', [comp('flexipage:tabset', 'flexipage_tabset', [('tabs', 'Facet-tabs')])])
     out += region('sidebar', sidebar)
+    tabs = [facet_tab('Standard.Tab.detail', 'Facet-details', 'flexipage_tab_details'), facet_tab('Standard.Tab.relatedLists', 'Facet-related', 'flexipage_tab_related')]
+    out += '    <flexiPageRegions>\n' + ''.join(tabs) + '        <name>Facet-tabs</name>\n        <type>Facet</type>\n    </flexiPageRegions>\n'
+    out += '    <flexiPageRegions>\n' + ''.join(c for c in main if 'relatedListContainer' not in c) + '        <name>Facet-details</name>\n        <type>Facet</type>\n    </flexiPageRegions>\n'
+    out += '    <flexiPageRegions>\n' + ''.join(c for c in main if 'relatedListContainer' in c) + '        <name>Facet-related</name>\n        <type>Facet</type>\n    </flexiPageRegions>\n'
     out += f'    <masterLabel>{X(label)}</masterLabel>\n    <sobjectType>{sobject}</sobjectType>\n    <template>\n        <name>flexipage:recordHomeTemplateDesktop</name>\n    </template>\n    <type>RecordPage</type>\n</FlexiPage>\n'
     return out
 

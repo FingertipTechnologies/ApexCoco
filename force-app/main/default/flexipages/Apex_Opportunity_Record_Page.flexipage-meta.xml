@@ -13,20 +13,18 @@
                 <identifier>runtime_sales_pathassistant_pathAssistant</identifier>
             </componentInstance>
         </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentName>force:relatedListContainer</componentName>
-                <identifier>force_relatedListContainer</identifier>
-            </componentInstance>
-        </itemInstances>
         <name>header</name>
         <type>Region</type>
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>force:detailPanel</componentName>
-                <identifier>force_detailPanel</identifier>
+                <componentInstanceProperties>
+                    <name>tabs</name>
+                    <value>Facet-tabs</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tabset</componentName>
+                <identifier>flexipage_tabset</identifier>
             </componentInstance>
         </itemInstances>
         <name>main</name>
@@ -41,6 +39,58 @@
         </itemInstances>
         <name>sidebar</name>
         <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-details</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Standard.Tab.detail</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab_details</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-related</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Standard.Tab.relatedLists</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab_related</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-tabs</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>force:detailPanel</componentName>
+                <identifier>force_detailPanel</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-details</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>force:relatedListContainer</componentName>
+                <identifier>force_relatedListContainer</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-related</name>
+        <type>Facet</type>
     </flexiPageRegions>
     <masterLabel>Apex Opportunity Record Page</masterLabel>
     <sobjectType>Opportunity</sobjectType>
