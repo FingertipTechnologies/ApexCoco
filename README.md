@@ -25,7 +25,7 @@ qualification) is built separately; Person 2 starts from the qualified Lead that
 | UX | Apex Sales app, 5 Lightning record pages (Sample Request, Opportunity, Account 360, Quote, Order), 9 layouts, 8 compact layouts, 4 tabs | Critical fields above the fold; related lists for samples, quotes, competitors, onboarding, orders, cases, activities. |
 | Analytics | 11 reports, 2 dashboards (Sales Management, Sample Management), 2 custom report types | Dynamic dashboards (logged-in user). |
 | Access | 4 permission sets: Apex Sales Executive, Apex Sales Manager, Apex Sales Admin, Apex Management | Not overbuilt; each demo user sees the intended experience. |
-| Demo data | `scripts/apex/loadDemoData.apex`, `loadGoldenLead.apex`, `resetDemoData.apex` | 10 accounts, 13 contacts, 9 products with price book, 9 opportunities across all stages, 10 samples (incl. rejected → approved iteration), 7 quotes (incl. revision), 8 orders with 90-day and 30-day cadences, competitor intel, onboarding, cases, activities. |
+| Demo data | `scripts/apex/loadDemoData_1_Master.apex, loadDemoData_2_Pipeline.apex, loadDemoData_3_Commercial.apex and loadDemoData_4_Context.apex (in that order)`, `loadGoldenLead.apex`, `resetDemoData.apex` | 10 accounts, 13 contacts, 9 products with price book, 9 opportunities across all stages, 10 samples (incl. rejected → approved iteration), 7 quotes (incl. revision), 8 orders with 90-day and 30-day cadences, competitor intel, onboarding, cases, activities. |
 
 Detailed documentation:
 
@@ -44,7 +44,7 @@ manifest/package-shared-lead-contract.xml
 force-app/main/default/           Person 2 metadata (objects, flows, layouts, pages, reports, permission sets, Apex, ...)
 shared-lead-contract/main/default/objects/Lead/fields   the 15 frozen Lead fields Person 2 consumes (Person 1 owns them)
 scripts/deploy.sh                 one-command deploy (+ optional data)
-scripts/apex/loadDemoData.apex    demo data (labelled APEX DEMO DATA)
+scripts/apex/loadDemoData_1..4_*.apex  demo data in four parts, run in order (labelled APEX DEMO DATA)
 scripts/apex/loadGoldenLead.apex  the qualified ABC Foods lead for the merged Person 1 + Person 2 run
 scripts/apex/resetDemoData.apex   removes the demo data so the org can be reset before each run
 docs/                             documentation
@@ -86,7 +86,10 @@ sf project deploy start --target-org apexdemo --source-dir force-app/main/defaul
 sf project deploy start --target-org apexdemo --source-dir shared-lead-contract --wait 20        # optional, see above
 sf project deploy start --target-org apexdemo --source-dir force-app --wait 60 --test-level RunSpecifiedTests --tests LeadSampleConversionServiceTest
 for ps in Apex_Sales_Executive Apex_Sales_Manager Apex_Sales_Admin Apex_Management; do sf org assign permset --target-org apexdemo --name $ps; done
-sf apex run --target-org apexdemo --file scripts/apex/loadDemoData.apex
+sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_1_Master.apex
+sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_2_Pipeline.apex
+sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_3_Commercial.apex
+sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_4_Context.apex
 sf org open --target-org apexdemo --path /lightning/app/c__Apex_Sales
 ```
 
@@ -107,7 +110,10 @@ sf org open --target-org apexdemo --path /lightning/app/c__Apex_Sales
 
 ```bash
 sf apex run --target-org apexdemo --file scripts/apex/resetDemoData.apex
-sf apex run --target-org apexdemo --file scripts/apex/loadDemoData.apex
+sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_1_Master.apex
+sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_2_Pipeline.apex
+sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_3_Commercial.apex
+sf apex run --target-org apexdemo --file scripts/apex/loadDemoData_4_Context.apex
 ```
 
 ## Golden demo in one screen (details in docs/03-demo-script.md)

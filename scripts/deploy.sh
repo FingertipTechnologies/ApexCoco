@@ -5,7 +5,7 @@
 #
 #   --with-lead-contract  also deploys shared-lead-contract/ (the frozen Person 1 Lead fields). Use it in an org
 #                         where Person 1's Lead fields are NOT yet present (Person 2 stand-alone testing).
-#   --data                runs scripts/apex/loadDemoData.apex after deployment
+#   --data                runs scripts/apex/loadDemoData_1_Master.apex, loadDemoData_2_Pipeline.apex, loadDemoData_3_Commercial.apex and loadDemoData_4_Context.apex (in that order) after deployment
 #   --golden-lead         runs scripts/apex/loadGoldenLead.apex (merged Person 1 + Person 2 demo start)
 set -euo pipefail
 ORG="${1:?usage: deploy.sh <org-alias> [--with-lead-contract] [--data] [--golden-lead]}"; shift || true
@@ -31,7 +31,11 @@ for ps in Apex_Sales_Executive Apex_Sales_Manager Apex_Sales_Admin Apex_Manageme
 done
 
 # 5. Demo data
-if $DATA;   then sf apex run --target-org "$ORG" --file scripts/apex/loadDemoData.apex;   fi
+if $DATA; then
+  for part in loadDemoData_1_Master loadDemoData_2_Pipeline loadDemoData_3_Commercial loadDemoData_4_Context; do
+    sf apex run --target-org "$ORG" --file "scripts/apex/$part.apex"
+  done
+fi
 if $GOLDEN; then sf apex run --target-org "$ORG" --file scripts/apex/loadGoldenLead.apex; fi
 
 echo "Done. Open the Apex Sales app: sf org open --target-org $ORG --path /lightning/app/c__Apex_Sales"

@@ -1,5 +1,5 @@
 /**
- * Apex Coco - Person 2: remove all demo records (anything created by loadDemoData.apex / loadGoldenLead.apex
+ * Apex Coco - Person 2: remove all demo records (anything created by loadDemoData_1..4 scripts / loadGoldenLead.apex
  * and everything created during a demo run on those customers). Products and price book entries are kept
  * unless KEEP_PRODUCTS is set to false.
  *
@@ -33,4 +33,4 @@ if (!KEEP_PRODUCTS) {
     delete [SELECT Id FROM PricebookEntry WHERE Product2Id IN :prods];
     delete prods;
 }
-System.debug('APEX DEMO DATA removed. Run loadDemoData.apex to reload.');
+System.debug('APEX DEMO DATA removed. Run loadDemoData_1..4 scripts to reload.');

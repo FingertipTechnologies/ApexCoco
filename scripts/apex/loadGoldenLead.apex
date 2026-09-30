@@ -3,7 +3,7 @@
  *
  * Creates the qualified Lead "ABC Foods International / Michael Anderson" exactly as Person 1 hands it over
  * (Lead Status = Qualified-equivalent, Sample Requested = TRUE, Next Action = Create Sample Request).
- * Run after loadDemoData.apex. The "Request Sample" action on this lead converts it and attaches it to the
+ * Run after loadDemoData_1..4 scripts. The "Request Sample" action on this lead converts it and attaches it to the
  * pre-loaded ABC Foods International account (duplicate prevention by company name).
  *
  *   sf apex run --file scripts/apex/loadGoldenLead.apex --target-org <alias>

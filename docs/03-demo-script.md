@@ -3,7 +3,7 @@
 Presenter rules: one customer (ABC Foods International) from start to finish; Apex vocabulary (MT, batch, COA, importer, BE,
 Sales Admin); every screen answers a documented Apex problem; say "simulated" for SAP and "DEMO / to validate" for thresholds.
 
-Org state before the run: `resetDemoData.apex` + `loadDemoData.apex` (+ `loadGoldenLead.apex` for the merged run). Log in as
+Org state before the run: `resetDemoData.apex` + the four `loadDemoData_*.apex` scripts (+ `loadGoldenLead.apex` for the merged run). Log in as
 the Sales Executive for steps 1–11, switch to Sales Manager / Management for the approval, Sales Admin for the SAP step.
 
 | # | Screen / action | What to say | Apex problem answered |
