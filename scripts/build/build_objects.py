@@ -597,7 +597,7 @@ def main():
     write_fields(FA, 'Case', CASE)
     write_fields(FA, 'Product2', PRODUCT)
     write_fields(SHARED, 'Lead', LEAD)
-    LEAD_LV_COLS = ['FULL_NAME', 'COMPANY', 'Rating_Indicator__c', 'LEAD.RATING', 'LEAD.PHONE', 'LEAD.MOBILE', 'LEAD.EMAIL', 'LEAD.STATUS', 'Lead_Aging__c', 'CORE.USERS.ALIAS']
+    LEAD_LV_COLS = ['FULL_NAME', 'LEAD.COMPANY', 'Rating_Indicator__c', 'LEAD.RATING', 'LEAD.PHONE', 'LEAD.MOBILE_PHONE', 'LEAD.EMAIL', 'LEAD.STATUS', 'Lead_Aging__c', 'CORE.USERS.ALIAS']
     lvbase = os.path.join(SHARED, 'objects', 'Lead', 'listViews')
     for name, label, filters in [
         ('Apex_All_Leads', 'Apex Leads - All (Rating Indicator)', []),

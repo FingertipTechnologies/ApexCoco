@@ -57,15 +57,6 @@
         <name>Layout</name>
     </types>
     <types>
-        <members>Lead.Apex_Action_Today</members>
-        <members>Lead.Apex_All_Leads</members>
-        <members>Lead.Apex_Cold_Leads</members>
-        <members>Lead.Apex_Hot_Leads</members>
-        <members>Lead.Apex_This_Week_Closing</members>
-        <members>Lead.Apex_Warm_Leads</members>
-        <name>ListView</name>
-    </types>
-    <types>
         <members>Apex_Lead_Path</members>
         <name>PathAssistant</name>
     </types>

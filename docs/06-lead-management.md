@@ -62,6 +62,7 @@ git pull origin Gowtham
 sf project deploy start --metadata-dir manifest/lead-mdapi --ignore-errors --wait 20        # Lead fields, layout, compact layout, list views
 sf project deploy start --source-dir force-app --wait 60 --test-level RunSpecifiedTests --tests LeadSampleConversionServiceTest   # static resource + permission sets
 sf apex run --file scripts/apex/loadLeadRatingDemo.apex                                    # 3 demo leads: Hot / Warm / Cold
+sf project deploy start --metadata-dir manifest/lead-listviews-mdapi --wait 20             # the six Lead list views
 sf apex run --file scripts/apex/verifyLeadManagement.apex                                  # automated check
 ```
 

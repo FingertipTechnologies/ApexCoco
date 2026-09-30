@@ -26,6 +26,11 @@ fi
 # 3. Person 2 metadata
 sf project deploy start --target-org "$ORG" --source-dir force-app --wait 60 --test-level RunSpecifiedTests --tests LeadSampleConversionServiceTest
 
+# 3b. Lead list views (own package: a column-name problem must never block the Lead fields)
+if $WITH_LEAD; then
+  sf project deploy start --target-org "$ORG" --metadata-dir manifest/lead-listviews-mdapi --wait 20 || true
+fi
+
 # 4. Permission sets for the running user
 for ps in Apex_Sales_Executive Apex_Sales_Manager Apex_Sales_Admin Apex_Management; do
   sf org assign permset --target-org "$ORG" --name "$ps" || true
