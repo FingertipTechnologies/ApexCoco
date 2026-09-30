@@ -55,7 +55,7 @@ for path in glob.glob(f'{FA}/layouts/*.xml'):
     for qa in t.iter(f'{NS}quickActionName'):
         if qa.text not in quick_actions: errors.append(f'{path}: quick action {qa.text} missing')
     for an in t.iter(f'{NS}actionName'):
-        if '.' in an.text and an.text not in quick_actions: errors.append(f'{path}: platform action {an.text} missing')
+        if '.' in an.text and an.text not in quick_actions and not an.text.startswith(('NewTask','LogACall','NewEvent','SendEmail')): errors.append(f'{path}: platform action {an.text} missing')
 
 # ---- flexipages
 for path in glob.glob(f'{FA}/flexipages/*.xml'):

@@ -55,7 +55,7 @@ def layout_xml(sections, related, actions=None, quick_actions=None, highlights=T
     out += '</Layout>\n'
     return out
 
-STD = [('Edit', 'StandardButton'), ('Delete', 'StandardButton'), ('Clone', 'StandardButton'), ('ChangeOwnerOne', 'StandardButton')]
+STD = [('NewTask', 'QuickAction'), ('LogACall', 'QuickAction'), ('NewEvent', 'QuickAction'), ('SendEmail', 'QuickAction'), ('Edit', 'StandardButton'), ('Delete', 'StandardButton'), ('Clone', 'StandardButton'), ('ChangeOwnerOne', 'StandardButton')]
 SR_FIELDS = ['NAME', 'Product__c', 'Iteration_Number__c', 'Status__c', 'Result__c', 'Requested_Date__c', 'Dispatch_Date__c', 'Tracking_Number__c']
 
 # Sample_Request__c
@@ -181,9 +181,9 @@ def region(name, items):
 
 def flexipage(label, sobject, main, sidebar, path=True):
     out = HDR + f'<FlexiPage xmlns="{NS}">\n'
-    out += region('header', [comp('force:highlightsPanel', 'force_highlightsPanel')])
-    items = ([comp('runtime_sales_pathassistant:pathAssistant', 'runtime_sales_pathassistant_pathAssistant')] if path else []) + main
-    out += region('main', items)
+    header = [comp('force:highlightsPanel', 'force_highlightsPanel')] + ([comp('runtime_sales_pathassistant:pathAssistant', 'runtime_sales_pathassistant_pathAssistant')] if path else [])
+    out += region('header', header)
+    out += region('main', main)
     out += region('sidebar', sidebar)
     out += f'    <masterLabel>{X(label)}</masterLabel>\n    <sobjectType>{sobject}</sobjectType>\n    <template>\n        <name>flexipage:recordHomeTemplateDesktop</name>\n    </template>\n    <type>RecordPage</type>\n</FlexiPage>\n'
     return out
