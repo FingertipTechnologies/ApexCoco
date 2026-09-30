@@ -363,7 +363,7 @@ QUOTE = [
  dict(api='Competitor_Price__c', label='Competitor Price', type='Currency', precision=18, scale=2),
  dict(api='Approval_Status__c', label='Approval Status', type='Picklist', values=['Not Required', 'Pending Approval', 'Approved', 'Rejected'], default='Not Required'),
  dict(api='Requires_Approval__c', label='Requires Approval', type='Checkbox', formulaType='Checkbox',
-      formula=f'BLANKVALUE(Discount, 0) > {CMDT}Discount_Threshold_Percent__c'),
+      formula='BLANKVALUE(Discount, 0) > 5', help='DEMO / TO VALIDATE: discount above 5% needs approval. Keep in step with Apex Demo Setting.Discount Threshold % (used by the flows).'),
  dict(api='Sales_Manager_Approver__c', label='Sales Manager Approver', type='Lookup', referenceTo='User', relationshipLabel='Quotes (Sales Manager Approver)', relationshipName='Sales_Manager_Approval_Quotes', help='Set automatically by flow: owner\'s manager, or the owner when no manager is set.'),
  dict(api='Management_Approver__c', label='Management Approver', type='Lookup', referenceTo='User', relationshipLabel='Quotes (Management Approver)', relationshipName='Management_Approval_Quotes', help='Set automatically by flow from the Apex Demo Setting or the manager chain.'),
  dict(api='Total_Cost__c', label='Total Cost (DEMO)', type='Summary', summarizedField='QuoteLineItem.Line_Cost__c', summaryForeignKey='QuoteLineItem.QuoteId', summaryOperation='sum'),
@@ -371,7 +371,7 @@ QUOTE = [
  dict(api='Margin_Percent__c', label='Margin % (DEMO)', type='Percent', formulaType='Percent', scale=1, blanks='BlankAsZero', formula='IF(TotalPrice > 0, (TotalPrice - Total_Cost__c) / TotalPrice * 100, 0)'),
 ]
 QUOTE_VRS = [
- ('VR_Sent_Requires_Approval', 'CASE(TEXT(Status), "Sent", 1, "Presented", 1, "Accepted", 1, 0) = 1 && Requires_Approval__c && NOT(ISPICKVAL(Approval_Status__c, "Approved"))',
+ ('VR_Sent_Requires_Approval', 'AND(OR(ISPICKVAL(Status, "Sent"), ISPICKVAL(Status, "Presented"), ISPICKVAL(Status, "Accepted")), BLANKVALUE(Discount, 0) > 5, NOT(ISPICKVAL(Approval_Status__c, "Approved")))',
   'This quote exceeds the discount threshold and must be approved before it is sent or accepted. Use Submit for Approval.', 'Status', None),
 ]
 QLI = [

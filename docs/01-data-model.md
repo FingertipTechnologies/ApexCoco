@@ -193,7 +193,7 @@ Name field: **Integration Id** (AutoNumber, INT-{00000})
 | Previous Quote Version | `Previous_Quote__c` | Lookup |  | > Quote (child relationship Revisions__r) |
 | Quote Date | `Quote_Date__c` | Date |  |  - Defaults to the creation date; editable for historical demo data. |
 | Quote Version | `Quote_Version__c` | Number |  | 3,0 - default 1 |
-| Requires Approval | `Requires_Approval__c` | Formula (Checkbox) |  | `BLANKVALUE(Discount, 0) > $CustomMetadata.Apex_Demo_Setting__mdt.Default.Discount_Threshold_Percent__c` |
+| Requires Approval | `Requires_Approval__c` | Formula (Checkbox) |  | `BLANKVALUE(Discount, 0) > 5` - DEMO / TO VALIDATE: discount above 5% needs approval. Keep in step with Apex Demo Setting.Discount Threshold % (used by the flows). |
 | Revision Reason | `Revision_Reason__c` | Text |  | length 255 |
 | Sales Manager Approver | `Sales_Manager_Approver__c` | Lookup |  | > User (child relationship Sales_Manager_Approval_Quotes__r) - Set automatically by flow: owner's manager, or the owner when no manager is set. |
 | Total Cost (DEMO) | `Total_Cost__c` | Summary |  | SUM of QuoteLineItem.Line_Cost__c |
@@ -270,7 +270,7 @@ Name field: **Integration Id** (AutoNumber, INT-{00000})
 | Opportunity | `VR_Quotation_Stages_Need_Quote` | `CASE(TEXT(StageName), "Quotation Sent", 1, "Negotiation", 1, "Customer Approval", 1, 0) = 1 && Quote_Count__c = 0` | Create a Quote for this opportunity before moving to Quotation Sent, Negotiation or Customer Approval. |
 | Opportunity | `VR_Sample_Requested_Needs_Sample` | `NOT(ISNEW()) && ISCHANGED(StageName) && ISPICKVAL(StageName, "Sample Requested") && Sample_Request_Count__c = 0` | Create a Sample Request for this opportunity before setting the stage to Sample Requested. |
 | Opportunity | `VR_Technical_Evaluation_Needs_Status` | `ISPICKVAL(StageName, "Technical Evaluation") && ISBLANK(TEXT(Technical_Evaluation_Status__c))` | Set the Technical Evaluation Status when the opportunity is in Technical Evaluation. |
-| Quote | `VR_Sent_Requires_Approval` | `CASE(TEXT(Status), "Sent", 1, "Presented", 1, "Accepted", 1, 0) = 1 && Requires_Approval__c && NOT(ISPICKVAL(Approval_Status__c, "Approved"))` | This quote exceeds the discount threshold and must be approved before it is sent or accepted. Use Submit for Approval. |
+| Quote | `VR_Sent_Requires_Approval` | `AND(OR(ISPICKVAL(Status, "Sent"), ISPICKVAL(Status, "Presented"), ISPICKVAL(Status, "Accepted")), BLANKVALUE(Discount, 0) > 5, NOT(ISPICKVAL(Approval_Status__c, "Approved")))` | This quote exceeds the discount threshold and must be approved before it is sent or accepted. Use Submit for Approval. |
 | Sample_Request__c | `VR_Account_Required` | `ISBLANK(Account__c)` | Account is required. It is filled automatically when the sample is created from an Opportunity or a parent sample. |
 | Sample_Request__c | `VR_Approved_Requires_Feedback` | `ISPICKVAL(Result__c, "Approved") && ISBLANK(Customer_Feedback__c)` | Record the customer feedback before approving a sample. |
 | Sample_Request__c | `VR_Closed_Requires_Reason` | `ISPICKVAL(Status__c, "Closed") && ISBLANK(Closure_Reason__c)` | Enter a closure reason when closing a sample request without a result. |

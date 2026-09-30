@@ -2,7 +2,7 @@
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>VR_Sent_Requires_Approval</fullName>
     <active>true</active>
-    <errorConditionFormula>CASE(TEXT(Status), "Sent", 1, "Presented", 1, "Accepted", 1, 0) = 1 &amp;&amp; Requires_Approval__c &amp;&amp; NOT(ISPICKVAL(Approval_Status__c, "Approved"))</errorConditionFormula>
+    <errorConditionFormula>AND(OR(ISPICKVAL(Status, "Sent"), ISPICKVAL(Status, "Presented"), ISPICKVAL(Status, "Accepted")), BLANKVALUE(Discount, 0) &gt; 5, NOT(ISPICKVAL(Approval_Status__c, "Approved")))</errorConditionFormula>
     <errorDisplayField>Status</errorDisplayField>
     <errorMessage>This quote exceeds the discount threshold and must be approved before it is sent or accepted. Use Submit for Approval.</errorMessage>
 </ValidationRule>
