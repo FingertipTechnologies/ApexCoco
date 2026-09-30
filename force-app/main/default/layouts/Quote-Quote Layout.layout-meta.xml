@@ -73,10 +73,6 @@
                 <behavior>Edit</behavior>
                 <field>Delivery_Terms__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Pricebook2Id</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -245,10 +241,6 @@
         </quickActionListItems>
     </quickActionList>
     <relatedLists>
-        <fields>PRODUCT2.NAME</fields>
-        <fields>QUOTELINEITEM.QUANTITY</fields>
-        <fields>QUOTELINEITEM.UNITPRICE</fields>
-        <fields>QUOTELINEITEM.TOTALPRICE</fields>
         <relatedList>RelatedQuoteLineItemList</relatedList>
     </relatedLists>
     <relatedLists>

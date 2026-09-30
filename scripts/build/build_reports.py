@@ -82,7 +82,7 @@ report('Orders_and_SAP_Status', 'Orders and SAP Status (DEMO)', 'Apex_Orders__c'
        'Order$SAP_Status__c', date_col='Order$CreatedDate', aggregates=('Order$TotalAmount',), desc='Order visibility with the simulated SAP status. Integration is a labelled mock.')
 report('Repeat_Business_Reorder_Status', 'Repeat Business - Reorder Status', 'AccountList',
        ['ACCOUNT.NAME', 'Account.Customer_Type__c', 'Account.Market__c', 'Account.Last_Purchase_Date__c', 'Account.Last_Order_Value__c', 'Account.Average_Reorder_Interval_Days__c', 'Account.Expected_Reorder_Date__c', 'Account.Orders_Last_12_Months__c'],
-       'Account.Reorder_Status__c', date_col='ACCOUNT.CREATED_DATE', desc='Customers due or overdue for a repeat order, with cadence and last purchase.')
+       'Account.Reorder_Status__c', date_col='Account.Last_Purchase_Date__c', desc='Customers due or overdue for a repeat order, with cadence and last purchase.')
 report('Onboarding_Status', 'Customer Onboarding Status', 'CustomEntity$Customer_Onboarding__c',
        ['CUST_NAME', 'Customer_Onboarding__c.Account__c', 'Customer_Onboarding__c.Opportunity__c', 'Customer_Onboarding__c.Completion_Percent__c', 'Customer_Onboarding__c.Due_Date__c', 'Customer_Onboarding__c.Quality_Status__c', 'Customer_Onboarding__c.Finance_Status__c', 'Customer_Onboarding__c.Logistics_Status__c'],
        'Customer_Onboarding__c.Status__c', date_col='CUST_CREATED_DATE', desc='Pending and completed onboarding checklists.')

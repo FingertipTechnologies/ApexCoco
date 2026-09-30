@@ -13,6 +13,8 @@ def w(path, content):
 
 # ------------------------------------------------------------------ layouts
 def section(label, cols, style='TwoColumnsTopToBottom', detail=True, edit=True):
+    if style == 'OneColumn':
+        cols = [[i for col in cols for i in col]]
     out = ['    <layoutSections>', '        <customLabel>true</customLabel>', f'        <detailHeading>{"true" if detail else "false"}</detailHeading>', f'        <editHeading>{"true" if edit else "false"}</editHeading>', f'        <label>{X(label)}</label>']
     for col in cols:
         out.append('        <layoutColumns>')
@@ -110,7 +112,7 @@ w(f'{FA}/layouts/Opportunity-Opportunity Layout.layout-meta.xml', layout_xml([
     section('Description', [['Description'], []], style='OneColumn'),
     sysinfo(),
 ], [('Sample_Request__c.Opportunity__c', SR_FIELDS), ('Competitor_Intel__c.Opportunity__c', ['NAME', 'Competitor_Name__c', 'Quoted_Price__c', 'Customer_Preference__c', 'Source__c']),
-    ('Customer_Onboarding__c.Opportunity__c', ['NAME', 'Status__c', 'Completion_Percent__c', 'Due_Date__c']), ('RelatedQuoteList', ['NAME', 'QUOTE.QUOTENUMBER', 'QUOTE.STATUS', 'QUOTE.TOTALPRICE']), ('RelatedOrderList', ['ORDER.ORDERNUMBER', 'ORDER.STATUS', 'ORDER.TOTALAMOUNT']), 'RelatedActivityList', 'RelatedHistoryList', 'RelatedFileList'],
+    ('Customer_Onboarding__c.Opportunity__c', ['NAME', 'Status__c', 'Completion_Percent__c', 'Due_Date__c']), 'RelatedQuoteList', 'RelatedOrderList', 'RelatedActivityList', 'RelatedHistoryList', 'RelatedFileList'],
     actions=[('Opportunity.New_Sample_Request', 'QuickAction'), ('Opportunity.New_Competitor_Intel', 'QuickAction')] + STD,
     quick_actions=['Opportunity.New_Sample_Request', 'Opportunity.New_Competitor_Intel']))
 
@@ -122,12 +124,12 @@ w(f'{FA}/layouts/Account-Account Layout.layout-meta.xml', layout_xml([
                                 ['Average_Reorder_Interval_Days__c', 'Expected_Reorder_Date__c', ('Readonly', 'Reorder_Status__c'), 'Orders_Last_12_Months__c']]),
     section('Address Information', [['BillingAddress'], ['ShippingAddress']]),
     sysinfo(),
-], [('RelatedContactList', ['CONTACT.FULL_NAME', 'CONTACT.TITLE', 'CONTACT.EMAIL', 'CONTACT.PHONE1']),
-    ('RelatedOpportunityList', ['OPPORTUNITY.NAME', 'OPPORTUNITY.STAGE_NAME', 'OPPORTUNITY.AMOUNT', 'OPPORTUNITY.CLOSE_DATE']),
+], ['RelatedContactList',
+    'RelatedOpportunityList',
     ('Sample_Request__c.Account__c', SR_FIELDS), ('Competitor_Intel__c.Account__c', ['NAME', 'Competitor_Name__c', 'Product__c', 'Quoted_Price__c', 'Customer_Preference__c']),
     ('Customer_Onboarding__c.Account__c', ['NAME', 'Status__c', 'Completion_Percent__c', 'Due_Date__c']),
-    ('RelatedCaseList', ['CASES.CASE_NUMBER', 'CASES.SUBJECT', 'CASES.PRIORITY', 'CASES.STATUS']),
-    ('RelatedQuoteList', ['NAME', 'QUOTE.QUOTENUMBER', 'QUOTE.STATUS', 'QUOTE.TOTALPRICE']), ('RelatedOrderList', ['ORDER.ORDERNUMBER', 'ORDER.STATUS', 'ORDER.TOTALAMOUNT']),
+    'RelatedCaseList',
+    'RelatedQuoteList', 'RelatedOrderList',
     'RelatedActivityList', 'RelatedHistoryList', 'RelatedFileList'],
     actions=[('Account.New_Sample_Request', 'QuickAction')] + STD, quick_actions=['Account.New_Sample_Request']))
 
@@ -135,23 +137,23 @@ w(f'{FA}/layouts/Account-Account Layout.layout-meta.xml', layout_xml([
 w(f'{FA}/layouts/Quote-Quote Layout.layout-meta.xml', layout_xml([
     section('Quote Information', [[('Required', 'Name'), ('Readonly', 'QuoteNumber'), 'OpportunityId', ('Readonly', 'AccountId'), 'ContactId', 'OwnerId'],
                                   ['Status', 'Quote_Version__c', 'Previous_Quote__c', 'Revision_Reason__c', 'Quote_Date__c', 'ExpirationDate']]),
-    section('Commercial Terms (DEMO - validate with Apex)', [['Payment_Terms__c', 'Delivery_Terms__c', 'Pricebook2Id'], ['Competitor_Name__c', 'Competitor_Price__c', 'Description']]),
+    section('Commercial Terms (DEMO - validate with Apex)', [['Payment_Terms__c', 'Delivery_Terms__c'], ['Competitor_Name__c', 'Competitor_Price__c', 'Description']]),
     section('Totals & Margin', [[('Readonly', 'Subtotal'), 'Discount', ('Readonly', 'TotalPrice'), ('Readonly', 'GrandTotal')],
                                 [('Readonly', 'Total_Cost__c'), ('Readonly', 'Total_Margin__c'), ('Readonly', 'Margin_Percent__c')]]),
     section('Approval', [[('Readonly', 'Requires_Approval__c'), 'Approval_Status__c'], ['Sales_Manager_Approver__c', 'Management_Approver__c']]),
     section('Contact & Address', [['Email', 'Phone', 'BillingAddress'], ['ShippingAddress']]),
     sysinfo(),
-], [('RelatedQuoteLineItemList', ['PRODUCT2.NAME', 'QUOTELINEITEM.QUANTITY', 'QUOTELINEITEM.UNITPRICE', 'QUOTELINEITEM.TOTALPRICE']), ('Quote.Previous_Quote__c', ['NAME', 'Quote_Version__c', 'Status', 'TotalPrice', 'Discount', 'Approval_Status__c']), 'RelatedProcessHistoryList', 'RelatedActivityList', 'RelatedFileList'],
+], ['RelatedQuoteLineItemList', ('Quote.Previous_Quote__c', ['NAME', 'Quote_Version__c', 'Status', 'TotalPrice', 'Discount', 'Approval_Status__c']), 'RelatedProcessHistoryList', 'RelatedActivityList', 'RelatedFileList'],
     actions=[('Quote.Revise_Quote', 'QuickAction'), ('SubmitForApproval', 'StandardButton')] + STD, quick_actions=['Quote.Revise_Quote']))
 
 # Order
 w(f'{FA}/layouts/Order-Order Layout.layout-meta.xml', layout_xml([
     section('Order Information', [[('Readonly', 'OrderNumber'), ('Required', 'AccountId'), 'OpportunityId', ('Required', 'Status'), ('Required', 'EffectiveDate'), 'OwnerId'],
-                                  ['PoNumber', 'PoDate', 'Pricebook2Id', ('Readonly', 'TotalAmount'), 'Description']]),
+                                  ['PoNumber', 'PoDate', ('Readonly', 'Pricebook2Id'), ('Readonly', 'TotalAmount'), 'Description']]),
     section('SAP Handoff (DEMO - simulated, real integration is Phase 2)', [['Integration_Mode__c', 'SAP_Status__c', 'SAP_Order_Number__c'], ['SAP_Invoice_Number__c', 'SAP_Sent_Date_Time__c', 'SAP_Last_Response__c']]),
     section('Address Information', [['BillingAddress'], ['ShippingAddress']]),
     sysinfo(),
-], [('RelatedOrderItemList', ['PRODUCT2.NAME', 'ORDERITEM.QUANTITY', 'ORDERITEM.UNITPRICE', 'ORDERITEM.TOTALPRICE']), ('Integration_Log__c.Order__c', ['NAME', 'Direction__c', 'Status__c', 'Sent_Date_Time__c', 'Response_Summary__c']), ('Case.Order__c', ['CASES.CASE_NUMBER', 'CASES.SUBJECT', 'CASES.STATUS']), 'RelatedActivityList', 'RelatedHistoryList', 'RelatedFileList'],
+], ['RelatedOrderItemList', ('Integration_Log__c.Order__c', ['NAME', 'Direction__c', 'Status__c', 'Sent_Date_Time__c', 'Response_Summary__c']), ('Case.Order__c', ['CASES.CASE_NUMBER', 'CASES.SUBJECT', 'CASES.STATUS']), 'RelatedActivityList', 'RelatedHistoryList', 'RelatedFileList'],
     actions=[('Order.Send_to_SAP', 'QuickAction'), ('Activate', 'StandardButton')] + STD, quick_actions=['Order.Send_to_SAP']))
 
 # Case

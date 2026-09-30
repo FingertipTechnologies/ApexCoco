@@ -38,7 +38,7 @@
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
     <timeFrameFilter>
-        <dateColumn>ACCOUNT.CREATED_DATE</dateColumn>
+        <dateColumn>Account.Last_Purchase_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

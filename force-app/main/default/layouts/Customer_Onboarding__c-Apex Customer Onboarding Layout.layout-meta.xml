@@ -105,8 +105,6 @@
                 <field>Notes__c</field>
             </layoutItems>
         </layoutColumns>
-        <layoutColumns>
-        </layoutColumns>
         <style>OneColumn</style>
     </layoutSections>
     <layoutSections>
