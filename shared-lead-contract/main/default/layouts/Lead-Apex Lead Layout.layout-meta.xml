@@ -361,6 +361,17 @@
         </platformActionListItems>
     </platformActionList>
     <relatedLists>
+        <fields>NAME</fields>
+        <fields>Product__c</fields>
+        <fields>Iteration_Number__c</fields>
+        <fields>Status__c</fields>
+        <fields>Result__c</fields>
+        <fields>Requested_Date__c</fields>
+        <fields>Dispatch_Date__c</fields>
+        <fields>Tracking_Number__c</fields>
+        <relatedList>Sample_Request__c.Lead__c</relatedList>
+    </relatedLists>
+    <relatedLists>
         <relatedList>RelatedActivityList</relatedList>
     </relatedLists>
     <relatedLists>

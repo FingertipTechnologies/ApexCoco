@@ -41,7 +41,7 @@ def check_field(obj, fld, where):
         errors.append(f'{where}: {obj}.{fld} unknown')
 
 # ---- layouts
-for path in glob.glob(f'{FA}/layouts/*.xml'):
+for path in glob.glob(f'{FA}/layouts/*.xml') + glob.glob(f'{SH}/layouts/*.xml'):
     obj = os.path.basename(path).split('-')[0]
     t = ET.parse(path).getroot()
     for li in t.iter(f'{NS}layoutItems'):
@@ -58,7 +58,7 @@ for path in glob.glob(f'{FA}/layouts/*.xml'):
         if '.' in an.text and an.text not in quick_actions and not an.text.startswith(('NewTask','LogACall','NewEvent','SendEmail')): errors.append(f'{path}: platform action {an.text} missing')
 
 # ---- flexipages
-for path in glob.glob(f'{FA}/flexipages/*.xml'):
+for path in glob.glob(f'{FA}/flexipages/*.xml') + glob.glob(f'{SH}/flexipages/*.xml'):
     t = ET.parse(path).getroot()
     obj = t.find(f'{NS}sobjectType').text
     for cp in t.iter(f'{NS}componentInstanceProperties'):
@@ -174,7 +174,7 @@ for path in glob.glob(f'{FA}/permissionsets/*.xml'):
         if fa.find(f'{NS}flow').text not in flows: errors.append(f'{path}: flow missing')
 
 # ---- path assistants
-for path in glob.glob(f'{FA}/pathAssistants/*.xml'):
+for path in glob.glob(f'{FA}/pathAssistants/*.xml') + glob.glob(f'{SH}/pathAssistants/*.xml'):
     t = ET.parse(path).getroot()
     obj = t.find(f'{NS}entityName').text
     for f in t.iter(f'{NS}fieldNames'):

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Apex_Lead_Compact</fullName>
+    <fields>Name</fields>
+    <fields>Company</fields>
+    <fields>Status</fields>
+    <fields>Customer_Type__c</fields>
+    <fields>Interested_Product__c</fields>
+    <fields>Estimated_Annual_Volume__c</fields>
+    <fields>Potential_Category__c</fields>
+    <fields>AI_Lead_Score__c</fields>
+    <fields>Sample_Requested__c</fields>
+    <label>Apex Lead Compact</label>
+</CompactLayout>
