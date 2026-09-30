@@ -4,7 +4,7 @@
     <description>Existing supplier</description>
     <externalId>false</externalId>
     <label>Current Supplier</label>
-    <length>255</length>
+    <length>100</length>
     <required>false</required>
     <type>Text</type>
 </CustomField>

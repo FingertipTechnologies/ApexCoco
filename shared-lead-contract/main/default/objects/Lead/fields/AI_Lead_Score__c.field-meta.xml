@@ -4,7 +4,7 @@
     <description>AI prioritization</description>
     <externalId>false</externalId>
     <label>AI Lead Score</label>
-    <precision>3</precision>
+    <precision>18</precision>
     <required>false</required>
     <scale>0</scale>
     <type>Number</type>

@@ -4,7 +4,7 @@
     <description>Competitor mapping (kept as text: the org already has this field as text and Salesforce cannot change a field type; a lookup can replace it later)</description>
     <externalId>false</externalId>
     <label>Competitor Name</label>
-    <length>255</length>
+    <length>100</length>
     <required>false</required>
     <type>Text</type>
 </CustomField>

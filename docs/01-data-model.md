@@ -245,15 +245,15 @@ Name field: **Integration Id** (AutoNumber, INT-{00000})
 | Field | API Name | Type | Required | Notes / Picklist values |
 |---|---|---|---|---|
 | AI Insights | `AI_Insights__c` | LongTextArea |  | length 32768 - Generated recommendation |
-| AI Lead Score | `AI_Lead_Score__c` | Number |  | 3,0 - AI prioritization |
+| AI Lead Score | `AI_Lead_Score__c` | Number |  | 18,0 - AI prioritization |
 | Application / Usage | `Application_Usage__c` | LongTextArea |  | length 32768 - End use |
 | Business Model | `Business_Model__c` | Picklist |  | Bulk Ingredient Buyer, Private Label, Own Brand Distribution, Manufacturing Partner - Business model |
 | Buying Intent | `Buying_Intent__c` | Picklist |  | Immediate Purchase, Future Requirement, R&D Evaluation, Price Comparison, Existing Supplier Review, Information Gathering - Buying stage |
 | Campaign Name | `Campaign__c` | Lookup |  | > Campaign (child relationship Apex_Leads__r) - Track exhibition/campaign |
 | Company Type | `Company_Type__c` | Picklist |  | Importer, Brand Owner, Manufacturer, Distributor, Trader, Retailer - Business classification |
-| Competitor Name | `Competitor__c` | Text |  | length 255 - Competitor mapping (kept as text: the org already has this field as text and Salesforce cannot change a field type; a lookup can replace it later) |
+| Competitor Name | `Competitor__c` | Text |  | length 100 - Competitor mapping (kept as text: the org already has this field as text and Salesforce cannot change a field type; a lookup can replace it later) |
 | Country | `Country__c` | Picklist |  | India, United States, United Kingdom, Germany, Netherlands, France, Italy, Spain, Sweden, Poland, United Arab Emirates, Saudi Arabia, Turkey, South Africa, Egypt, Australia, New Zealand, Japan, South Korea, China, Singapore, Malaysia, Vietnam, Canada, Brazil, Mexico, Other - Customer geography (values: DEMO list, extend as needed) |
-| Current Supplier | `Current_Supplier__c` | Text |  | length 255 - Existing supplier |
+| Current Supplier | `Current_Supplier__c` | Text |  | length 100 - Existing supplier |
 | Customer Response | `Customer_Response__c` | Picklist |  | Interested, Not Interested, Future Requirement, Waiting Approval, Requested Sample, Requested Quote, No Response - Response tracking |
 | Customer Type | `Customer_Type__c` | Picklist |  | Importer, Brand Owner, Manufacturer, Distributor, Trader, Retailer, Private Label Customer, B2C Customer - Customer segment |
 | Decision Maker Identified | `Decision_Maker_Identified__c` | Checkbox |  |  - default false - Qualification |
@@ -276,7 +276,7 @@ Name field: **Integration Id** (AutoNumber, INT-{00000})
 | Reason for Switching | `Reason_for_Switching__c` | Picklist |  | Price, Quality Issues, Supply Reliability, Lead Time, Certification / Compliance, Product Range, Payment Terms, Other - Customer motivation (values: DEMO list, validate with Apex) |
 | Research Completed | `Research_Completed__c` | Checkbox |  |  - default false - Research status |
 | Research Notes | `Research_Notes__c` | LongTextArea |  | length 32768 - Research comments |
-| Sample Product | `Sample_Product__c` | Text |  | length 255 - Sample requirement |
+| Sample Product | `Sample_Product__c` | Text |  | length 100 - Sample requirement |
 | Sample Request Date | `Sample_Request_Date__c` | Date |  |  - Sample timeline |
 | Sample Requested | `Sample_Requested__c` | Checkbox |  |  - default false - Opportunity trigger |
 | WhatsApp Number | `WhatsApp_Number__c` | Phone |  |  - Communication |
