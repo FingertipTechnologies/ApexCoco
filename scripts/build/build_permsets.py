@@ -9,7 +9,7 @@ FA = os.path.join(ROOT, 'force-app', 'main', 'default', 'permissionsets')
 os.makedirs(FA, exist_ok=True)
 NS = 'http://soap.sforce.com/2006/04/metadata'
 
-CUSTOM_OBJECTS = ['Sample_Request__c', 'Competitor_Intel__c', 'Customer_Onboarding__c', 'Integration_Log__c', 'Competitor__c']
+CUSTOM_OBJECTS = ['Sample_Request__c', 'Competitor_Intel__c', 'Customer_Onboarding__c', 'Integration_Log__c']
 STD_OBJECTS = ['Account', 'Contact', 'Lead', 'Opportunity', 'Product2', 'Pricebook2', 'Quote', 'Order', 'Case']
 FLOWS = ['Apex_Lead_Request_Sample', 'Apex_Sample_Request_New_Iteration', 'Apex_Quote_Revise', 'Apex_Order_Send_To_SAP']
 TABS = {'Sample_Request__c': 'Sample_Request__c', 'Competitor_Intel__c': 'Competitor_Intel__c', 'Customer_Onboarding__c': 'Customer_Onboarding__c', 'Integration_Log__c': 'Integration_Log__c',
@@ -62,37 +62,37 @@ ALL_TABS = list(TABS.keys())
 # Sales Executive: create/edit own records across the lifecycle, no delete on commercial records
 permset('Apex_Sales_Executive', 'Apex Sales Executive',
         'Person 2 demo role. Owns leads, accounts, sample requests, opportunities, quotes and activities end to end.',
-        [perms('Sample_Request__c', 1, 1, 1, 0), perms('Competitor_Intel__c', 1, 1, 1, 1), perms('Competitor__c', 1, 1, 1, 0), perms('Customer_Onboarding__c', 1, 1, 1, 0), perms('Integration_Log__c', 0, 1, 0, 0),
+        [perms('Sample_Request__c', 1, 1, 1, 0), perms('Competitor_Intel__c', 1, 1, 1, 1), perms('Customer_Onboarding__c', 1, 1, 1, 0), perms('Integration_Log__c', 0, 1, 0, 0),
          perms('Account', 1, 1, 1, 0), perms('Contact', 1, 1, 1, 0), perms('Lead', 1, 1, 1, 0), perms('Opportunity', 1, 1, 1, 0), perms('Product2', 0, 1, 0, 0),
          perms('Pricebook2', 0, 1, 0, 0), perms('Quote', 1, 1, 1, 0), perms('Order', 1, 1, 1, 0), perms('Case', 1, 1, 1, 0)],
-        editable_objects=ALL + ['Competitor__c'], readonly_objects=['Integration_Log__c', 'Product2'], tabs=ALL_TABS, user_perms=['RunReports'])
+        editable_objects=ALL, readonly_objects=['Integration_Log__c', 'Product2'], tabs=ALL_TABS, user_perms=['RunReports'])
 
 # Sales Manager: team visibility, approvals, dashboards
 permset('Apex_Sales_Manager', 'Apex Sales Manager',
         'Person 2 demo role. Team visibility on the whole lifecycle, quote approvals, reports and dashboards.',
-        [perms('Sample_Request__c', 1, 1, 1, 1, va=True, ma=True), perms('Competitor_Intel__c', 1, 1, 1, 1, va=True, ma=True), perms('Competitor__c', 1, 1, 1, 1, va=True, ma=True), perms('Customer_Onboarding__c', 1, 1, 1, 1, va=True, ma=True),
+        [perms('Sample_Request__c', 1, 1, 1, 1, va=True, ma=True), perms('Competitor_Intel__c', 1, 1, 1, 1, va=True, ma=True), perms('Customer_Onboarding__c', 1, 1, 1, 1, va=True, ma=True),
          perms('Integration_Log__c', 0, 1, 0, 0, va=True), perms('Account', 1, 1, 1, 1, va=True, ma=True), perms('Contact', 1, 1, 1, 1, va=True, ma=True), perms('Lead', 1, 1, 1, 1, va=True, ma=True),
          perms('Opportunity', 1, 1, 1, 1, va=True, ma=True), perms('Product2', 1, 1, 1, 0), perms('Pricebook2', 1, 1, 1, 0), perms('Quote', 1, 1, 1, 1, va=True, ma=True),
          perms('Order', 1, 1, 1, 1, va=True, ma=True), perms('Case', 1, 1, 1, 1, va=True, ma=True)],
-        editable_objects=ALL + ['Competitor__c'], readonly_objects=['Integration_Log__c'], tabs=ALL_TABS, user_perms=['RunReports', 'CreateCustomizeReports', 'CreateCustomizeDashboards'])
+        editable_objects=ALL, readonly_objects=['Integration_Log__c'], tabs=ALL_TABS, user_perms=['RunReports', 'CreateCustomizeReports', 'CreateCustomizeDashboards'])
 
 # Sales Admin: samples, products/pricebook, onboarding documents, orders and SAP handoff
 permset('Apex_Sales_Admin', 'Apex Sales Admin',
         'Person 2 demo role. Factory / operations support: sample preparation and dispatch queue, product catalogue and price book, onboarding checklist, order activation and the simulated SAP handoff.',
-        [perms('Sample_Request__c', 1, 1, 1, 0, va=True, ma=True), perms('Competitor_Intel__c', 0, 1, 0, 0, va=True), perms('Competitor__c', 0, 1, 0, 0, va=True), perms('Customer_Onboarding__c', 1, 1, 1, 0, va=True, ma=True),
+        [perms('Sample_Request__c', 1, 1, 1, 0, va=True, ma=True), perms('Competitor_Intel__c', 0, 1, 0, 0, va=True), perms('Customer_Onboarding__c', 1, 1, 1, 0, va=True, ma=True),
          perms('Integration_Log__c', 1, 1, 1, 0, va=True), perms('Account', 0, 1, 1, 0, va=True), perms('Contact', 1, 1, 1, 0, va=True), perms('Lead', 0, 1, 0, 0, va=True),
          perms('Opportunity', 0, 1, 1, 0, va=True), perms('Product2', 1, 1, 1, 0), perms('Pricebook2', 1, 1, 1, 0), perms('Quote', 0, 1, 0, 0, va=True),
          perms('Order', 1, 1, 1, 0, va=True, ma=True), perms('Case', 1, 1, 1, 0, va=True)],
         editable_objects=['Sample_Request__c', 'Customer_Onboarding__c', 'Integration_Log__c', 'Account', 'Order', 'Product2', 'Case', 'Opportunity', 'Contact'],
-        readonly_objects=['Competitor_Intel__c', 'Competitor__c', 'Lead', 'Quote', 'QuoteLineItem'], tabs=ALL_TABS, user_perms=['RunReports'])
+        readonly_objects=['Competitor_Intel__c', 'Lead', 'Quote', 'QuoteLineItem'], tabs=ALL_TABS, user_perms=['RunReports'])
 
 # Management: read everything, dashboards, final approvals
 permset('Apex_Management', 'Apex Management',
         'Person 2 demo role. Broad read visibility, dashboards, and final quote approval.',
-        [perms('Sample_Request__c', 0, 1, 0, 0, va=True), perms('Competitor_Intel__c', 0, 1, 0, 0, va=True), perms('Competitor__c', 0, 1, 0, 0, va=True), perms('Customer_Onboarding__c', 0, 1, 0, 0, va=True),
+        [perms('Sample_Request__c', 0, 1, 0, 0, va=True), perms('Competitor_Intel__c', 0, 1, 0, 0, va=True), perms('Customer_Onboarding__c', 0, 1, 0, 0, va=True),
          perms('Integration_Log__c', 0, 1, 0, 0, va=True), perms('Account', 0, 1, 1, 0, va=True), perms('Contact', 0, 1, 0, 0, va=True), perms('Lead', 0, 1, 0, 0, va=True),
          perms('Opportunity', 0, 1, 1, 0, va=True), perms('Product2', 0, 1, 0, 0), perms('Pricebook2', 0, 1, 0, 0), perms('Quote', 0, 1, 1, 0, va=True),
          perms('Order', 0, 1, 0, 0, va=True), perms('Case', 0, 1, 0, 0, va=True)],
-        editable_objects=['Opportunity', 'Quote', 'Account'], readonly_objects=['Sample_Request__c', 'Competitor_Intel__c', 'Competitor__c', 'Customer_Onboarding__c', 'Integration_Log__c', 'Lead', 'Order', 'Case', 'Product2', 'QuoteLineItem'],
+        editable_objects=['Opportunity', 'Quote', 'Account'], readonly_objects=['Sample_Request__c', 'Competitor_Intel__c', 'Customer_Onboarding__c', 'Integration_Log__c', 'Lead', 'Order', 'Case', 'Product2', 'QuoteLineItem'],
         tabs=ALL_TABS, flows=False, apex=False, user_perms=['RunReports', 'CreateCustomizeDashboards'])
 print('permission sets written')

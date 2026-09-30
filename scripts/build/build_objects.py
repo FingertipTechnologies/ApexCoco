@@ -437,7 +437,7 @@ LEAD = [
  dict(api='Research_Completed__c', label='Research Completed', type='Checkbox', default='false', description='Research status'),
  dict(api='Research_Notes__c', label='Research Notes', type='LongTextArea', length=32768, visibleLines=3, description='Research comments'),
  dict(api='Current_Supplier__c', label='Current Supplier', type='Text', length=255, description='Existing supplier'),
- dict(api='Competitor__c', label='Competitor Name', type='Lookup', referenceTo='Competitor__c', relationshipLabel='Leads', relationshipName='Leads', description='Competitor mapping'),
+ dict(api='Competitor__c', label='Competitor Name', type='Text', length=255, description='Competitor mapping (kept as text: the org already has this field as text and Salesforce cannot change a field type; a lookup can replace it later)'),
  dict(api='Reason_for_Switching__c', label='Reason for Switching', type='Picklist', values=['Price', 'Quality Issues', 'Supply Reliability', 'Lead Time', 'Certification / Compliance', 'Product Range', 'Payment Terms', 'Other'], description='Customer motivation (values: DEMO list, validate with Apex)'),
  dict(api='WhatsApp_Number__c', label='WhatsApp Number', type='Phone', description='Communication'),
  dict(api='Designation__c', label='Designation', type='Text', length=255, description='Contact role'),
@@ -453,13 +453,6 @@ LEAD = [
  dict(api='AI_Lead_Score__c', label='AI Lead Score', type='Number', precision=3, scale=0, description='AI prioritization'),
  dict(api='Lead_Health__c', label='Lead Health', type='Picklist', values=['High', 'Medium', 'Low'], description='AI insight'),
  dict(api='AI_Insights__c', label='AI Insights', type='LongTextArea', length=32768, visibleLines=4, description='Generated recommendation'),
-]
-COMPETITOR = [
- dict(api='Website__c', label='Website', type='Url'),
- dict(api='Country__c', label='Country', type='Picklist', values=COUNTRIES),
- dict(api='Strength__c', label='Strength', type='Text', length=255),
- dict(api='Weakness__c', label='Weakness', type='Text', length=255),
- dict(api='Notes__c', label='Notes', type='LongTextArea', length=32768, visibleLines=3),
 ]
 
 # ---------------------------------------------------------------- write everything
@@ -550,21 +543,16 @@ def main():
     write_fields(FA, 'Case', CASE)
     write_fields(FA, 'Product2', PRODUCT)
     write_fields(SHARED, 'Lead', LEAD)
-    base = os.path.join(SHARED, 'objects', 'Competitor__c')
-    w(os.path.join(base, 'Competitor__c.object-meta.xml'), custom_object_xml('Competitor', 'Competitors', 'Competitor Name', history=False, compact=None,
-        description='Competitor master referenced by Lead.Competitor__c (shared Lead contract).'))
-    write_fields(SHARED, 'Competitor__c', COMPETITOR)
-    w(os.path.join(base, 'listViews', 'All.listView-meta.xml'), listview_xml('All', 'All Competitors', ['NAME', 'Country__c', 'Website__c', 'Strength__c', 'Weakness__c']))
 
     # Field inventory for permission sets / docs
     inv = {
         'Sample_Request__c': [f['api'] for f in SR], 'Competitor_Intel__c': [f['api'] for f in CI], 'Customer_Onboarding__c': [f['api'] for f in ONB],
         'Integration_Log__c': [f['api'] for f in IL], 'Opportunity': [f['api'] for f in OPP], 'Account': [f['api'] for f in ACC], 'Quote': [f['api'] for f in QUOTE],
-        'QuoteLineItem': [f['api'] for f in QLI], 'Order': [f['api'] for f in ORDER], 'Case': [f['api'] for f in CASE], 'Product2': [f['api'] for f in PRODUCT], 'Lead': [f['api'] for f in LEAD], 'Competitor__c': [f['api'] for f in COMPETITOR],
+        'QuoteLineItem': [f['api'] for f in QLI], 'Order': [f['api'] for f in ORDER], 'Case': [f['api'] for f in CASE], 'Product2': [f['api'] for f in PRODUCT], 'Lead': [f['api'] for f in LEAD],
     }
     readonly = {}
     required = {}
-    for obj, lst in [('Sample_Request__c', SR), ('Competitor_Intel__c', CI), ('Customer_Onboarding__c', ONB), ('Integration_Log__c', IL), ('Opportunity', OPP), ('Account', ACC), ('Quote', QUOTE), ('QuoteLineItem', QLI), ('Order', ORDER), ('Case', CASE), ('Product2', PRODUCT), ('Lead', LEAD), ('Competitor__c', COMPETITOR)]:
+    for obj, lst in [('Sample_Request__c', SR), ('Competitor_Intel__c', CI), ('Customer_Onboarding__c', ONB), ('Integration_Log__c', IL), ('Opportunity', OPP), ('Account', ACC), ('Quote', QUOTE), ('QuoteLineItem', QLI), ('Order', ORDER), ('Case', CASE), ('Product2', PRODUCT), ('Lead', LEAD)]:
         readonly[obj] = [f['api'] for f in lst if f.get('formula') or f['type'] == 'Summary']
         required[obj] = [f['api'] for f in lst if f.get('required')]
     with open(os.path.join(os.path.dirname(__file__), 'field_inventory.json'), 'w') as fh:

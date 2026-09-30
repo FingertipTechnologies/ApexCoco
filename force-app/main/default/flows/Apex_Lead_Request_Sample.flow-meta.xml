@@ -257,7 +257,7 @@
         <inputAssignments>
             <field>Competitor__c</field>
             <value>
-                <elementReference>Get_Lead.Competitor__r.Name</elementReference>
+                <elementReference>Get_Lead.Competitor__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>

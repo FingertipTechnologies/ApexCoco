@@ -200,7 +200,7 @@
         <inputAssignments>
             <field>Competitor__c</field>
             <value>
-                <elementReference>$Record.Lead__r.Competitor__r.Name</elementReference>
+                <elementReference>$Record.Lead__r.Competitor__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>

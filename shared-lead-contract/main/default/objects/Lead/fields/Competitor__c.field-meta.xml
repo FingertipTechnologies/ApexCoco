@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Competitor__c</fullName>
-    <deleteConstraint>SetNull</deleteConstraint>
-    <description>Competitor mapping</description>
+    <description>Competitor mapping (kept as text: the org already has this field as text and Salesforce cannot change a field type; a lookup can replace it later)</description>
     <externalId>false</externalId>
     <label>Competitor Name</label>
-    <referenceTo>Competitor__c</referenceTo>
-    <relationshipLabel>Leads</relationshipLabel>
-    <relationshipName>Leads</relationshipName>
+    <length>255</length>
     <required>false</required>
-    <type>Lookup</type>
+    <type>Text</type>
 </CustomField>

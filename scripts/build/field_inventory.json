@@ -203,13 +203,6 @@
    "AI_Lead_Score__c",
    "Lead_Health__c",
    "AI_Insights__c"
-  ],
-  "Competitor__c": [
-   "Website__c",
-   "Country__c",
-   "Strength__c",
-   "Weakness__c",
-   "Notes__c"
   ]
  },
  "readonly": {
@@ -243,8 +236,7 @@
   "Order": [],
   "Case": [],
   "Product2": [],
-  "Lead": [],
-  "Competitor__c": []
+  "Lead": []
  },
  "required": {
   "Sample_Request__c": [
@@ -269,7 +261,6 @@
   "Order": [],
   "Case": [],
   "Product2": [],
-  "Lead": [],
-  "Competitor__c": []
+  "Lead": []
  }
 }

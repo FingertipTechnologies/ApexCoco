@@ -181,11 +181,6 @@ w(f'{SHL}/layouts/Lead-Apex Lead Layout.layout-meta.xml', layout_xml([
     sysinfo(),
 ], ['RelatedActivityList', 'RelatedHistoryList', 'RelatedFileList'],
     actions=[('Lead.Request_Sample', 'QuickAction'), ('Convert', 'StandardButton')] + STD))
-w(f'{SHL}/layouts/Competitor__c-Competitor Layout.layout-meta.xml', layout_xml([
-    section('Competitor', [[('Required', 'Name'), 'Website__c', 'Country__c', 'OwnerId'], ['Strength__c', 'Weakness__c']]),
-    section('Notes', [['Notes__c'], []], style='OneColumn'),
-    sysinfo(),
-], ['Lead.Competitor__c', 'RelatedActivityList', 'RelatedFileList'], actions=STD))
 
 # ------------------------------------------------------------------ flexipages
 def comp(name, ident, props=None):

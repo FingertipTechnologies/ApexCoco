@@ -56,7 +56,7 @@ The Lead fields are defined by Person 1's specification (`Apex_Coco_Salesforce_L
 `shared-lead-contract/` exactly with those API names: 36 custom fields (Lead Number, Campaign, Event Name, LinkedIn Profile,
 Country, Company Type, Employee Count, Customer Type, Business Model, Potential Category, Buying Intent, Purchase Timeline,
 Estimated / Expected Monthly Volume, Interested Product (multi-select), Application / Usage, Lead Classification, Research
-Completed / Notes, Current Supplier, Competitor (lookup to the small `Competitor__c` object), Reason for Switching, WhatsApp
+Completed / Notes, Current Supplier, Competitor (text), Reason for Switching, WhatsApp
 Number, Designation, Last Contact / Next Follow-up Date, Preferred Communication, Customer Response, Sample Requested / Date /
 Product, Decision Maker Identified, Product Requirement Confirmed, AI Lead Score, Lead Health, AI Insights), the Lead Status
 values (New, Research Pending, Qualified, Engaged, Sample Discussion, Nurture, Junk, Lost, Converted), the Lead Source values
@@ -67,8 +67,10 @@ Person 2 reads only these Lead fields: `Sample_Requested__c`, `Sample_Request_Da
 `Competitor__c` (name). They are referenced in two flows only: `Apex_Lead_Request_Sample` and `Apex_Sample_Request_After_Create`.
 Account.Customer Type and Opportunity.Purchase Timeline use the same picklist values as the Lead so the hand-off copies cleanly.
 
-Values the spreadsheet left open and that are DEMO defaults to validate: the Country list, the Reason for Switching list and
-the Competitor lookup target.
+Values the spreadsheet left open and that are DEMO defaults to validate: the Country list and the Reason for Switching list.
+Deviation: `Competitor__c` is Text (the spreadsheet says Lookup) because the org already holds it as text and a field type cannot
+be changed in place. `Interested_Product__c` was first deployed as a lookup and must be deleted before the multi-select version
+is deployed: `sf project deploy start --metadata-dir manifest/destructive-lead --wait 10`.
 
 ## Prerequisites
 

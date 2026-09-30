@@ -251,7 +251,7 @@ Name field: **Integration Id** (AutoNumber, INT-{00000})
 | Buying Intent | `Buying_Intent__c` | Picklist |  | Immediate Purchase, Future Requirement, R&D Evaluation, Price Comparison, Existing Supplier Review, Information Gathering - Buying stage |
 | Campaign Name | `Campaign__c` | Lookup |  | > Campaign (child relationship Apex_Leads__r) - Track exhibition/campaign |
 | Company Type | `Company_Type__c` | Picklist |  | Importer, Brand Owner, Manufacturer, Distributor, Trader, Retailer - Business classification |
-| Competitor Name | `Competitor__c` | Lookup |  | > Competitor__c (child relationship Leads__r) - Competitor mapping |
+| Competitor Name | `Competitor__c` | Text |  | length 255 - Competitor mapping (kept as text: the org already has this field as text and Salesforce cannot change a field type; a lookup can replace it later) |
 | Country | `Country__c` | Picklist |  | India, United States, United Kingdom, Germany, Netherlands, France, Italy, Spain, Sweden, Poland, United Arab Emirates, Saudi Arabia, Turkey, South Africa, Egypt, Australia, New Zealand, Japan, South Korea, China, Singapore, Malaysia, Vietnam, Canada, Brazil, Mexico, Other - Customer geography (values: DEMO list, extend as needed) |
 | Current Supplier | `Current_Supplier__c` | Text |  | length 255 - Existing supplier |
 | Customer Response | `Customer_Response__c` | Picklist |  | Interested, Not Interested, Future Requirement, Waiting Approval, Requested Sample, Requested Quote, No Response - Response tracking |

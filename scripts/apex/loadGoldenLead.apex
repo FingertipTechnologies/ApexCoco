@@ -8,9 +8,6 @@
  *
  *   sf apex run --file scripts/apex/loadGoldenLead.apex --target-org <alias>
  */
-List<Competitor__c> comps = [SELECT Id FROM Competitor__c WHERE Name = 'Competitor A' LIMIT 1];
-Competitor__c compA = comps.isEmpty() ? new Competitor__c(Name = 'Competitor A', Country__c = 'Other', Strength__c = 'Price', Weakness__c = 'Lead time and inconsistent particle size', Notes__c = 'APEX DEMO DATA') : comps[0];
-if (compA.Id == null) { insert compA; }
 Set<String> statuses = new Set<String>();
 for (LeadStatus ls : [SELECT MasterLabel FROM LeadStatus WHERE IsConverted = false]) { statuses.add(ls.MasterLabel); }
 String status = statuses.contains('Qualified') ? 'Qualified' : new List<String>(statuses)[0];
@@ -23,7 +20,7 @@ Lead golden = new Lead(
     Potential_Category__c = 'High', Buying_Intent__c = 'R&D Evaluation', Purchase_Timeline__c = '6 Months', Estimated_Annual_Volume__c = 500, Expected_Monthly_Volume__c = 40,
     Interested_Product__c = 'Coconut Milk Powder', Application_Usage__c = 'Bakery and beverage manufacturers in the US Northeast (reconstitution trials).',
     Lead_Classification__c = 'Potential Customer', Research_Completed__c = true, Research_Notes__c = 'Importer supplying US bakery and beverage manufacturers. Currently buying from Competitor A at about 3,400/MT. APEX DEMO DATA',
-    Current_Supplier__c = 'Competitor A', Competitor__c = compA.Id, Reason_for_Switching__c = 'Lead Time',
+    Current_Supplier__c = 'Competitor A', Competitor__c = 'Competitor A', Reason_for_Switching__c = 'Lead Time',
     Last_Contact_Date__c = Date.today().addDays(-1), Next_Followup_Date__c = Date.today().addDays(2), Preferred_Communication__c = 'WhatsApp', Customer_Response__c = 'Requested Sample',
     Sample_Requested__c = true, Sample_Request_Date__c = Date.today(), Sample_Product__c = 'Coconut Milk Powder',
     Decision_Maker_Identified__c = true, Product_Requirement_Confirmed__c = true,

@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>Competitor__c.Country__c</members>
-        <members>Competitor__c.Notes__c</members>
-        <members>Competitor__c.Strength__c</members>
-        <members>Competitor__c.Weakness__c</members>
-        <members>Competitor__c.Website__c</members>
         <members>Lead.AI_Insights__c</members>
         <members>Lead.AI_Lead_Score__c</members>
         <members>Lead.Application_Usage__c</members>
@@ -45,21 +40,8 @@
         <name>CustomField</name>
     </types>
     <types>
-        <members>Competitor__c</members>
-        <name>CustomObject</name>
-    </types>
-    <types>
-        <members>Competitor__c</members>
-        <name>CustomTab</name>
-    </types>
-    <types>
-        <members>Competitor__c-Competitor Layout</members>
         <members>Lead-Apex Lead Layout</members>
         <name>Layout</name>
-    </types>
-    <types>
-        <members>Competitor__c.All</members>
-        <name>ListView</name>
     </types>
     <types>
         <members>LeadSource</members>
