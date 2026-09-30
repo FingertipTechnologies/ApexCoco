@@ -143,7 +143,7 @@ w(f'{FA}/layouts/Quote-Quote Layout.layout-meta.xml', layout_xml([
     section('Approval', [[('Readonly', 'Requires_Approval__c'), 'Approval_Status__c'], ['Sales_Manager_Approver__c', 'Management_Approver__c']]),
     section('Contact & Address', [['Email', 'Phone', 'BillingAddress'], ['ShippingAddress']]),
     sysinfo(),
-], ['RelatedQuoteLineItemList', ('Quote.Previous_Quote__c', ['NAME', 'Quote_Version__c', 'Status', 'TotalPrice', 'Discount', 'Approval_Status__c']), 'RelatedProcessHistoryList', 'RelatedActivityList', 'RelatedFileList'],
+], ['RelatedQuoteLineItemList', 'Quote.Previous_Quote__c', 'RelatedProcessHistoryList', 'RelatedActivityList', 'RelatedFileList'],
     actions=[('Quote.Revise_Quote', 'QuickAction'), ('SubmitForApproval', 'StandardButton')] + STD))
 
 # Order

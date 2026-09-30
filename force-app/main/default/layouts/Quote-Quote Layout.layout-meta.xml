@@ -239,12 +239,6 @@
         <relatedList>RelatedQuoteLineItemList</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>NAME</fields>
-        <fields>Quote_Version__c</fields>
-        <fields>Status</fields>
-        <fields>TotalPrice</fields>
-        <fields>Discount</fields>
-        <fields>Approval_Status__c</fields>
         <relatedList>Quote.Previous_Quote__c</relatedList>
     </relatedLists>
     <relatedLists>
